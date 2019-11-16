@@ -1,0 +1,1 @@
+include ':app', ':armap-debug', ':armap', ':testaar', ':armap_st'

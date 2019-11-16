@@ -1,0 +1,117 @@
+{
+  "sdkConfiguration": {
+    "baseUrl": "https://aot.pointr.cloud",
+    "beaconBrandName": "kontakt",
+    "uuidList": [
+      {
+        "index": 1,
+        "uuid": "AAAAAAA0-BBB0-CCC0-DDD0-A0D000000001"
+      },
+      {
+        "index": 2,
+        "uuid": "AAAAAAA0-BBB0-CCC0-DDD0-A0D000000002"
+      },
+      {
+        "index": 3,
+        "uuid": "AAAAAAA0-BBB0-CCC0-DDD0-A0D000000003"
+      },
+      {
+        "index": 4,
+        "uuid": "AAAAAAA0-BBB0-CCC0-DDD0-A0D000000004"
+      },
+      {
+        "index": 5,
+        "uuid": "AAAAAAA0-BBB0-CCC0-DDD0-A0D000000005"
+      },
+      {
+        "index": 6,
+        "uuid": "AAAAAAA0-BBB0-CCC0-DDD0-A0D000000006"
+      },
+      {
+        "index": 7,
+        "uuid": "AAAAAAA0-BBB0-CCC0-DDD0-A0D000000007"
+      },
+      {
+        "index": 8,
+        "uuid": "AAAAAAA0-BBB0-CCC0-DDD0-A0D000000008"
+      },
+      {
+        "index": 9,
+        "uuid": "AAAAAAA0-BBB0-CCC0-DDD0-A0D000000009"
+      },
+      {
+        "index": 10,
+        "uuid": "AAAAAAA0-BBB0-CCC0-DDD0-A0D00000000A"
+      }
+    ]
+  },
+  "facilityConfiguration": {
+    "mapMinLevel": -1,
+    "mapMaxLevel": 6,
+    "name": "Default",
+    "facilityId": 1,
+    "internalIdentifier": 1,
+    "mapWidthMeters": 198.0,
+    "mapHeightMeters": 198.0
+  },
+  "venueConfiguration": {
+    "name": "Default",
+    "internalIdentifier": 1,
+    "beaconType": "kontakt"
+  },
+  "geofenceManagerConfiguration": {
+    "exitPushMessage": "Goodbye",
+    "isEnabled": true,
+    "regionTimeoutInterval": 30.0,
+    "shouldNotifyEnterExit": false,
+    "shouldNotifyWithPushMessage": false,
+    "welcomePushMessage": "Welcome to AOT! Open the app for navigation"
+  },
+  "locationSharingConfiguration": {
+    "positionUploadIntervalSeconds": 90.0
+  },
+  "pathManagerConfiguration": {
+    "arrivalThresholdInMetres": 5.0,
+    "rerouteThresholdInMetres": 15.0
+  },
+  "poiManagerConfiguration": {
+    "shouldShowPortalsAsPois": true
+  },
+  "positionManagerConfiguration": {
+    "accuracyMultiplier": 10.0,
+    "biasPower": 2.2,
+    "maxWalkingSpeed": 4.0,
+    "measurementHistoryTimespan": 10.0,
+    "stepInterval": 5.0,
+    "isBackgroundPositioningEnabled": true,
+    "thresholdForLosingPositionInSeconds": 120,
+    "thresholdForFadingPositionInSeconds": 60,
+    "beaconSilenceTimeInSeconds": 75,
+    "shouldResetOnLevelChange": false,
+    "numberOfNearestBeaconsToUse": 4,
+    "requiredMeasurementsForPositionReporting": 2
+
+  },
+  "userInterfaceConfiguration": {
+    "accuracyCircleMaxSize": 5.0,
+    "accuracyCircleMinSize": 1.0,
+    "accuracyCirclePulseColour": "FF0000",
+    "accuracyCircleStaticColour": "FF0000",
+    "maxZoomScale": 8,
+    "pathColor": "2980B9",
+    "pathWidth": 3.5,
+    "shouldCheckAnnotationClash": true,
+    "mapRotationLimitAngleInDegrees": 6.0,
+    "isAugmentedRealityEnabled": false
+  },
+  "carparkConfiguration": {
+    "isEnabled": false
+  },
+  "dataManagerConfiguration": {
+    "versionApi": "/exportdata/RetrieveExportData",
+    "graphApi": "/exportdata/RetrieveExportData?data=graph",
+    "poiApi": "/exportdata/RetrieveExportData?data=2",
+    "wallApi": "/exportdata/RetrieveExportData?data=5",
+    "configurationApi": "/exportdata/RetrieveExportData?data=9"
+  }
+}

@@ -1,0 +1,3416 @@
+{
+  "status": {
+    "code": 200,
+    "errorMessage": ""
+  },
+  "body": {
+    "venueInternalIdentifier": 5,
+    "facilities": [
+      {
+        "facilityInternalIdentifier": 5,
+        "data": [
+          {
+            "level": 0,
+            "poi": [
+              {
+                "name": "168 Coffee",
+                "description": "168 Coffee",
+                "id": "poi351224500180837",
+                "translations": {},
+                "keywords": "168 Coffee,Coffee",
+                "voicekeywords": "",
+                "type": "Cafes, Coffee and Tea Houses",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.431,
+                "y": 0.548,
+                "extraData": {
+                  "group": "\"451156000347608\""
+                }
+              },
+              {
+                "name": "AB Shop",
+                "description": "AB Shop",
+                "id": "poi135198000834281",
+                "translations": {},
+                "keywords": "Souvenir Shop,Gifts",
+                "voicekeywords": "",
+                "type": "Accessories, Gifts",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.464,
+                "y": 0.583,
+                "extraData": {
+                  "group": "\"334806000296623\""
+                }
+              },
+              {
+                "name": "Air Asia Check in Counter",
+                "description": "Air Asia Check in Counter",
+                "id": "poi948642500063694",
+                "translations": {},
+                "keywords": "Air Asia Check in Counter,Air Asia,Check in Counter",
+                "voicekeywords": "",
+                "type": "Bag Drop / Check-in",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.213,
+                "y": 0.517,
+                "extraData": {
+                  "group": "\"748576500388276\""
+                }
+              },
+              {
+                "name": "Airport Information",
+                "description": "Airport Information",
+                "id": "poi735082000017833",
+                "translations": {},
+                "keywords": "Information,Airport Information",
+                "voicekeywords": "",
+                "type": "Help Desk",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.658,
+                "y": 0.533,
+                "extraData": {
+                  "group": "\"534685500744457\""
+                }
+              },
+              {
+                "name": "Airport Information Center",
+                "description": "Airport Information Center",
+                "id": "poi328957500345025",
+                "translations": {},
+                "keywords": "Airport Information Center,Information Center",
+                "voicekeywords": "",
+                "type": "Help Desk",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.482,
+                "y": 0.575,
+                "extraData": {
+                  "group": "\"328798000749847\""
+                }
+              },
+              {
+                "name": "Airport TAXI",
+                "description": "Airport TAXI",
+                "id": "poi969829500170668",
+                "translations": {},
+                "keywords": "Airport TAXI,Taxi",
+                "voicekeywords": "",
+                "type": "Taxi and Car Service",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.564,
+                "y": 0.583,
+                "extraData": {
+                  "group": "\"969647500226314\""
+                }
+              },
+              {
+                "name": "ARABITIA COFFEE",
+                "description": "ARABITIA COFFEE",
+                "id": "poi180533000494939",
+                "translations": {},
+                "keywords": "ARABITIA COFFEE,Coffee",
+                "voicekeywords": "",
+                "type": "Cafes, Coffee and Tea Houses",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.562,
+                "y": 0.423,
+                "extraData": {
+                  "group": "\"380128500820731\""
+                }
+              },
+              {
+                "name": "Bangkok Airways Check in Counter",
+                "description": "Bangkok Airways Check in Counter",
+                "id": "poi321049000787570",
+                "translations": {},
+                "keywords": "Bangkok Airways Check in Counter,Bangkok Airways,Check in Counter",
+                "voicekeywords": "",
+                "type": "Bag Drop / Check-in",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.208,
+                "y": 0.564,
+                "extraData": {
+                  "group": "\"420360000320991\""
+                }
+              },
+              {
+                "name": "Bangkok Airways Ticket Office",
+                "description": "Bangkok Airways Ticket Office",
+                "id": "poi465384500244858",
+                "translations": {},
+                "keywords": "Bangkok Airways Ticket Office,Bangkok Airways,Ticket Office",
+                "voicekeywords": "",
+                "type": "Ticketing",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.337,
+                "y": 0.523,
+                "extraData": {
+                  "group": "\"565299500313327\""
+                }
+              },
+              {
+                "name": "Bangkok Airways Waiting Lounge",
+                "description": "Bangkok Airways Waiting Lounge",
+                "id": "poi224314000777287",
+                "translations": {},
+                "keywords": "Bangkok Airways Waiting Lounge,Bangkok Airways,Waiting Lounge",
+                "voicekeywords": "",
+                "type": "Waiting Lounge",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.45,
+                "y": 0.504,
+                "extraData": {
+                  "group": "\"824238500456998\""
+                }
+              },
+              {
+                "name": "BBL ATM",
+                "description": "BBL ATM",
+                "id": "poi971133500656961",
+                "translations": {},
+                "keywords": "BBL ATM,BBL,ATM",
+                "voicekeywords": "",
+                "type": "ATM",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.284,
+                "y": 0.588,
+                "extraData": {
+                  "group": "\"971064000855932\""
+                }
+              },
+              {
+                "name": "BLACK CANYON COFEE",
+                "description": "BLACK CANYON COFEE",
+                "id": "poi190481000259636",
+                "translations": {},
+                "keywords": "BLACK CANYON COFEE,Black Canyon,Coffee",
+                "voicekeywords": "",
+                "type": "Cafes, Coffee and Tea Houses",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.265,
+                "y": 0.462,
+                "extraData": {
+                  "group": "\"890376000033662\""
+                }
+              },
+              {
+                "name": "BLACK CANYON COFEE",
+                "description": "BLACK CANYON COFEE",
+                "id": "poi807865500919570",
+                "translations": {},
+                "keywords": "Black Canyon,BLACK CANYON COFEE,Coffee",
+                "voicekeywords": "",
+                "type": "Cafes, Coffee and Tea Houses",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.486,
+                "y": 0.547,
+                "extraData": {
+                  "group": "\"107788000400817\""
+                }
+              },
+              {
+                "name": "BLACK CANYON COFEE",
+                "description": "BLACK CANYON COFEE",
+                "id": "poi781462500187447",
+                "translations": {},
+                "keywords": "BLACK CANYON COFEE,Black Canyon,Coffee",
+                "voicekeywords": "",
+                "type": "Cafes, Coffee and Tea Houses",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.475,
+                "y": 0.434,
+                "extraData": {
+                  "group": "\"781388500155436\""
+                }
+              },
+              {
+                "name": "Camden Food Co.",
+                "description": "Camden Food Co.",
+                "id": "poi236338000413532",
+                "translations": {},
+                "keywords": "Camden Food Co",
+                "voicekeywords": "",
+                "type": "Food and Beverage",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.347,
+                "y": 0.413,
+                "extraData": {
+                  "group": "\"136259000376961\""
+                }
+              },
+              {
+                "name": "Check in Counter",
+                "description": "Check in Counter",
+                "id": "poi757608000004062",
+                "translations": {},
+                "keywords": "Check in Counter",
+                "voicekeywords": "",
+                "type": "Bag Drop / Check-in",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.209,
+                "y": 0.585,
+                "extraData": {
+                  "group": "\"657527000355055\""
+                }
+              },
+              {
+                "name": "Daily Queen",
+                "description": "Daily Queen",
+                "id": "poi150711500108914",
+                "translations": {},
+                "keywords": "Daily Queen,Food and Beverage,ice cream",
+                "voicekeywords": "",
+                "type": "Food and Beverage",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.745,
+                "y": 0.546,
+                "extraData": {
+                  "group": "\"350632000493810\""
+                }
+              },
+              {
+                "name": "Doi Chang Coffee",
+                "description": "Doi Chang Coffee",
+                "id": "poi605331500278514",
+                "translations": {},
+                "keywords": "Doi Chang Coffee,Doi Chang,Coffee",
+                "voicekeywords": "",
+                "type": "Cafes, Coffee and Tea Houses",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.461,
+                "y": 0.536,
+                "extraData": {
+                  "group": "\"705249000627802\""
+                }
+              },
+              {
+                "name": "Doi Loung Souvenir Shop",
+                "description": "Doi Loung Souvenir Shop",
+                "id": "poi358130000228273",
+                "translations": {},
+                "keywords": "Doi Loung Souvenir Shop,Doi Loung,Souvenir Shop",
+                "voicekeywords": "",
+                "type": "Accessories, Gifts",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.498,
+                "y": 0.522,
+                "extraData": {
+                  "group": "\"457862500095320\""
+                }
+              },
+              {
+                "name": "Doi Tung Coffee",
+                "description": "Doi Tung Coffee",
+                "id": "poi421266500500276",
+                "translations": {},
+                "keywords": "Doi Tung Coffee,Coffee,Doi Tung",
+                "voicekeywords": "",
+                "type": "Cafes, Coffee and Tea Houses",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.529,
+                "y": 0.582,
+                "extraData": {
+                  "group": "\"521179500154725\""
+                }
+              },
+              {
+                "name": "Doi Tung Shop",
+                "description": "Doi Tung Shop",
+                "id": "poi868746000831044",
+                "translations": {},
+                "keywords": "Doi Tung Souvenir Shop,Doi Tung,Souvenir Shop,Gifts",
+                "voicekeywords": "",
+                "type": "Accessories, Gifts",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.422,
+                "y": 0.583,
+                "extraData": {
+                  "group": "\"568628000696307\""
+                }
+              },
+              {
+                "name": "FOOD VARIETY",
+                "description": "FOOD VARIETY",
+                "id": "poi711615500420484",
+                "translations": {},
+                "keywords": "FOOD VARIETY",
+                "voicekeywords": "",
+                "type": "Food and Beverage",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.383,
+                "y": 0.471,
+                "extraData": {
+                  "group": "\"911540000606976\""
+                }
+              },
+              {
+                "name": "Fresh Coffee",
+                "description": "Fresh Coffee",
+                "id": "poi365728000683140",
+                "translations": {},
+                "keywords": "Fresh Coffee,Coffee",
+                "voicekeywords": "",
+                "type": "Cafes, Coffee and Tea Houses",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.274,
+                "y": 0.439,
+                "extraData": {
+                  "group": "\"165642000842535\""
+                }
+              },
+              {
+                "name": "GSB ATM",
+                "description": "GSB ATM",
+                "id": "poi396353000981834",
+                "translations": {},
+                "keywords": "GSB ATM,ATM,GSB",
+                "voicekeywords": "",
+                "type": "ATM",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.298,
+                "y": 0.588,
+                "extraData": {
+                  "group": "\"895703000238561\""
+                }
+              },
+              {
+                "name": "Hertz Car Rental ",
+                "description": "Hertz Car Rental ",
+                "id": "poi903998500498274",
+                "translations": {},
+                "keywords": "Hertz Car Rental,Car Rental",
+                "voicekeywords": "",
+                "type": "Taxi and Car Service",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.58,
+                "y": 0.583,
+                "extraData": {
+                  "group": "\"803927500104974\""
+                }
+              },
+              {
+                "name": "Immigration Counter",
+                "description": "Immigration Counter",
+                "id": "poi272017000856490",
+                "translations": {},
+                "keywords": "Immigration Counter,Immigration",
+                "voicekeywords": "",
+                "type": "Customs and Immigration",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.757,
+                "y": 0.448,
+                "region": [
+                  {
+                    "x": 0.754,
+                    "y": 0.474
+                  },
+                  {
+                    "x": 0.754,
+                    "y": 0.423
+                  },
+                  {
+                    "x": 0.76,
+                    "y": 0.423
+                  },
+                  {
+                    "x": 0.76,
+                    "y": 0.474
+                  },
+                  {
+                    "x": 0.754,
+                    "y": 0.474
+                  }
+                ],
+                "extraData": {
+                  "group": "\"971843000018063\""
+                }
+              },
+              {
+                "name": "KAO SOI HOUSE",
+                "description": "KAO SOI HOUSE",
+                "id": "poi756780000025713",
+                "translations": {},
+                "keywords": "KAO SOI HOUSE,Food and Beverage",
+                "voicekeywords": "",
+                "type": "Food and Beverage",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.617,
+                "y": 0.586,
+                "extraData": {
+                  "group": "\"656555500612096\""
+                }
+              },
+              {
+                "name": "KTB ATM",
+                "description": "KTB ATM",
+                "id": "poi634477500698993",
+                "translations": {},
+                "keywords": "KTB ATM,KTB,ATM",
+                "voicekeywords": "",
+                "type": "ATM",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.601,
+                "y": 0.584,
+                "extraData": {
+                  "group": "\"534117500397442\""
+                }
+              },
+              {
+                "name": "KTB Exchange",
+                "description": "KTB Exchange",
+                "id": "poi305744000903150",
+                "translations": {},
+                "keywords": "KTB Exchange,KTB,currency exchange",
+                "voicekeywords": "",
+                "type": "Currency Exchange",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.61,
+                "y": 0.584,
+                "extraData": {
+                  "group": "\"905646500162685\""
+                }
+              },
+              {
+                "name": "Lion AIr Check in Counter",
+                "description": "Lion AIr Check in Counter",
+                "id": "poi279208000201320",
+                "translations": {},
+                "keywords": "Lion AIr Check in Counter,Lion AIr,Check in Counter",
+                "voicekeywords": "",
+                "type": "Bag Drop / Check-in",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.213,
+                "y": 0.487,
+                "extraData": {
+                  "group": "\"279136000662777\""
+                }
+              },
+              {
+                "name": "Nok AIr Check in Counter",
+                "description": "Nok AIr Check in Counter",
+                "id": "poi821451000739880",
+                "translations": {},
+                "keywords": "Nok AIr Check in Counter,Nok Air,Check in Counter",
+                "voicekeywords": "",
+                "type": "Bag Drop / Check-in",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.213,
+                "y": 0.502,
+                "extraData": {
+                  "group": "\"621377000578940\""
+                }
+              },
+              {
+                "name": "Nok Air Ticket Office",
+                "description": "Nok Air Ticket Office",
+                "id": "poi900897500192973",
+                "translations": {},
+                "keywords": "Nok Air Ticket Office,Nok Air,Ticket Office",
+                "voicekeywords": "",
+                "type": "Ticketing",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.296,
+                "y": 0.523,
+                "extraData": {
+                  "group": "\"700828000275786\""
+                }
+              },
+              {
+                "name": "O Natural Shop",
+                "description": "O Natural Shop",
+                "id": "poi241017500355401",
+                "translations": {},
+                "keywords": "O Natural Shop,Natural,Souvenir Shop,Gifts",
+                "voicekeywords": "",
+                "type": "Accessories, Gifts",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.446,
+                "y": 0.583,
+                "extraData": {
+                  "group": "\"740920000997863\""
+                }
+              },
+              {
+                "name": "PA RAT KHUN Souvenir Shop",
+                "description": "PA RAT KHUN Souvenir Shop",
+                "id": "poi989958000604454",
+                "translations": {},
+                "keywords": "PA RAT KHUN,Souvenir Shop",
+                "voicekeywords": "",
+                "type": "Accessories, Gifts",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.453,
+                "y": 0.523,
+                "extraData": {
+                  "group": "\"989500500560653\""
+                }
+              },
+              {
+                "name": "SCB ATM",
+                "description": "SCB ATM",
+                "id": "poi473399500639929",
+                "translations": {},
+                "keywords": "SCB,ATM,SCB ATM",
+                "voicekeywords": "",
+                "type": "ATM",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.293,
+                "y": 0.588,
+                "extraData": {
+                  "group": "\"673298000607368\""
+                }
+              },
+              {
+                "name": "SCB ATM",
+                "description": "SCB ATM",
+                "id": "poi457970000865865",
+                "translations": {},
+                "keywords": "SCB ATM,SCB,ATM",
+                "voicekeywords": "",
+                "type": "ATM",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.633,
+                "y": 0.586,
+                "extraData": {
+                  "group": "\"357897500883267\""
+                }
+              },
+              {
+                "name": "SCB Exchange",
+                "description": "SCB Exchange",
+                "id": "poi655853500690454",
+                "translations": {},
+                "keywords": "SCB Exchange,currency exchange",
+                "voicekeywords": "",
+                "type": "Currency Exchange",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.628,
+                "y": 0.586,
+                "extraData": {
+                  "group": "\"755632500542800\""
+                }
+              },
+              {
+                "name": "Thai Air Asia Ticket Office",
+                "description": "Thai Air Asia Ticket Office",
+                "id": "poi477754000714021",
+                "translations": {},
+                "keywords": "Thai Air Asia Ticket Office,Thai Air Asia,Ticket Office",
+                "voicekeywords": "",
+                "type": "Ticketing",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.359,
+                "y": 0.523,
+                "extraData": {
+                  "group": "\"377678500624197\""
+                }
+              },
+              {
+                "name": "Thai Airways Waiting Lounge",
+                "description": "Thai Airways  Waiting Lounge",
+                "id": "poi688839500138052",
+                "translations": {},
+                "keywords": "Thai Airways,Waiting Lounge,Thai Airways Waiting Lounge",
+                "voicekeywords": "",
+                "type": "Waiting Lounge",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.399,
+                "y": 0.468,
+                "extraData": {
+                  "group": "\"688771000600211\""
+                }
+              },
+              {
+                "name": "Thai Lion Air Ticket Office",
+                "description": "Thai Lion Air Ticket Office",
+                "id": "poi177866000113481",
+                "translations": {},
+                "keywords": "Thai Lion Air Ticket Office,Thai Lion Air,Ticket Office",
+                "voicekeywords": "",
+                "type": "Ticketing",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.391,
+                "y": 0.523,
+                "extraData": {
+                  "group": "\"577775000076381\""
+                }
+              },
+              {
+                "name": "Thai Smile Airways Ticket Office",
+                "description": "Thai Smile Airways Ticket Office",
+                "id": "poi924591500999985",
+                "translations": {},
+                "keywords": "Thai Smile Airways Ticket Office,Thai Smile Airways,Ticket Office",
+                "voicekeywords": "",
+                "type": "Ticketing",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.266,
+                "y": 0.522,
+                "extraData": {
+                  "group": "\"324430500023158\""
+                }
+              },
+              {
+                "name": "Thai Smile Check in Counter",
+                "description": "Thai Smile Check in Counter",
+                "id": "poi820539500697201",
+                "translations": {},
+                "keywords": "Thai Smile Check in Counter,Thai Smile,Check in Counter",
+                "voicekeywords": "",
+                "type": "Bag Drop / Check-in",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.208,
+                "y": 0.545,
+                "extraData": {
+                  "group": "\"720444000272641\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362085532345",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.289,
+                "y": 0.489,
+                "region": [
+                  {
+                    "x": 0.29,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.296,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.296,
+                    "y": 0.493
+                  },
+                  {
+                    "x": 0.296,
+                    "y": 0.493
+                  },
+                  {
+                    "x": 0.296,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.282,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.282,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.282,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.285,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.285,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.285,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.285,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.285,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.285,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.285,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.29,
+                    "y": 0.478
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362085532345\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362086840872",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.274,
+                "y": 0.489,
+                "region": [
+                  {
+                    "x": 0.281,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.278,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.278,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.267,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.267,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.278,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.278,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.281,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.281,
+                    "y": 0.478
+                  },
+                  {
+                    "x": 0.281,
+                    "y": 0.501
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362086840872\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362137691368",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.466,
+                "y": 0.451,
+                "region": [
+                  {
+                    "x": 0.47,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.47,
+                    "y": 0.447
+                  },
+                  {
+                    "x": 0.472,
+                    "y": 0.447
+                  },
+                  {
+                    "x": 0.472,
+                    "y": 0.457
+                  },
+                  {
+                    "x": 0.461,
+                    "y": 0.457
+                  },
+                  {
+                    "x": 0.461,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.464,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.464,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.47,
+                    "y": 0.446
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362137691368\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362145415868",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.454,
+                "y": 0.451,
+                "region": [
+                  {
+                    "x": 0.449,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.452,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.46,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.46,
+                    "y": 0.457
+                  },
+                  {
+                    "x": 0.449,
+                    "y": 0.457
+                  },
+                  {
+                    "x": 0.449,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.449,
+                    "y": 0.446
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362145415868\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362153833930",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.423,
+                "y": 0.445,
+                "region": [
+                  {
+                    "x": 0.426,
+                    "y": 0.44
+                  },
+                  {
+                    "x": 0.426,
+                    "y": 0.441
+                  },
+                  {
+                    "x": 0.426,
+                    "y": 0.451
+                  },
+                  {
+                    "x": 0.42,
+                    "y": 0.451
+                  },
+                  {
+                    "x": 0.42,
+                    "y": 0.441
+                  },
+                  {
+                    "x": 0.423,
+                    "y": 0.441
+                  },
+                  {
+                    "x": 0.423,
+                    "y": 0.44
+                  },
+                  {
+                    "x": 0.426,
+                    "y": 0.44
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362153833930\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362155286614",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.417,
+                "y": 0.445,
+                "region": [
+                  {
+                    "x": 0.42,
+                    "y": 0.44
+                  },
+                  {
+                    "x": 0.42,
+                    "y": 0.441
+                  },
+                  {
+                    "x": 0.42,
+                    "y": 0.451
+                  },
+                  {
+                    "x": 0.414,
+                    "y": 0.451
+                  },
+                  {
+                    "x": 0.414,
+                    "y": 0.441
+                  },
+                  {
+                    "x": 0.416,
+                    "y": 0.441
+                  },
+                  {
+                    "x": 0.416,
+                    "y": 0.44
+                  },
+                  {
+                    "x": 0.42,
+                    "y": 0.44
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362155286614\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi680851000488292",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.559,
+                "y": 0.489,
+                "region": [
+                  {
+                    "x": 0.544,
+                    "y": 0.479
+                  },
+                  {
+                    "x": 0.544,
+                    "y": 0.499
+                  },
+                  {
+                    "x": 0.558,
+                    "y": 0.499
+                  },
+                  {
+                    "x": 0.558,
+                    "y": 0.502
+                  },
+                  {
+                    "x": 0.574,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.574,
+                    "y": 0.479
+                  },
+                  {
+                    "x": 0.544,
+                    "y": 0.479
+                  }
+                ],
+                "extraData": {
+                  "group": "\"480761500974585\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi997257500892053",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.525,
+                "y": 0.49,
+                "region": [
+                  {
+                    "x": 0.507,
+                    "y": 0.479
+                  },
+                  {
+                    "x": 0.507,
+                    "y": 0.502
+                  },
+                  {
+                    "x": 0.544,
+                    "y": 0.502
+                  },
+                  {
+                    "x": 0.544,
+                    "y": 0.479
+                  },
+                  {
+                    "x": 0.507,
+                    "y": 0.479
+                  }
+                ],
+                "extraData": {
+                  "group": "\"497182500071526\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi892482000331217",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.577,
+                "y": 0.509,
+                "region": [
+                  {
+                    "x": 0.558,
+                    "y": 0.502
+                  },
+                  {
+                    "x": 0.558,
+                    "y": 0.516
+                  },
+                  {
+                    "x": 0.597,
+                    "y": 0.516
+                  },
+                  {
+                    "x": 0.597,
+                    "y": 0.502
+                  },
+                  {
+                    "x": 0.558,
+                    "y": 0.502
+                  }
+                ],
+                "extraData": {
+                  "group": "\"692403000147424\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi823559500311175",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.493,
+                "y": 0.49,
+                "region": [
+                  {
+                    "x": 0.486,
+                    "y": 0.479
+                  },
+                  {
+                    "x": 0.486,
+                    "y": 0.502
+                  },
+                  {
+                    "x": 0.501,
+                    "y": 0.502
+                  },
+                  {
+                    "x": 0.501,
+                    "y": 0.479
+                  },
+                  {
+                    "x": 0.486,
+                    "y": 0.479
+                  }
+                ],
+                "extraData": {
+                  "group": "\"123485500479651\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi116690000820210",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.478,
+                "y": 0.49,
+                "region": [
+                  {
+                    "x": 0.47,
+                    "y": 0.479
+                  },
+                  {
+                    "x": 0.47,
+                    "y": 0.502
+                  },
+                  {
+                    "x": 0.486,
+                    "y": 0.502
+                  },
+                  {
+                    "x": 0.486,
+                    "y": 0.479
+                  },
+                  {
+                    "x": 0.47,
+                    "y": 0.479
+                  }
+                ],
+                "extraData": {
+                  "group": "\"316607000328831\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi836259000797832",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.41,
+                "y": 0.445,
+                "region": [
+                  {
+                    "x": 0.407,
+                    "y": 0.44
+                  },
+                  {
+                    "x": 0.407,
+                    "y": 0.451
+                  },
+                  {
+                    "x": 0.414,
+                    "y": 0.451
+                  },
+                  {
+                    "x": 0.414,
+                    "y": 0.44
+                  },
+                  {
+                    "x": 0.407,
+                    "y": 0.44
+                  }
+                ],
+                "extraData": {
+                  "group": "\"836191000338092\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi994220000734843",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.403,
+                "y": 0.445,
+                "region": [
+                  {
+                    "x": 0.407,
+                    "y": 0.44
+                  },
+                  {
+                    "x": 0.401,
+                    "y": 0.44
+                  },
+                  {
+                    "x": 0.401,
+                    "y": 0.451
+                  },
+                  {
+                    "x": 0.407,
+                    "y": 0.451
+                  },
+                  {
+                    "x": 0.407,
+                    "y": 0.44
+                  }
+                ],
+                "extraData": {
+                  "group": "\"294152500989349\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi161235000894075",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.666,
+                "y": 0.508,
+                "region": [
+                  {
+                    "x": 0.685,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.648,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.648,
+                    "y": 0.516
+                  },
+                  {
+                    "x": 0.685,
+                    "y": 0.516
+                  },
+                  {
+                    "x": 0.685,
+                    "y": 0.501
+                  }
+                ],
+                "extraData": {
+                  "group": "\"460694500381454\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi738003000744215",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.799,
+                "y": 0.487,
+                "region": [
+                  {
+                    "x": 0.808,
+                    "y": 0.48
+                  },
+                  {
+                    "x": 0.79,
+                    "y": 0.48
+                  },
+                  {
+                    "x": 0.79,
+                    "y": 0.495
+                  },
+                  {
+                    "x": 0.808,
+                    "y": 0.495
+                  },
+                  {
+                    "x": 0.808,
+                    "y": 0.48
+                  }
+                ],
+                "extraData": {
+                  "group": "\"637810500086881\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi543031500518739",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.817,
+                "y": 0.487,
+                "region": [
+                  {
+                    "x": 0.826,
+                    "y": 0.48
+                  },
+                  {
+                    "x": 0.808,
+                    "y": 0.48
+                  },
+                  {
+                    "x": 0.808,
+                    "y": 0.495
+                  },
+                  {
+                    "x": 0.826,
+                    "y": 0.495
+                  },
+                  {
+                    "x": 0.826,
+                    "y": 0.48
+                  }
+                ],
+                "extraData": {
+                  "group": "\"942958000349852\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi154975000612489",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.842,
+                "y": 0.462,
+                "region": [
+                  {
+                    "x": 0.826,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.86,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.86,
+                    "y": 0.479
+                  },
+                  {
+                    "x": 0.826,
+                    "y": 0.479
+                  },
+                  {
+                    "x": 0.826,
+                    "y": 0.446
+                  }
+                ],
+                "extraData": {
+                  "group": "\"854892500431379\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi771643500229153",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.824,
+                "y": 0.474,
+                "extraData": {
+                  "group": "\"571558000667751\""
+                }
+              },
+              {
+                "name": "Tourist Police",
+                "description": "Tourist Police",
+                "id": "poi650586500368870",
+                "translations": {},
+                "keywords": "Tourist Police,Police",
+                "voicekeywords": "",
+                "type": "Security and Safety",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.788,
+                "y": 0.524,
+                "extraData": {
+                  "group": "\"250406000897132\""
+                }
+              },
+              {
+                "name": "True Auto Rental",
+                "description": "True Auto Rental",
+                "id": "poi678790000244248",
+                "translations": {},
+                "keywords": "True Auto Rental,Car Rental",
+                "voicekeywords": "",
+                "type": "Taxi and Car Service",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.571,
+                "y": 0.583,
+                "extraData": {
+                  "group": "\"678705000890975\""
+                }
+              },
+              {
+                "name": "Viet Jet Air Check in Counter",
+                "description": "Viet Jet Air Check in Counter",
+                "id": "poi808104000323879",
+                "translations": {},
+                "keywords": "Viet Jet Air Check in Counter,Viet Jet Air,Check in Counter",
+                "voicekeywords": "",
+                "type": "Bag Drop / Check-in",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.213,
+                "y": 0.471,
+                "extraData": {
+                  "group": "\"808037500686270\""
+                }
+              },
+              {
+                "name": "Viet Jet Air Ticket Office",
+                "description": "Viet Jet Air Ticket Office",
+                "id": "poi941614000271997",
+                "translations": {},
+                "keywords": "Viet Jet Air Ticket Office,Viet Jet Air,Ticket Office",
+                "voicekeywords": "",
+                "type": "Ticketing",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.324,
+                "y": 0.577,
+                "extraData": {
+                  "group": "\"741505000852654\""
+                }
+              },
+              {
+                "name": "X-Ray",
+                "description": "X-Ray",
+                "id": "poi302587500412996",
+                "translations": {},
+                "keywords": "X-Ray",
+                "voicekeywords": "",
+                "type": "Security and Safety",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.354,
+                "y": 0.571,
+                "extraData": {
+                  "group": "\"902142000795495\""
+                }
+              },
+              {
+                "name": "X-Ray",
+                "description": "X-Ray",
+                "id": "poi339734500752593",
+                "translations": {},
+                "keywords": "X-Ray",
+                "voicekeywords": "",
+                "type": "Security and Safety",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.377,
+                "y": 0.571,
+                "extraData": {
+                  "group": "\"439615000134385\""
+                }
+              },
+              {
+                "name": "X-Ray",
+                "description": "X-Ray",
+                "id": "poi920543000644285",
+                "translations": {},
+                "keywords": "X-Ray,Domestic Departure",
+                "voicekeywords": "",
+                "type": "Accessories, Gifts",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.39,
+                "y": 0.492,
+                "extraData": {
+                  "group": "\"720463500086492\""
+                }
+              }
+            ],
+            "portals": [
+              {
+                "name": "Lift",
+                "description": "",
+                "portalLinkId": 349,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Lift",
+                "destinationLevel": 1,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.758,
+                  "y": 0.391
+                },
+                "destinationNodePoi": {
+                  "x": 0.758,
+                  "y": 0.391
+                }
+              },
+              {
+                "name": "Lift",
+                "description": "",
+                "portalLinkId": 350,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Lift",
+                "destinationLevel": 1,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.242,
+                  "y": 0.583
+                },
+                "destinationNodePoi": {
+                  "x": 0.242,
+                  "y": 0.583
+                }
+              },
+              {
+                "name": "Lift",
+                "description": "",
+                "portalLinkId": 352,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Lift",
+                "destinationLevel": 1,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.594,
+                  "y": 0.406
+                },
+                "destinationNodePoi": {
+                  "x": 0.594,
+                  "y": 0.406
+                }
+              },
+              {
+                "name": "Stairs",
+                "description": "",
+                "portalLinkId": 356,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Stairs",
+                "destinationLevel": 1,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.301,
+                  "y": 0.573
+                },
+                "destinationNodePoi": {
+                  "x": 0.301,
+                  "y": 0.573
+                }
+              },
+              {
+                "name": "Stairs",
+                "description": "",
+                "portalLinkId": 358,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Stairs",
+                "destinationLevel": 1,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.712,
+                  "y": 0.53
+                },
+                "destinationNodePoi": {
+                  "x": 0.712,
+                  "y": 0.53
+                }
+              },
+              {
+                "name": "Escalator",
+                "description": "",
+                "portalLinkId": 359,
+                "portalProperty": "onewayPortal",
+                "portalType": "Escalator",
+                "destinationLevel": 1,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.698,
+                  "y": 0.524
+                },
+                "destinationNodePoi": {
+                  "x": 0.753,
+                  "y": 0.525
+                }
+              },
+              {
+                "name": "Escalator",
+                "description": "",
+                "portalLinkId": 360,
+                "portalProperty": "onewayPortal",
+                "portalType": "Escalator",
+                "destinationLevel": 1,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.311,
+                  "y": 0.398
+                },
+                "destinationNodePoi": {
+                  "x": 0.365,
+                  "y": 0.399
+                }
+              },
+              {
+                "name": "Stairs",
+                "description": "",
+                "portalLinkId": 361,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Stairs",
+                "destinationLevel": 1,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.471,
+                  "y": 0.399
+                },
+                "destinationNodePoi": {
+                  "x": 0.471,
+                  "y": 0.399
+                }
+              },
+              {
+                "name": "Stairs",
+                "description": "",
+                "portalLinkId": 365,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Stairs",
+                "destinationLevel": 1,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.509,
+                  "y": 0.4
+                },
+                "destinationNodePoi": {
+                  "x": 0.509,
+                  "y": 0.4
+                }
+              },
+              {
+                "name": "Escalator",
+                "description": "",
+                "portalLinkId": 357,
+                "portalProperty": "onewayPortal",
+                "portalType": "Escalator",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.315,
+                  "y": 0.568
+                },
+                "destinationNodePoi": {
+                  "x": 0.315,
+                  "y": 0.568
+                }
+              },
+              {
+                "name": "Escalator",
+                "description": "",
+                "portalLinkId": 363,
+                "portalProperty": "onewayPortal",
+                "portalType": "Escalator",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.489,
+                  "y": 0.404
+                },
+                "destinationNodePoi": {
+                  "x": 0.489,
+                  "y": 0.404
+                }
+              },
+              {
+                "name": "Escalator",
+                "description": "",
+                "portalLinkId": 364,
+                "portalProperty": "onewayPortal",
+                "portalType": "Escalator",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.562,
+                  "y": 0.404
+                },
+                "destinationNodePoi": {
+                  "x": 0.562,
+                  "y": 0.404
+                }
+              }
+            ]
+          },
+          {
+            "level": 1,
+            "poi": [
+              {
+                "name": " Buddha statue",
+                "description": "Luang Por Tuard",
+                "id": "poi452634000463744",
+                "translations": {},
+                "keywords": "Praying,Buddha statue",
+                "voicekeywords": "",
+                "type": "Faith and Worship",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.784,
+                "y": 0.521,
+                "region": [
+                  {
+                    "x": 0.78,
+                    "y": 0.527
+                  },
+                  {
+                    "x": 0.78,
+                    "y": 0.516
+                  },
+                  {
+                    "x": 0.789,
+                    "y": 0.516
+                  },
+                  {
+                    "x": 0.789,
+                    "y": 0.527
+                  },
+                  {
+                    "x": 0.78,
+                    "y": 0.527
+                  }
+                ],
+                "extraData": {
+                  "group": "\"352503500791921\""
+                }
+              },
+              {
+                "name": " Buddha statue",
+                "description": "Luang Por Tuard",
+                "id": "poi995736000238026",
+                "translations": {},
+                "keywords": "Praying,Buddha statue",
+                "voicekeywords": "",
+                "type": "Faith and Worship",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.779,
+                "y": 0.524,
+                "extraData": {
+                  "group": "\"295655000314132\""
+                }
+              },
+              {
+                "name": "Blackck Canyon Coffee",
+                "description": "Blackck Canyon Coffee",
+                "id": "poi572101500122710",
+                "translations": {},
+                "keywords": "Blackck Canyon Coffee,Blackck Canyon,Coffee",
+                "voicekeywords": "",
+                "type": "Cafes, Coffee and Tea Houses",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.449,
+                "y": 0.511,
+                "region": [
+                  {
+                    "x": 0.436,
+                    "y": 0.516
+                  },
+                  {
+                    "x": 0.436,
+                    "y": 0.506
+                  },
+                  {
+                    "x": 0.462,
+                    "y": 0.506
+                  },
+                  {
+                    "x": 0.462,
+                    "y": 0.516
+                  },
+                  {
+                    "x": 0.436,
+                    "y": 0.516
+                  }
+                ],
+                "extraData": {
+                  "group": "\"471948000290236\""
+                }
+              },
+              {
+                "name": "Blackck Canyon Coffee",
+                "description": "Blackck Canyon Coffee",
+                "id": "poi766030000964377",
+                "translations": {},
+                "keywords": "Blackck Canyon Coffee,Blackck Canyon,Coffee",
+                "voicekeywords": "",
+                "type": "Cafes, Coffee and Tea Houses",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.448,
+                "y": 0.505,
+                "extraData": {
+                  "group": "\"165963000853447\""
+                }
+              },
+              {
+                "name": "Boarding Counter",
+                "description": "Boarding Counter",
+                "id": "poi555302500930608",
+                "translations": {},
+                "keywords": "Boarding Counter",
+                "voicekeywords": "",
+                "type": "Airlines and Aviation Services",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.41,
+                "y": 0.486,
+                "extraData": {
+                  "group": "\"955172500595055\""
+                }
+              },
+              {
+                "name": "Bridge 1",
+                "description": "Bridge",
+                "id": "poi917300000910439",
+                "translations": {},
+                "keywords": "Bridge",
+                "voicekeywords": "",
+                "type": "Gate",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.702,
+                "y": 0.383,
+                "extraData": {
+                  "group": "\"617166500020371\""
+                }
+              },
+              {
+                "name": "Bridge 2",
+                "description": "Bridge",
+                "id": "poi936900500065605",
+                "translations": {},
+                "keywords": "Bridge",
+                "voicekeywords": "",
+                "type": "Gate",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.418,
+                "y": 0.383,
+                "extraData": {
+                  "group": "\"336548500499934\""
+                }
+              },
+              {
+                "name": "Bridge 3",
+                "description": "Bridge",
+                "id": "poi775156000068305",
+                "translations": {},
+                "keywords": "Bridge",
+                "voicekeywords": "",
+                "type": "Gate",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.191,
+                "y": 0.383,
+                "extraData": {
+                  "group": "\"175073000913375\""
+                }
+              },
+              {
+                "name": "Buddhism Praying Room",
+                "description": "Buddhism Praying Room",
+                "id": "poi907678000775527",
+                "translations": {},
+                "keywords": "Buddhism Praying Room,Buddhism,Praying Room",
+                "voicekeywords": "",
+                "type": "Faith and Worship",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.23,
+                "y": 0.606,
+                "extraData": {
+                  "group": "\"807607000402362\""
+                }
+              },
+              {
+                "name": "Buddhism Praying Room",
+                "description": "Buddhism Praying Room",
+                "id": "poi181497500059138",
+                "translations": {},
+                "keywords": "Buddhism,Buddhism Praying Room,Praying Room",
+                "voicekeywords": "",
+                "type": "Faith and Worship",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.23,
+                "y": 0.611,
+                "region": [
+                  {
+                    "x": 0.225,
+                    "y": 0.607
+                  },
+                  {
+                    "x": 0.237,
+                    "y": 0.607
+                  },
+                  {
+                    "x": 0.237,
+                    "y": 0.617
+                  },
+                  {
+                    "x": 0.225,
+                    "y": 0.617
+                  },
+                  {
+                    "x": 0.225,
+                    "y": 0.607
+                  }
+                ],
+                "extraData": {
+                  "group": "\"981047500377089\""
+                }
+              },
+              {
+                "name": "Customs ",
+                "description": "Customs ",
+                "id": "poi488067500293555",
+                "translations": {},
+                "keywords": "Customs",
+                "voicekeywords": "",
+                "type": "Customs and Immigration",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.318,
+                "y": 0.489,
+                "extraData": {
+                  "group": "\"787971000220495\""
+                }
+              },
+              {
+                "name": "Gate International",
+                "description": "Gate International",
+                "id": "poi535882500255919",
+                "translations": {},
+                "keywords": "Gate International,International Departure",
+                "voicekeywords": "",
+                "type": "Gate",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.41,
+                "y": 0.481,
+                "extraData": {
+                  "group": "\"935810500835710\""
+                }
+              },
+              {
+                "name": "Immigration",
+                "description": "Immigration",
+                "id": "poi384776000831602",
+                "translations": {},
+                "keywords": "",
+                "voicekeywords": "",
+                "type": "Customs and Immigration",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.294,
+                "y": 0.497,
+                "extraData": {
+                  "group": "\"184710500642915\""
+                }
+              },
+              {
+                "name": "Information FL 2",
+                "description": "Information FL 2",
+                "id": "poi745411000912643",
+                "translations": {},
+                "keywords": "Information",
+                "voicekeywords": "",
+                "type": "Help Desk",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.231,
+                "y": 0.566,
+                "extraData": {
+                  "group": "\"345273500337217\""
+                }
+              },
+              {
+                "name": "Mapas Shop",
+                "description": "Mapas Shop",
+                "id": "poi999476000424690",
+                "translations": {},
+                "keywords": "",
+                "voicekeywords": "",
+                "type": "Accessories, Gifts",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.508,
+                "y": 0.512,
+                "region": [
+                  {
+                    "x": 0.471,
+                    "y": 0.516
+                  },
+                  {
+                    "x": 0.471,
+                    "y": 0.507
+                  },
+                  {
+                    "x": 0.544,
+                    "y": 0.507
+                  },
+                  {
+                    "x": 0.544,
+                    "y": 0.516
+                  },
+                  {
+                    "x": 0.471,
+                    "y": 0.516
+                  }
+                ],
+                "extraData": {
+                  "group": "\"799358000665956\""
+                }
+              },
+              {
+                "name": "Muslim Praying Room",
+                "description": "Muslim Praying Room",
+                "id": "poi531736000544588",
+                "translations": {},
+                "keywords": "Muslim Praying Room,Muslim,Praying Room",
+                "voicekeywords": "",
+                "type": "Faith and Worship",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.766,
+                "y": 0.593,
+                "region": [
+                  {
+                    "x": 0.753,
+                    "y": 0.586
+                  },
+                  {
+                    "x": 0.781,
+                    "y": 0.586
+                  },
+                  {
+                    "x": 0.778,
+                    "y": 0.593
+                  },
+                  {
+                    "x": 0.781,
+                    "y": 0.601
+                  },
+                  {
+                    "x": 0.753,
+                    "y": 0.601
+                  },
+                  {
+                    "x": 0.753,
+                    "y": 0.586
+                  }
+                ],
+                "extraData": {
+                  "group": "\"631164000701084\""
+                }
+              },
+              {
+                "name": "Muslim Praying Room",
+                "description": "Muslim Praying Room",
+                "id": "poi571278500114116",
+                "translations": {},
+                "keywords": "Muslim Praying Room,Muslim,Praying Room",
+                "voicekeywords": "",
+                "type": "Faith and Worship",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.786,
+                "y": 0.611,
+                "region": [
+                  {
+                    "x": 0.782,
+                    "y": 0.606
+                  },
+                  {
+                    "x": 0.786,
+                    "y": 0.607
+                  },
+                  {
+                    "x": 0.791,
+                    "y": 0.606
+                  },
+                  {
+                    "x": 0.791,
+                    "y": 0.617
+                  },
+                  {
+                    "x": 0.782,
+                    "y": 0.617
+                  },
+                  {
+                    "x": 0.782,
+                    "y": 0.606
+                  }
+                ],
+                "extraData": {
+                  "group": "\"271195000307556\""
+                }
+              },
+              {
+                "name": "Muslim Praying Room",
+                "description": "Muslim Praying Room",
+                "id": "poi869158000689480",
+                "translations": {},
+                "keywords": "Muslim Praying Room,Muslim,Praying Room",
+                "voicekeywords": "",
+                "type": "Faith and Worship",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.779,
+                "y": 0.593,
+                "extraData": {
+                  "group": "\"669082500936649\""
+                }
+              },
+              {
+                "name": "Muslim Praying Room",
+                "description": "Muslim Praying Room",
+                "id": "poi433725000256275",
+                "translations": {},
+                "keywords": "Muslim Praying Room,Muslim,Praying Room",
+                "voicekeywords": "",
+                "type": "Faith and Worship",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.786,
+                "y": 0.606,
+                "extraData": {
+                  "group": "\"433654500552680\""
+                }
+              },
+              {
+                "name": "Seating Area",
+                "description": "Seating Area",
+                "id": "poi966137500584608",
+                "translations": {},
+                "keywords": "",
+                "voicekeywords": "",
+                "type": "Seating",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.498,
+                "y": 0.492,
+                "region": [
+                  {
+                    "x": 0.458,
+                    "y": 0.5
+                  },
+                  {
+                    "x": 0.458,
+                    "y": 0.484
+                  },
+                  {
+                    "x": 0.539,
+                    "y": 0.484
+                  },
+                  {
+                    "x": 0.539,
+                    "y": 0.5
+                  },
+                  {
+                    "x": 0.458,
+                    "y": 0.5
+                  }
+                ],
+                "extraData": {
+                  "group": "\"265975000944311\""
+                }
+              },
+              {
+                "name": "Seating Area",
+                "description": "Seating Area",
+                "id": "poi118196000071698",
+                "translations": {},
+                "keywords": "",
+                "voicekeywords": "",
+                "type": "Seating",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.436,
+                "y": 0.492,
+                "region": [
+                  {
+                    "x": 0.422,
+                    "y": 0.5
+                  },
+                  {
+                    "x": 0.422,
+                    "y": 0.484
+                  },
+                  {
+                    "x": 0.451,
+                    "y": 0.484
+                  },
+                  {
+                    "x": 0.451,
+                    "y": 0.5
+                  },
+                  {
+                    "x": 0.422,
+                    "y": 0.5
+                  }
+                ],
+                "extraData": {
+                  "group": "\"818127500787542\""
+                }
+              },
+              {
+                "name": "Seating Area",
+                "description": "Seating Area",
+                "id": "poi201376500034042",
+                "translations": {},
+                "keywords": "",
+                "voicekeywords": "",
+                "type": "Seating",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.361,
+                "y": 0.492,
+                "region": [
+                  {
+                    "x": 0.334,
+                    "y": 0.5
+                  },
+                  {
+                    "x": 0.334,
+                    "y": 0.484
+                  },
+                  {
+                    "x": 0.388,
+                    "y": 0.484
+                  },
+                  {
+                    "x": 0.388,
+                    "y": 0.5
+                  },
+                  {
+                    "x": 0.334,
+                    "y": 0.5
+                  }
+                ],
+                "extraData": {
+                  "group": "\"801306000828997\""
+                }
+              },
+              {
+                "name": "The Foodie Project",
+                "description": "The Foodie Project",
+                "id": "poi924151500617789",
+                "translations": {},
+                "keywords": "The Foodie Project,Restaurant",
+                "voicekeywords": "",
+                "type": "Restaurant",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.245,
+                "y": 0.461,
+                "extraData": {
+                  "group": "\"824076000196316\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362161882894",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.81,
+                "y": 0.58,
+                "region": [
+                  {
+                    "x": 0.819,
+                    "y": 0.587
+                  },
+                  {
+                    "x": 0.818,
+                    "y": 0.587
+                  },
+                  {
+                    "x": 0.818,
+                    "y": 0.588
+                  },
+                  {
+                    "x": 0.818,
+                    "y": 0.589
+                  },
+                  {
+                    "x": 0.792,
+                    "y": 0.589
+                  },
+                  {
+                    "x": 0.792,
+                    "y": 0.587
+                  },
+                  {
+                    "x": 0.791,
+                    "y": 0.587
+                  },
+                  {
+                    "x": 0.791,
+                    "y": 0.58
+                  },
+                  {
+                    "x": 0.792,
+                    "y": 0.579
+                  },
+                  {
+                    "x": 0.794,
+                    "y": 0.579
+                  },
+                  {
+                    "x": 0.798,
+                    "y": 0.579
+                  },
+                  {
+                    "x": 0.798,
+                    "y": 0.579
+                  },
+                  {
+                    "x": 0.798,
+                    "y": 0.572
+                  },
+                  {
+                    "x": 0.828,
+                    "y": 0.572
+                  },
+                  {
+                    "x": 0.828,
+                    "y": 0.587
+                  },
+                  {
+                    "x": 0.826,
+                    "y": 0.587
+                  },
+                  {
+                    "x": 0.819,
+                    "y": 0.587
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362161882894\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362161942630",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.81,
+                "y": 0.562,
+                "region": [
+                  {
+                    "x": 0.792,
+                    "y": 0.555
+                  },
+                  {
+                    "x": 0.792,
+                    "y": 0.554
+                  },
+                  {
+                    "x": 0.826,
+                    "y": 0.554
+                  },
+                  {
+                    "x": 0.826,
+                    "y": 0.555
+                  },
+                  {
+                    "x": 0.828,
+                    "y": 0.555
+                  },
+                  {
+                    "x": 0.828,
+                    "y": 0.571
+                  },
+                  {
+                    "x": 0.798,
+                    "y": 0.571
+                  },
+                  {
+                    "x": 0.798,
+                    "y": 0.564
+                  },
+                  {
+                    "x": 0.798,
+                    "y": 0.564
+                  },
+                  {
+                    "x": 0.794,
+                    "y": 0.564
+                  },
+                  {
+                    "x": 0.792,
+                    "y": 0.564
+                  },
+                  {
+                    "x": 0.791,
+                    "y": 0.562
+                  },
+                  {
+                    "x": 0.791,
+                    "y": 0.555
+                  },
+                  {
+                    "x": 0.792,
+                    "y": 0.555
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362161942630\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362162061198",
+                "translations": {},
+                "keywords": "",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.817,
+                "y": 0.497,
+                "region": [
+                  {
+                    "x": 0.806,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.501
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.498
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.498
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.498
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.493
+                  },
+                  {
+                    "x": 0.828,
+                    "y": 0.493
+                  },
+                  {
+                    "x": 0.828,
+                    "y": 0.502
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.501
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362162061198\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362162072538",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.816,
+                "y": 0.488,
+                "region": [
+                  {
+                    "x": 0.826,
+                    "y": 0.484
+                  },
+                  {
+                    "x": 0.826,
+                    "y": 0.485
+                  },
+                  {
+                    "x": 0.828,
+                    "y": 0.485
+                  },
+                  {
+                    "x": 0.828,
+                    "y": 0.493
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.493
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.488
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.488
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.484
+                  },
+                  {
+                    "x": 0.806,
+                    "y": 0.484
+                  },
+                  {
+                    "x": 0.826,
+                    "y": 0.484
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362162072538\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362162246445",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.205,
+                "y": 0.575,
+                "region": [
+                  {
+                    "x": 0.19,
+                    "y": 0.584
+                  },
+                  {
+                    "x": 0.19,
+                    "y": 0.582
+                  },
+                  {
+                    "x": 0.188,
+                    "y": 0.582
+                  },
+                  {
+                    "x": 0.188,
+                    "y": 0.566
+                  },
+                  {
+                    "x": 0.217,
+                    "y": 0.566
+                  },
+                  {
+                    "x": 0.218,
+                    "y": 0.574
+                  },
+                  {
+                    "x": 0.218,
+                    "y": 0.574
+                  },
+                  {
+                    "x": 0.222,
+                    "y": 0.574
+                  },
+                  {
+                    "x": 0.224,
+                    "y": 0.574
+                  },
+                  {
+                    "x": 0.225,
+                    "y": 0.576
+                  },
+                  {
+                    "x": 0.225,
+                    "y": 0.582
+                  },
+                  {
+                    "x": 0.224,
+                    "y": 0.582
+                  },
+                  {
+                    "x": 0.224,
+                    "y": 0.584
+                  },
+                  {
+                    "x": 0.19,
+                    "y": 0.584
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362162246445\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi1555362162273968",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "out",
+                "maxZoomLevel": "in",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.205,
+                "y": 0.557,
+                "region": [
+                  {
+                    "x": 0.188,
+                    "y": 0.55
+                  },
+                  {
+                    "x": 0.19,
+                    "y": 0.55
+                  },
+                  {
+                    "x": 0.19,
+                    "y": 0.549
+                  },
+                  {
+                    "x": 0.207,
+                    "y": 0.549
+                  },
+                  {
+                    "x": 0.207,
+                    "y": 0.549
+                  },
+                  {
+                    "x": 0.21,
+                    "y": 0.549
+                  },
+                  {
+                    "x": 0.224,
+                    "y": 0.549
+                  },
+                  {
+                    "x": 0.224,
+                    "y": 0.55
+                  },
+                  {
+                    "x": 0.225,
+                    "y": 0.55
+                  },
+                  {
+                    "x": 0.225,
+                    "y": 0.557
+                  },
+                  {
+                    "x": 0.224,
+                    "y": 0.559
+                  },
+                  {
+                    "x": 0.222,
+                    "y": 0.559
+                  },
+                  {
+                    "x": 0.222,
+                    "y": 0.559
+                  },
+                  {
+                    "x": 0.222,
+                    "y": 0.559
+                  },
+                  {
+                    "x": 0.218,
+                    "y": 0.559
+                  },
+                  {
+                    "x": 0.218,
+                    "y": 0.559
+                  },
+                  {
+                    "x": 0.218,
+                    "y": 0.559
+                  },
+                  {
+                    "x": 0.218,
+                    "y": 0.566
+                  },
+                  {
+                    "x": 0.188,
+                    "y": 0.566
+                  },
+                  {
+                    "x": 0.188,
+                    "y": 0.55
+                  }
+                ],
+                "extraData": {
+                  "group": "\"poi1555362162273968\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi713616000610981",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.466,
+                "y": 0.455,
+                "region": [
+                  {
+                    "x": 0.461,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.461,
+                    "y": 0.463
+                  },
+                  {
+                    "x": 0.471,
+                    "y": 0.463
+                  },
+                  {
+                    "x": 0.471,
+                    "y": 0.446
+                  },
+                  {
+                    "x": 0.461,
+                    "y": 0.446
+                  }
+                ],
+                "extraData": {
+                  "group": "\"713265000585971\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi737941500319954",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.466,
+                "y": 0.472,
+                "region": [
+                  {
+                    "x": 0.461,
+                    "y": 0.464
+                  },
+                  {
+                    "x": 0.471,
+                    "y": 0.464
+                  },
+                  {
+                    "x": 0.472,
+                    "y": 0.481
+                  },
+                  {
+                    "x": 0.461,
+                    "y": 0.481
+                  },
+                  {
+                    "x": 0.461,
+                    "y": 0.464
+                  }
+                ],
+                "extraData": {
+                  "group": "\"137843000597424\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi715353500985238",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.795,
+                "y": 0.571,
+                "extraData": {
+                  "group": "\"715279000354316\""
+                }
+              },
+              {
+                "name": "Toilets",
+                "description": "Toilets",
+                "id": "poi481328500266216",
+                "translations": {},
+                "keywords": "Toilets",
+                "voicekeywords": "",
+                "type": "Toilets",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.22,
+                "y": 0.567,
+                "extraData": {
+                  "group": "\"581246500534132\""
+                }
+              },
+              {
+                "name": "VAT Refund",
+                "description": "VAT Refund",
+                "id": "poi661831000083087",
+                "translations": {},
+                "keywords": "Vat Refund,Vat,Refund",
+                "voicekeywords": "",
+                "type": "Customs and Immigration",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.412,
+                "y": 0.505,
+                "extraData": {
+                  "group": "\"461757500771542\""
+                }
+              },
+              {
+                "name": "X-Ray",
+                "description": "X-Ray",
+                "id": "poi676801500685578",
+                "translations": {},
+                "keywords": "X-Ray,International Departure",
+                "voicekeywords": "",
+                "type": "Security and Safety",
+                "minZoomLevel": "",
+                "maxZoomLevel": "",
+                "imageUrl": "",
+                "iconUrl": "",
+                "x": 0.269,
+                "y": 0.498,
+                "extraData": {
+                  "group": "\"176704500355751\""
+                }
+              }
+            ],
+            "portals": [
+              {
+                "name": "Lift",
+                "description": "",
+                "portalLinkId": 349,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Lift",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.758,
+                  "y": 0.391
+                },
+                "destinationNodePoi": {
+                  "x": 0.758,
+                  "y": 0.391
+                }
+              },
+              {
+                "name": "Lift",
+                "description": "",
+                "portalLinkId": 350,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Lift",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.242,
+                  "y": 0.583
+                },
+                "destinationNodePoi": {
+                  "x": 0.242,
+                  "y": 0.583
+                }
+              },
+              {
+                "name": "Lift",
+                "description": "",
+                "portalLinkId": 352,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Lift",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.594,
+                  "y": 0.406
+                },
+                "destinationNodePoi": {
+                  "x": 0.594,
+                  "y": 0.406
+                }
+              },
+              {
+                "name": "Stairs",
+                "description": "",
+                "portalLinkId": 356,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Stairs",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.301,
+                  "y": 0.573
+                },
+                "destinationNodePoi": {
+                  "x": 0.301,
+                  "y": 0.573
+                }
+              },
+              {
+                "name": "Escalator",
+                "description": "",
+                "portalLinkId": 357,
+                "portalProperty": "onewayPortal",
+                "portalType": "Escalator",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.265,
+                  "y": 0.568
+                },
+                "destinationNodePoi": {
+                  "x": 0.315,
+                  "y": 0.568
+                }
+              },
+              {
+                "name": "Stairs",
+                "description": "",
+                "portalLinkId": 358,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Stairs",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.712,
+                  "y": 0.53
+                },
+                "destinationNodePoi": {
+                  "x": 0.712,
+                  "y": 0.53
+                }
+              },
+              {
+                "name": "Stairs",
+                "description": "",
+                "portalLinkId": 361,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Stairs",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.471,
+                  "y": 0.399
+                },
+                "destinationNodePoi": {
+                  "x": 0.471,
+                  "y": 0.399
+                }
+              },
+              {
+                "name": "Escalator",
+                "description": "",
+                "portalLinkId": 363,
+                "portalProperty": "onewayPortal",
+                "portalType": "Escalator",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.438,
+                  "y": 0.406
+                },
+                "destinationNodePoi": {
+                  "x": 0.489,
+                  "y": 0.404
+                }
+              },
+              {
+                "name": "Escalator",
+                "description": "",
+                "portalLinkId": 364,
+                "portalProperty": "onewayPortal",
+                "portalType": "Escalator",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.509,
+                  "y": 0.406
+                },
+                "destinationNodePoi": {
+                  "x": 0.562,
+                  "y": 0.404
+                }
+              },
+              {
+                "name": "Stairs",
+                "description": "",
+                "portalLinkId": 365,
+                "portalProperty": "multiwayPortal",
+                "portalType": "Stairs",
+                "destinationLevel": 0,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.509,
+                  "y": 0.4
+                },
+                "destinationNodePoi": {
+                  "x": 0.509,
+                  "y": 0.4
+                }
+              },
+              {
+                "name": "Escalator",
+                "description": "",
+                "portalLinkId": 359,
+                "portalProperty": "onewayPortal",
+                "portalType": "Escalator",
+                "destinationLevel": 1,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.753,
+                  "y": 0.525
+                },
+                "destinationNodePoi": {
+                  "x": 0.753,
+                  "y": 0.525
+                }
+              },
+              {
+                "name": "Escalator",
+                "description": "",
+                "portalLinkId": 360,
+                "portalProperty": "onewayPortal",
+                "portalType": "Escalator",
+                "destinationLevel": 1,
+                "keywords": "",
+                "voicekeywords": "",
+                "startNodePoi": {
+                  "x": 0.365,
+                  "y": 0.399
+                },
+                "destinationNodePoi": {
+                  "x": 0.365,
+                  "y": 0.399
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

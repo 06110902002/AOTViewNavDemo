@@ -1,0 +1,139 @@
+{
+  "status": {
+    "code": 200,
+    "errorMessage": ""
+  },
+  "body": {
+    "venueInternalIdentifier": 2,
+    "facilities": [
+      {
+        "facilityInternalIdentifier": 2,
+        "data": {
+          "mapVersion": [
+            {
+              "level": -1,
+              "version": 10,
+              "url": "https://pointrimages.blob.core.windows.net/aot/1560156677544671.jpg",
+              "lowResolutionUrl": "https://pointrimages.blob.core.windows.net/aot/low_1560156677544671.jpg",
+              "internalMapURL ": "",
+              "mapDetails": {
+                "url": "https://pointrimages.blob.core.windows.net/aot/1560156840127559.zip",
+                "width": 8000,
+                "height": 8000
+              },
+              "internalMapDetails": {}
+            },
+            {
+              "level": 0,
+              "version": 7,
+              "url": "https://pointrimages.blob.core.windows.net/aot/1560156475132689.jpg",
+              "lowResolutionUrl": "https://pointrimages.blob.core.windows.net/aot/low_1560156475132689.jpg",
+              "internalMapURL ": "",
+              "mapDetails": {
+                "url": "https://pointrimages.blob.core.windows.net/aot/1560156615752622.zip",
+                "width": 8000,
+                "height": 8000
+              },
+              "internalMapDetails": {}
+            },
+            {
+              "level": 1,
+              "version": 6,
+              "url": "https://pointrimages.blob.core.windows.net/aot/1560156003705630.jpg",
+              "lowResolutionUrl": "https://pointrimages.blob.core.windows.net/aot/low_1560156003705630.jpg",
+              "internalMapURL ": "",
+              "mapDetails": {
+                "url": "https://pointrimages.blob.core.windows.net/aot/156015643089266.zip",
+                "width": 8000,
+                "height": 8000
+              },
+              "internalMapDetails": {}
+            },
+            {
+              "level": 2,
+              "version": 6,
+              "url": "https://pointrimages.blob.core.windows.net/aot/1560155798567982.jpg",
+              "lowResolutionUrl": "https://pointrimages.blob.core.windows.net/aot/low_1560155798567982.jpg",
+              "internalMapURL ": "",
+              "mapDetails": {
+                "url": "https://pointrimages.blob.core.windows.net/aot/1560155954662707.zip",
+                "width": 8000,
+                "height": 8000
+              },
+              "internalMapDetails": {}
+            },
+            {
+              "level": 3,
+              "version": 5,
+              "url": "https://pointrimages.blob.core.windows.net/aot/1560155240126571.jpg",
+              "lowResolutionUrl": "https://pointrimages.blob.core.windows.net/aot/low_1560155240126571.jpg",
+              "internalMapURL ": "",
+              "mapDetails": {
+                "url": "https://pointrimages.blob.core.windows.net/aot/1560155601140426.zip",
+                "width": 8000,
+                "height": 8000
+              },
+              "internalMapDetails": {}
+            },
+            {
+              "level": 4,
+              "version": 6,
+              "url": "https://pointrimages.blob.core.windows.net/aot/1560154940083796.jpg",
+              "lowResolutionUrl": "https://pointrimages.blob.core.windows.net/aot/low_1560154940083796.jpg",
+              "internalMapURL ": "",
+              "mapDetails": {
+                "url": "https://pointrimages.blob.core.windows.net/aot/1560155186905703.zip",
+                "width": 8000,
+                "height": 8000
+              },
+              "internalMapDetails": {}
+            },
+            {
+              "level": 5,
+              "version": 5,
+              "url": "https://pointrimages.blob.core.windows.net/aot/1560154446579236.jpg",
+              "lowResolutionUrl": "https://pointrimages.blob.core.windows.net/aot/low_1560154446579236.jpg",
+              "internalMapURL ": "",
+              "mapDetails": {
+                "url": "https://pointrimages.blob.core.windows.net/aot/1560154860235852.zip",
+                "width": 8000,
+                "height": 8000
+              },
+              "internalMapDetails": {}
+            },
+            {
+              "level": 6,
+              "version": 4,
+              "url": "https://pointrimages.blob.core.windows.net/aot/156015416781967.jpg",
+              "lowResolutionUrl": "https://pointrimages.blob.core.windows.net/aot/low_156015416781967.jpg",
+              "internalMapURL ": "",
+              "mapDetails": {
+                "url": "https://pointrimages.blob.core.windows.net/aot/1560154378802779.zip",
+                "width": 8000,
+                "height": 8000
+              },
+              "internalMapDetails": {}
+            },
+            {
+              "level": 7,
+              "version": 4,
+              "url": "https://pointrimages.blob.core.windows.net/aot/1560153854131555.jpg",
+              "lowResolutionUrl": "https://pointrimages.blob.core.windows.net/aot/low_1560153854131555.jpg",
+              "internalMapURL ": "",
+              "mapDetails": {
+                "url": "https://pointrimages.blob.core.windows.net/aot/1560154003434362.zip",
+                "width": 8000,
+                "height": 8000
+              },
+              "internalMapDetails": {}
+            }
+          ],
+          "poiVersion": 266,
+          "wallVersion": 214,
+          "graphVersion": 230,
+          "configurationVersion": 7
+        }
+      }
+    ]
+  }
+}

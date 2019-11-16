@@ -1,0 +1,25 @@
+{
+  "status": {
+    "code": 200,
+    "errorMessage": ""
+  },
+  "body": {
+    "venueInternalIdentifier": 2,
+    "data": {},
+    "facilities": [
+      {
+        "facilityInternalIdentifier": 2,
+        "data": {
+          "facilityConfiguration": {
+            "facilityId": 2,
+            "mapMinLevel": -1,
+            "mapMaxLevel": 5,
+            "mapHeightMeters": 1600.0,
+            "mapWidthMeters": 1600.0,
+            "internalIdentifier": 2
+          }
+        }
+      }
+    ]
+  }
+}

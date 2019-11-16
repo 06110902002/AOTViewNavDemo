@@ -1,0 +1,3469 @@
+{
+  "status": {
+    "code": 200,
+    "errorMessage": ""
+  },
+  "body": {
+    "venueInternalIdentifier": 6,
+    "facilities": [
+      {
+        "facilityInternalIdentifier": 6,
+        "data": {
+          "facilityId": 6,
+          "dx": 0.01,
+          "interFacilityPortalNodes": [],
+          "portalNodes": [
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 899,
+                "x": 0.338,
+                "y": 0.533,
+                "level": 0
+              },
+              "endNode": {
+                "id": 900,
+                "x": 0.338,
+                "y": 0.533,
+                "level": 1
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 911,
+                "x": 0.423,
+                "y": 0.522,
+                "level": 0
+              },
+              "endNode": {
+                "id": 912,
+                "x": 0.423,
+                "y": 0.522,
+                "level": 1
+              },
+              "type": "Stairs",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 901,
+                "x": 0.594,
+                "y": 0.526,
+                "level": 0
+              },
+              "endNode": {
+                "id": 902,
+                "x": 0.594,
+                "y": 0.526,
+                "level": 1
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 903,
+                "x": 0.658,
+                "y": 0.453,
+                "level": 0
+              },
+              "endNode": {
+                "id": 904,
+                "x": 0.658,
+                "y": 0.453,
+                "level": 1
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 913,
+                "x": 0.683,
+                "y": 0.547,
+                "level": 0
+              },
+              "endNode": {
+                "id": 914,
+                "x": 0.683,
+                "y": 0.547,
+                "level": 1
+              },
+              "type": "Stairs",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 905,
+                "x": 0.299,
+                "y": 0.449,
+                "level": 0
+              },
+              "endNode": {
+                "id": 906,
+                "x": 0.299,
+                "y": 0.449,
+                "level": 1
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 907,
+                "x": 0.224,
+                "y": 0.449,
+                "level": 0
+              },
+              "endNode": {
+                "id": 908,
+                "x": 0.224,
+                "y": 0.449,
+                "level": 1
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 925,
+                "x": 0.32,
+                "y": 0.526,
+                "level": 0
+              },
+              "endNode": {
+                "id": 926,
+                "x": 0.342,
+                "y": 0.529,
+                "level": 1
+              },
+              "type": "Escalator",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 927,
+                "x": 0.244,
+                "y": 0.445,
+                "level": 0
+              },
+              "endNode": {
+                "id": 928,
+                "x": 0.219,
+                "y": 0.446,
+                "level": 1
+              },
+              "type": "Escalator",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 929,
+                "x": 0.553,
+                "y": 0.528,
+                "level": 0
+              },
+              "endNode": {
+                "id": 930,
+                "x": 0.54,
+                "y": 0.508,
+                "level": 1
+              },
+              "type": "Escalator",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 931,
+                "x": 0.575,
+                "y": 0.528,
+                "level": 0
+              },
+              "endNode": {
+                "id": 932,
+                "x": 0.593,
+                "y": 0.506,
+                "level": 1
+              },
+              "type": "Escalator",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 933,
+                "x": 0.654,
+                "y": 0.471,
+                "level": 0
+              },
+              "endNode": {
+                "id": 934,
+                "x": 0.667,
+                "y": 0.455,
+                "level": 1
+              },
+              "type": "Escalator",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 935,
+                "x": 0.73,
+                "y": 0.447,
+                "level": 0
+              },
+              "endNode": {
+                "id": 936,
+                "x": 0.707,
+                "y": 0.447,
+                "level": 1
+              },
+              "type": "Escalator",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 937,
+                "x": 0.725,
+                "y": 0.528,
+                "level": 0
+              },
+              "endNode": {
+                "id": 938,
+                "x": 0.739,
+                "y": 0.505,
+                "level": 1
+              },
+              "type": "Escalator",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 939,
+                "x": 0.276,
+                "y": 0.445,
+                "level": 0
+              },
+              "endNode": {
+                "id": 940,
+                "x": 0.302,
+                "y": 0.446,
+                "level": 1
+              },
+              "type": "Escalator",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 923,
+                "x": 0.597,
+                "y": 0.546,
+                "level": 0
+              },
+              "endNode": {
+                "id": 924,
+                "x": 0.597,
+                "y": 0.546,
+                "level": 1
+              },
+              "type": "Stairs",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 909,
+                "x": 0.714,
+                "y": 0.513,
+                "level": 0
+              },
+              "endNode": {
+                "id": 910,
+                "x": 0.714,
+                "y": 0.513,
+                "level": 1
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 900,
+                "x": 0.338,
+                "y": 0.533,
+                "level": 1
+              },
+              "endNode": {
+                "id": 899,
+                "x": 0.338,
+                "y": 0.533,
+                "level": 0
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 912,
+                "x": 0.423,
+                "y": 0.522,
+                "level": 1
+              },
+              "endNode": {
+                "id": 911,
+                "x": 0.423,
+                "y": 0.522,
+                "level": 0
+              },
+              "type": "Stairs",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 902,
+                "x": 0.594,
+                "y": 0.526,
+                "level": 1
+              },
+              "endNode": {
+                "id": 901,
+                "x": 0.594,
+                "y": 0.526,
+                "level": 0
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 904,
+                "x": 0.658,
+                "y": 0.453,
+                "level": 1
+              },
+              "endNode": {
+                "id": 903,
+                "x": 0.658,
+                "y": 0.453,
+                "level": 0
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 914,
+                "x": 0.683,
+                "y": 0.547,
+                "level": 1
+              },
+              "endNode": {
+                "id": 913,
+                "x": 0.683,
+                "y": 0.547,
+                "level": 0
+              },
+              "type": "Stairs",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 906,
+                "x": 0.299,
+                "y": 0.449,
+                "level": 1
+              },
+              "endNode": {
+                "id": 905,
+                "x": 0.299,
+                "y": 0.449,
+                "level": 0
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 908,
+                "x": 0.224,
+                "y": 0.449,
+                "level": 1
+              },
+              "endNode": {
+                "id": 907,
+                "x": 0.224,
+                "y": 0.449,
+                "level": 0
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 924,
+                "x": 0.597,
+                "y": 0.546,
+                "level": 1
+              },
+              "endNode": {
+                "id": 923,
+                "x": 0.597,
+                "y": 0.546,
+                "level": 0
+              },
+              "type": "Stairs",
+              "travelTime": 0,
+              "isAccessible": false
+            },
+            {
+              "keywords": "",
+              "startNode": {
+                "id": 910,
+                "x": 0.714,
+                "y": 0.513,
+                "level": 1
+              },
+              "endNode": {
+                "id": 909,
+                "x": 0.714,
+                "y": 0.513,
+                "level": 0
+              },
+              "type": "Lift",
+              "travelTime": 0,
+              "isAccessible": true
+            }
+          ],
+          "graph": [
+            {
+              "level": 0,
+              "nodes": [
+                {
+                  "id": 100541,
+                  "x": 0.709,
+                  "y": 0.501,
+                  "neighbours": [
+                    [
+                      100642,
+                      1
+                    ],
+                    [
+                      100542,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100542,
+                  "x": 0.717,
+                  "y": 0.497,
+                  "neighbours": [
+                    [
+                      100541,
+                      1
+                    ],
+                    [
+                      100543,
+                      1
+                    ],
+                    [
+                      100544,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100543,
+                  "x": 0.717,
+                  "y": 0.533,
+                  "neighbours": [
+                    [
+                      100571,
+                      1
+                    ],
+                    [
+                      100556,
+                      1
+                    ],
+                    [
+                      100542,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    937
+                  ]
+                },
+                {
+                  "id": 100544,
+                  "x": 0.742,
+                  "y": 0.497,
+                  "neighbours": [
+                    [
+                      100542,
+                      1
+                    ],
+                    [
+                      100555,
+                      1
+                    ],
+                    [
+                      100572,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100545,
+                  "x": 0.555,
+                  "y": 0.503,
+                  "neighbours": [
+                    [
+                      100568,
+                      1
+                    ],
+                    [
+                      100582,
+                      1
+                    ],
+                    [
+                      100546,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100546,
+                  "x": 0.574,
+                  "y": 0.504,
+                  "neighbours": [
+                    [
+                      100545,
+                      1
+                    ],
+                    [
+                      100547,
+                      1
+                    ],
+                    [
+                      100548,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100547,
+                  "x": 0.601,
+                  "y": 0.504,
+                  "neighbours": [
+                    [
+                      100628,
+                      1
+                    ],
+                    [
+                      100546,
+                      1
+                    ],
+                    [
+                      100558,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100548,
+                  "x": 0.57,
+                  "y": 0.535,
+                  "neighbours": [
+                    [
+                      100582,
+                      1
+                    ],
+                    [
+                      100546,
+                      1
+                    ],
+                    [
+                      100558,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    931
+                  ]
+                },
+                {
+                  "id": 100549,
+                  "x": 0.21,
+                  "y": 0.49,
+                  "neighbours": [
+                    [
+                      100562,
+                      1
+                    ],
+                    [
+                      100550,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100550,
+                  "x": 0.21,
+                  "y": 0.449,
+                  "neighbours": [
+                    [
+                      100549,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100551,
+                  "x": 0.809,
+                  "y": 0.523,
+                  "neighbours": [
+                    [
+                      100564,
+                      1
+                    ],
+                    [
+                      100552,
+                      1
+                    ],
+                    [
+                      100563,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100552,
+                  "x": 0.788,
+                  "y": 0.533,
+                  "neighbours": [
+                    [
+                      100551,
+                      1
+                    ],
+                    [
+                      100553,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100553,
+                  "x": 0.768,
+                  "y": 0.533,
+                  "neighbours": [
+                    [
+                      100552,
+                      1
+                    ],
+                    [
+                      100571,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100554,
+                  "x": 0.796,
+                  "y": 0.499,
+                  "neighbours": [
+                    [
+                      100555,
+                      1
+                    ],
+                    [
+                      100563,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100555,
+                  "x": 0.768,
+                  "y": 0.497,
+                  "neighbours": [
+                    [
+                      100554,
+                      1
+                    ],
+                    [
+                      100544,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100556,
+                  "x": 0.703,
+                  "y": 0.533,
+                  "neighbours": [
+                    [
+                      100574,
+                      1
+                    ],
+                    [
+                      100557,
+                      1
+                    ],
+                    [
+                      100543,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    913
+                  ]
+                },
+                {
+                  "id": 100557,
+                  "x": 0.638,
+                  "y": 0.535,
+                  "neighbours": [
+                    [
+                      100556,
+                      1
+                    ],
+                    [
+                      100558,
+                      1
+                    ],
+                    [
+                      100559,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100558,
+                  "x": 0.601,
+                  "y": 0.535,
+                  "neighbours": [
+                    [
+                      100557,
+                      1
+                    ],
+                    [
+                      100548,
+                      1
+                    ],
+                    [
+                      100547,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    901,
+                    923
+                  ]
+                },
+                {
+                  "id": 100559,
+                  "x": 0.638,
+                  "y": 0.509,
+                  "neighbours": [
+                    [
+                      100573,
+                      1
+                    ],
+                    [
+                      100574,
+                      1
+                    ],
+                    [
+                      100557,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100560,
+                  "x": 0.166,
+                  "y": 0.456,
+                  "neighbours": [
+                    [
+                      100561,
+                      1
+                    ],
+                    [
+                      100565,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100561,
+                  "x": 0.192,
+                  "y": 0.458,
+                  "neighbours": [
+                    [
+                      100560,
+                      1
+                    ],
+                    [
+                      100562,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100562,
+                  "x": 0.192,
+                  "y": 0.493,
+                  "neighbours": [
+                    [
+                      100565,
+                      1
+                    ],
+                    [
+                      100561,
+                      1
+                    ],
+                    [
+                      100621,
+                      1
+                    ],
+                    [
+                      100549,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100563,
+                  "x": 0.802,
+                  "y": 0.512,
+                  "neighbours": [
+                    [
+                      100554,
+                      1
+                    ],
+                    [
+                      100551,
+                      1
+                    ],
+                    [
+                      100572,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100564,
+                  "x": 0.824,
+                  "y": 0.531,
+                  "neighbours": [
+                    [
+                      100627,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100565,
+                  "x": 0.167,
+                  "y": 0.493,
+                  "neighbours": [
+                    [
+                      100638,
+                      1
+                    ],
+                    [
+                      100560,
+                      1
+                    ],
+                    [
+                      100562,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100566,
+                  "x": 0.46,
+                  "y": 0.508,
+                  "neighbours": [
+                    [
+                      100632,
+                      1
+                    ],
+                    [
+                      100567,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100567,
+                  "x": 0.497,
+                  "y": 0.504,
+                  "neighbours": [
+                    [
+                      100566,
+                      1
+                    ],
+                    [
+                      100568,
+                      1
+                    ],
+                    [
+                      100569,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100568,
+                  "x": 0.527,
+                  "y": 0.504,
+                  "neighbours": [
+                    [
+                      100545,
+                      1
+                    ],
+                    [
+                      100585,
+                      1
+                    ],
+                    [
+                      100567,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100569,
+                  "x": 0.497,
+                  "y": 0.536,
+                  "neighbours": [
+                    [
+                      100585,
+                      1
+                    ],
+                    [
+                      100632,
+                      1
+                    ],
+                    [
+                      100567,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100570,
+                  "x": 0.737,
+                  "y": 0.561,
+                  "neighbours": [
+                    [
+                      100622,
+                      1
+                    ],
+                    [
+                      100627,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100571,
+                  "x": 0.739,
+                  "y": 0.533,
+                  "neighbours": [
+                    [
+                      100570,
+                      1
+                    ],
+                    [
+                      100543,
+                      1
+                    ],
+                    [
+                      100553,
+                      1
+                    ],
+                    [
+                      100572,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100572,
+                  "x": 0.741,
+                  "y": 0.51,
+                  "neighbours": [
+                    [
+                      100544,
+                      1
+                    ],
+                    [
+                      100571,
+                      1
+                    ],
+                    [
+                      100563,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100573,
+                  "x": 0.62,
+                  "y": 0.509,
+                  "neighbours": [
+                    [
+                      100628,
+                      1
+                    ],
+                    [
+                      100559,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100574,
+                  "x": 0.697,
+                  "y": 0.509,
+                  "neighbours": [
+                    [
+                      100556,
+                      1
+                    ],
+                    [
+                      100642,
+                      1
+                    ],
+                    [
+                      100559,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    909
+                  ]
+                },
+                {
+                  "id": 100575,
+                  "x": 0.277,
+                  "y": 0.451,
+                  "neighbours": [
+                    [
+                      100576,
+                      1
+                    ],
+                    [
+                      100580,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    905,
+                    939
+                  ]
+                },
+                {
+                  "id": 100576,
+                  "x": 0.246,
+                  "y": 0.449,
+                  "neighbours": [
+                    [
+                      100575,
+                      1
+                    ],
+                    [
+                      100577,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    907,
+                    927
+                  ]
+                },
+                {
+                  "id": 100577,
+                  "x": 0.245,
+                  "y": 0.46,
+                  "neighbours": [
+                    [
+                      100597,
+                      1
+                    ],
+                    [
+                      100576,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100578,
+                  "x": 0.131,
+                  "y": 0.529,
+                  "neighbours": [
+                    [
+                      100579,
+                      1
+                    ],
+                    [
+                      100581,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100579,
+                  "x": 0.003,
+                  "y": 0.528,
+                  "neighbours": [
+                    [
+                      100578,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100580,
+                  "x": 0.277,
+                  "y": 0.458,
+                  "neighbours": [
+                    [
+                      100575,
+                      1
+                    ],
+                    [
+                      100583,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100581,
+                  "x": 0.131,
+                  "y": 0.537,
+                  "neighbours": [
+                    [
+                      100578,
+                      1
+                    ],
+                    [
+                      100584,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100582,
+                  "x": 0.556,
+                  "y": 0.535,
+                  "neighbours": [
+                    [
+                      100548,
+                      1
+                    ],
+                    [
+                      100586,
+                      1
+                    ],
+                    [
+                      100545,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    929
+                  ]
+                },
+                {
+                  "id": 100583,
+                  "x": 0.284,
+                  "y": 0.458,
+                  "neighbours": [
+                    [
+                      100580,
+                      1
+                    ],
+                    [
+                      100587,
+                      1
+                    ],
+                    [
+                      100588,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100584,
+                  "x": 0.133,
+                  "y": 0.559,
+                  "neighbours": [
+                    [
+                      100581,
+                      1
+                    ],
+                    [
+                      100589,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100585,
+                  "x": 0.526,
+                  "y": 0.536,
+                  "neighbours": [
+                    [
+                      100586,
+                      1
+                    ],
+                    [
+                      100568,
+                      1
+                    ],
+                    [
+                      100569,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100586,
+                  "x": 0.544,
+                  "y": 0.535,
+                  "neighbours": [
+                    [
+                      100585,
+                      1
+                    ],
+                    [
+                      100582,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100587,
+                  "x": 0.284,
+                  "y": 0.472,
+                  "neighbours": [
+                    [
+                      100583,
+                      1
+                    ],
+                    [
+                      100594,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100588,
+                  "x": 0.303,
+                  "y": 0.456,
+                  "neighbours": [
+                    [
+                      100583,
+                      1
+                    ],
+                    [
+                      100610,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100589,
+                  "x": 0.189,
+                  "y": 0.559,
+                  "neighbours": [
+                    [
+                      100584,
+                      1
+                    ],
+                    [
+                      100595,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100590,
+                  "x": 0.412,
+                  "y": 0.56,
+                  "neighbours": [
+                    [
+                      100604,
+                      1
+                    ],
+                    [
+                      100611,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100591,
+                  "x": 0.412,
+                  "y": 0.537,
+                  "neighbours": [
+                    [
+                      100590,
+                      1
+                    ],
+                    [
+                      100592,
+                      1
+                    ],
+                    [
+                      100593,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    911
+                  ]
+                },
+                {
+                  "id": 100592,
+                  "x": 0.402,
+                  "y": 0.537,
+                  "neighbours": [
+                    [
+                      100591,
+                      1
+                    ],
+                    [
+                      100596,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100593,
+                  "x": 0.435,
+                  "y": 0.537,
+                  "neighbours": [
+                    [
+                      100591,
+                      1
+                    ],
+                    [
+                      100631,
+                      1
+                    ],
+                    [
+                      100632,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100594,
+                  "x": 0.225,
+                  "y": 0.469,
+                  "neighbours": [
+                    [
+                      100587,
+                      1
+                    ],
+                    [
+                      100597,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100595,
+                  "x": 0.266,
+                  "y": 0.559,
+                  "neighbours": [
+                    [
+                      100589,
+                      1
+                    ],
+                    [
+                      100598,
+                      1
+                    ],
+                    [
+                      100599,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100596,
+                  "x": 0.389,
+                  "y": 0.537,
+                  "neighbours": [
+                    [
+                      100592,
+                      1
+                    ],
+                    [
+                      100601,
+                      1
+                    ],
+                    [
+                      100626,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100597,
+                  "x": 0.225,
+                  "y": 0.46,
+                  "neighbours": [
+                    [
+                      100594,
+                      1
+                    ],
+                    [
+                      100577,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100598,
+                  "x": 0.268,
+                  "y": 0.541,
+                  "neighbours": [
+                    [
+                      100600,
+                      1
+                    ],
+                    [
+                      100605,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100599,
+                  "x": 0.282,
+                  "y": 0.558,
+                  "neighbours": [
+                    [
+                      100595,
+                      1
+                    ],
+                    [
+                      100600,
+                      1
+                    ],
+                    [
+                      100604,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100600,
+                  "x": 0.282,
+                  "y": 0.54,
+                  "neighbours": [
+                    [
+                      100598,
+                      1
+                    ],
+                    [
+                      100601,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100601,
+                  "x": 0.31,
+                  "y": 0.54,
+                  "neighbours": [
+                    [
+                      100600,
+                      1
+                    ],
+                    [
+                      100623,
+                      1
+                    ],
+                    [
+                      100596,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    899
+                  ]
+                },
+                {
+                  "id": 100602,
+                  "x": 0.732,
+                  "y": 0.472,
+                  "neighbours": [
+                    [
+                      100603,
+                      1
+                    ],
+                    [
+                      100606,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100603,
+                  "x": 0.732,
+                  "y": 0.442,
+                  "neighbours": [
+                    [
+                      100602,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    935
+                  ]
+                },
+                {
+                  "id": 100604,
+                  "x": 0.402,
+                  "y": 0.559,
+                  "neighbours": [
+                    [
+                      100599,
+                      1
+                    ],
+                    [
+                      100592,
+                      1
+                    ],
+                    [
+                      100590,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100605,
+                  "x": 0.189,
+                  "y": 0.541,
+                  "neighbours": [
+                    [
+                      100598,
+                      1
+                    ],
+                    [
+                      100589,
+                      1
+                    ],
+                    [
+                      100607,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100606,
+                  "x": 0.768,
+                  "y": 0.472,
+                  "neighbours": [
+                    [
+                      100602,
+                      1
+                    ],
+                    [
+                      100555,
+                      1
+                    ],
+                    [
+                      100608,
+                      1
+                    ],
+                    [
+                      100609,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100607,
+                  "x": 0.152,
+                  "y": 0.541,
+                  "neighbours": [
+                    [
+                      100605,
+                      1
+                    ],
+                    [
+                      100612,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100608,
+                  "x": 0.8,
+                  "y": 0.472,
+                  "neighbours": [
+                    [
+                      100606,
+                      1
+                    ],
+                    [
+                      100614,
+                      1
+                    ],
+                    [
+                      100615,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100609,
+                  "x": 0.768,
+                  "y": 0.442,
+                  "neighbours": [
+                    [
+                      100606,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100610,
+                  "x": 0.303,
+                  "y": 0.481,
+                  "neighbours": [
+                    [
+                      100588,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100611,
+                  "x": 0.544,
+                  "y": 0.56,
+                  "neighbours": [
+                    [
+                      100590,
+                      1
+                    ],
+                    [
+                      100586,
+                      1
+                    ],
+                    [
+                      100616,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100612,
+                  "x": 0.142,
+                  "y": 0.537,
+                  "neighbours": [
+                    [
+                      100581,
+                      1
+                    ],
+                    [
+                      100607,
+                      1
+                    ],
+                    [
+                      100613,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100613,
+                  "x": 0.145,
+                  "y": 0.528,
+                  "neighbours": [
+                    [
+                      100612,
+                      1
+                    ],
+                    [
+                      100618,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100614,
+                  "x": 0.824,
+                  "y": 0.47,
+                  "neighbours": [
+                    [
+                      100608,
+                      1
+                    ],
+                    [
+                      100619,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100615,
+                  "x": 0.8,
+                  "y": 0.442,
+                  "neighbours": [
+                    [
+                      100608,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100616,
+                  "x": 0.57,
+                  "y": 0.56,
+                  "neighbours": [
+                    [
+                      100611,
+                      1
+                    ],
+                    [
+                      100548,
+                      1
+                    ],
+                    [
+                      100622,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100617,
+                  "x": 0.225,
+                  "y": 0.527,
+                  "neighbours": [
+                    [
+                      100618,
+                      1
+                    ],
+                    [
+                      100623,
+                      1
+                    ],
+                    [
+                      100624,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100618,
+                  "x": 0.18,
+                  "y": 0.527,
+                  "neighbours": [
+                    [
+                      100617,
+                      1
+                    ],
+                    [
+                      100613,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100619,
+                  "x": 0.824,
+                  "y": 0.444,
+                  "neighbours": [
+                    [
+                      100614,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100620,
+                  "x": 0.18,
+                  "y": 0.515,
+                  "neighbours": [
+                    [
+                      100621,
+                      1
+                    ],
+                    [
+                      100618,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100621,
+                  "x": 0.19,
+                  "y": 0.515,
+                  "neighbours": [
+                    [
+                      100620,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100622,
+                  "x": 0.703,
+                  "y": 0.561,
+                  "neighbours": [
+                    [
+                      100616,
+                      1
+                    ],
+                    [
+                      100556,
+                      1
+                    ],
+                    [
+                      100570,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100623,
+                  "x": 0.31,
+                  "y": 0.524,
+                  "neighbours": [
+                    [
+                      100617,
+                      1
+                    ],
+                    [
+                      100601,
+                      1
+                    ],
+                    [
+                      100625,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    925
+                  ]
+                },
+                {
+                  "id": 100624,
+                  "x": 0.226,
+                  "y": 0.508,
+                  "neighbours": [
+                    [
+                      100617,
+                      1
+                    ],
+                    [
+                      100625,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100625,
+                  "x": 0.31,
+                  "y": 0.508,
+                  "neighbours": [
+                    [
+                      100624,
+                      1
+                    ],
+                    [
+                      100623,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100626,
+                  "x": 0.391,
+                  "y": 0.523,
+                  "neighbours": [
+                    [
+                      100596,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100627,
+                  "x": 0.804,
+                  "y": 0.563,
+                  "neighbours": [
+                    [
+                      100570,
+                      1
+                    ],
+                    [
+                      100564,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100628,
+                  "x": 0.62,
+                  "y": 0.504,
+                  "neighbours": [
+                    [
+                      100573,
+                      1
+                    ],
+                    [
+                      100547,
+                      1
+                    ],
+                    [
+                      100629,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100629,
+                  "x": 0.62,
+                  "y": 0.467,
+                  "neighbours": [
+                    [
+                      100628,
+                      1
+                    ],
+                    [
+                      100630,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100630,
+                  "x": 0.508,
+                  "y": 0.465,
+                  "neighbours": [
+                    [
+                      100629,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100631,
+                  "x": 0.435,
+                  "y": 0.524,
+                  "neighbours": [
+                    [
+                      100593,
+                      1
+                    ],
+                    [
+                      100633,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100632,
+                  "x": 0.458,
+                  "y": 0.537,
+                  "neighbours": [
+                    [
+                      100593,
+                      1
+                    ],
+                    [
+                      100566,
+                      1
+                    ],
+                    [
+                      100569,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100633,
+                  "x": 0.428,
+                  "y": 0.524,
+                  "neighbours": [
+                    [
+                      100631,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100634,
+                  "x": 0.694,
+                  "y": 0.444,
+                  "neighbours": [
+                    [
+                      100635,
+                      1
+                    ],
+                    [
+                      100637,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100635,
+                  "x": 0.694,
+                  "y": 0.476,
+                  "neighbours": [
+                    [
+                      100634,
+                      1
+                    ],
+                    [
+                      100636,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100636,
+                  "x": 0.67,
+                  "y": 0.476,
+                  "neighbours": [
+                    [
+                      100640,
+                      1
+                    ],
+                    [
+                      100635,
+                      1
+                    ],
+                    [
+                      100637,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100637,
+                  "x": 0.67,
+                  "y": 0.444,
+                  "neighbours": [
+                    [
+                      100634,
+                      1
+                    ],
+                    [
+                      100641,
+                      1
+                    ],
+                    [
+                      100636,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    903
+                  ]
+                },
+                {
+                  "id": 100638,
+                  "x": 0.149,
+                  "y": 0.493,
+                  "neighbours": [
+                    [
+                      100639,
+                      1
+                    ],
+                    [
+                      100565,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100639,
+                  "x": 0.15,
+                  "y": 0.446,
+                  "neighbours": [
+                    [
+                      100638,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100640,
+                  "x": 0.644,
+                  "y": 0.476,
+                  "neighbours": [
+                    [
+                      100641,
+                      1
+                    ],
+                    [
+                      100636,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    933
+                  ]
+                },
+                {
+                  "id": 100641,
+                  "x": 0.646,
+                  "y": 0.444,
+                  "neighbours": [
+                    [
+                      100640,
+                      1
+                    ],
+                    [
+                      100637,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100642,
+                  "x": 0.698,
+                  "y": 0.503,
+                  "neighbours": [
+                    [
+                      100574,
+                      1
+                    ],
+                    [
+                      100541,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 100643,
+                  "x": 0.275,
+                  "y": 0.49,
+                  "neighbours": [
+                    [
+                      100549,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                }
+              ]
+            },
+            {
+              "level": 1,
+              "nodes": [
+                {
+                  "id": 105710,
+                  "x": 0.705,
+                  "y": 0.486,
+                  "neighbours": [
+                    [
+                      105711,
+                      1
+                    ],
+                    [
+                      105723,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105711,
+                  "x": 0.731,
+                  "y": 0.487,
+                  "neighbours": [
+                    [
+                      105710,
+                      1
+                    ],
+                    [
+                      105712,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105712,
+                  "x": 0.74,
+                  "y": 0.493,
+                  "neighbours": [
+                    [
+                      105711,
+                      1
+                    ],
+                    [
+                      105750,
+                      1
+                    ],
+                    [
+                      105748,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    938
+                  ]
+                },
+                {
+                  "id": 105713,
+                  "x": 0.368,
+                  "y": 0.549,
+                  "neighbours": [
+                    [
+                      105717,
+                      1
+                    ],
+                    [
+                      105714,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105714,
+                  "x": 0.368,
+                  "y": 0.536,
+                  "neighbours": [
+                    [
+                      105713,
+                      1
+                    ],
+                    [
+                      105715,
+                      1
+                    ],
+                    [
+                      105716,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    900
+                  ]
+                },
+                {
+                  "id": 105715,
+                  "x": 0.368,
+                  "y": 0.527,
+                  "neighbours": [
+                    [
+                      105718,
+                      1
+                    ],
+                    [
+                      105714,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105716,
+                  "x": 0.455,
+                  "y": 0.535,
+                  "neighbours": [
+                    [
+                      105714,
+                      1
+                    ],
+                    [
+                      105744,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    912
+                  ]
+                },
+                {
+                  "id": 105717,
+                  "x": 0.344,
+                  "y": 0.549,
+                  "neighbours": [
+                    [
+                      105718,
+                      1
+                    ],
+                    [
+                      105713,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105718,
+                  "x": 0.344,
+                  "y": 0.527,
+                  "neighbours": [
+                    [
+                      105717,
+                      1
+                    ],
+                    [
+                      105715,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    926
+                  ]
+                },
+                {
+                  "id": 105719,
+                  "x": 0.195,
+                  "y": 0.495,
+                  "neighbours": [
+                    [
+                      105720,
+                      1
+                    ],
+                    [
+                      105756,
+                      1
+                    ],
+                    [
+                      105764,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105720,
+                  "x": 0.211,
+                  "y": 0.495,
+                  "neighbours": [
+                    [
+                      105719,
+                      1
+                    ],
+                    [
+                      105721,
+                      1
+                    ],
+                    [
+                      105722,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105721,
+                  "x": 0.23,
+                  "y": 0.495,
+                  "neighbours": [
+                    [
+                      105730,
+                      1
+                    ],
+                    [
+                      105720,
+                      1
+                    ],
+                    [
+                      105731,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105722,
+                  "x": 0.211,
+                  "y": 0.46,
+                  "neighbours": [
+                    [
+                      105734,
+                      1
+                    ],
+                    [
+                      105720,
+                      1
+                    ],
+                    [
+                      105746,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105723,
+                  "x": 0.693,
+                  "y": 0.493,
+                  "neighbours": [
+                    [
+                      105727,
+                      1
+                    ],
+                    [
+                      105710,
+                      1
+                    ],
+                    [
+                      105728,
+                      1
+                    ],
+                    [
+                      105729,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105724,
+                  "x": 0.578,
+                  "y": 0.469,
+                  "neighbours": [
+                    [
+                      105754,
+                      1
+                    ],
+                    [
+                      105725,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105725,
+                  "x": 0.523,
+                  "y": 0.469,
+                  "neighbours": [
+                    [
+                      105724,
+                      1
+                    ],
+                    [
+                      105726,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105726,
+                  "x": 0.503,
+                  "y": 0.505,
+                  "neighbours": [
+                    [
+                      105725,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105727,
+                  "x": 0.694,
+                  "y": 0.458,
+                  "neighbours": [
+                    [
+                      105754,
+                      1
+                    ],
+                    [
+                      105755,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105728,
+                  "x": 0.596,
+                  "y": 0.495,
+                  "neighbours": [
+                    [
+                      105723,
+                      1
+                    ],
+                    [
+                      105741,
+                      1
+                    ],
+                    [
+                      105772,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    932
+                  ]
+                },
+                {
+                  "id": 105729,
+                  "x": 0.686,
+                  "y": 0.515,
+                  "neighbours": [
+                    [
+                      105723,
+                      1
+                    ],
+                    [
+                      105748,
+                      1
+                    ],
+                    [
+                      105749,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    910
+                  ]
+                },
+                {
+                  "id": 105730,
+                  "x": 0.24,
+                  "y": 0.495,
+                  "neighbours": [
+                    [
+                      105746,
+                      1
+                    ],
+                    [
+                      105721,
+                      1
+                    ],
+                    [
+                      105768,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105731,
+                  "x": 0.229,
+                  "y": 0.547,
+                  "neighbours": [
+                    [
+                      105721,
+                      1
+                    ],
+                    [
+                      105756,
+                      1
+                    ],
+                    [
+                      105738,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105732,
+                  "x": 0.168,
+                  "y": 0.495,
+                  "neighbours": [
+                    [
+                      105733,
+                      1
+                    ],
+                    [
+                      105745,
+                      1
+                    ],
+                    [
+                      105764,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105733,
+                  "x": 0.17,
+                  "y": 0.458,
+                  "neighbours": [
+                    [
+                      105732,
+                      1
+                    ],
+                    [
+                      105734,
+                      1
+                    ],
+                    [
+                      105735,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105734,
+                  "x": 0.187,
+                  "y": 0.458,
+                  "neighbours": [
+                    [
+                      105733,
+                      1
+                    ],
+                    [
+                      105722,
+                      1
+                    ],
+                    [
+                      105764,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105735,
+                  "x": 0.151,
+                  "y": 0.458,
+                  "neighbours": [
+                    [
+                      105733,
+                      1
+                    ],
+                    [
+                      105745,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105736,
+                  "x": 0.316,
+                  "y": 0.527,
+                  "neighbours": [
+                    [
+                      105737,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105737,
+                  "x": 0.284,
+                  "y": 0.526,
+                  "neighbours": [
+                    [
+                      105736,
+                      1
+                    ],
+                    [
+                      105738,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105738,
+                  "x": 0.284,
+                  "y": 0.549,
+                  "neighbours": [
+                    [
+                      105731,
+                      1
+                    ],
+                    [
+                      105737,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105739,
+                  "x": 0.216,
+                  "y": 0.439,
+                  "neighbours": [
+                    [
+                      105762,
+                      1
+                    ],
+                    [
+                      105767,
+                      1
+                    ],
+                    [
+                      105740,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105740,
+                  "x": 0.141,
+                  "y": 0.439,
+                  "neighbours": [
+                    [
+                      105739,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105741,
+                  "x": 0.606,
+                  "y": 0.517,
+                  "neighbours": [
+                    [
+                      105728,
+                      1
+                    ],
+                    [
+                      105742,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105742,
+                  "x": 0.593,
+                  "y": 0.537,
+                  "neighbours": [
+                    [
+                      105741,
+                      1
+                    ],
+                    [
+                      105743,
+                      1
+                    ],
+                    [
+                      105744,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    902,
+                    924
+                  ]
+                },
+                {
+                  "id": 105743,
+                  "x": 0.609,
+                  "y": 0.56,
+                  "neighbours": [
+                    [
+                      105742,
+                      1
+                    ],
+                    [
+                      105760,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105744,
+                  "x": 0.537,
+                  "y": 0.537,
+                  "neighbours": [
+                    [
+                      105742,
+                      1
+                    ],
+                    [
+                      105716,
+                      1
+                    ],
+                    [
+                      105766,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105745,
+                  "x": 0.151,
+                  "y": 0.497,
+                  "neighbours": [
+                    [
+                      105732,
+                      1
+                    ],
+                    [
+                      105735,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105746,
+                  "x": 0.24,
+                  "y": 0.46,
+                  "neighbours": [
+                    [
+                      105730,
+                      1
+                    ],
+                    [
+                      105747,
+                      1
+                    ],
+                    [
+                      105722,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105747,
+                  "x": 0.263,
+                  "y": 0.46,
+                  "neighbours": [
+                    [
+                      105746,
+                      1
+                    ],
+                    [
+                      105768,
+                      1
+                    ],
+                    [
+                      105757,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105748,
+                  "x": 0.728,
+                  "y": 0.517,
+                  "neighbours": [
+                    [
+                      105712,
+                      1
+                    ],
+                    [
+                      105729,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105749,
+                  "x": 0.68,
+                  "y": 0.538,
+                  "neighbours": [
+                    [
+                      105765,
+                      1
+                    ],
+                    [
+                      105729,
+                      1
+                    ],
+                    [
+                      105760,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    914
+                  ]
+                },
+                {
+                  "id": 105750,
+                  "x": 0.75,
+                  "y": 0.513,
+                  "neighbours": [
+                    [
+                      105712,
+                      1
+                    ],
+                    [
+                      105765,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105751,
+                  "x": 0.293,
+                  "y": 0.465,
+                  "neighbours": [
+                    [
+                      105752,
+                      1
+                    ],
+                    [
+                      105757,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105752,
+                  "x": 0.301,
+                  "y": 0.465,
+                  "neighbours": [
+                    [
+                      105751,
+                      1
+                    ],
+                    [
+                      105753,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105753,
+                  "x": 0.303,
+                  "y": 0.497,
+                  "neighbours": [
+                    [
+                      105752,
+                      1
+                    ],
+                    [
+                      105773,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105754,
+                  "x": 0.663,
+                  "y": 0.469,
+                  "neighbours": [
+                    [
+                      105727,
+                      1
+                    ],
+                    [
+                      105724,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105755,
+                  "x": 0.767,
+                  "y": 0.458,
+                  "neighbours": [
+                    [
+                      105727,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105756,
+                  "x": 0.194,
+                  "y": 0.549,
+                  "neighbours": [
+                    [
+                      105719,
+                      1
+                    ],
+                    [
+                      105731,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105757,
+                  "x": 0.284,
+                  "y": 0.46,
+                  "neighbours": [
+                    [
+                      105751,
+                      1
+                    ],
+                    [
+                      105773,
+                      1
+                    ],
+                    [
+                      105747,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105758,
+                  "x": 0.535,
+                  "y": 0.439,
+                  "neighbours": [
+                    [
+                      105759,
+                      1
+                    ],
+                    [
+                      105769,
+                      1
+                    ],
+                    [
+                      105763,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105759,
+                  "x": 0.732,
+                  "y": 0.439,
+                  "neighbours": [
+                    [
+                      105758,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105760,
+                  "x": 0.671,
+                  "y": 0.56,
+                  "neighbours": [
+                    [
+                      105743,
+                      1
+                    ],
+                    [
+                      105749,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105761,
+                  "x": 0.307,
+                  "y": 0.449,
+                  "neighbours": [],
+                  "portalNeighbours": [
+                    906,
+                    940
+                  ]
+                },
+                {
+                  "id": 105762,
+                  "x": 0.307,
+                  "y": 0.439,
+                  "neighbours": [
+                    [
+                      105761,
+                      1
+                    ],
+                    [
+                      105739,
+                      1
+                    ],
+                    [
+                      105763,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105763,
+                  "x": 0.317,
+                  "y": 0.439,
+                  "neighbours": [
+                    [
+                      105762,
+                      1
+                    ],
+                    [
+                      105758,
+                      1
+                    ],
+                    [
+                      105736,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105764,
+                  "x": 0.187,
+                  "y": 0.495,
+                  "neighbours": [
+                    [
+                      105734,
+                      1
+                    ],
+                    [
+                      105719,
+                      1
+                    ],
+                    [
+                      105732,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105765,
+                  "x": 0.737,
+                  "y": 0.54,
+                  "neighbours": [
+                    [
+                      105750,
+                      1
+                    ],
+                    [
+                      105774,
+                      1
+                    ],
+                    [
+                      105749,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105766,
+                  "x": 0.526,
+                  "y": 0.518,
+                  "neighbours": [
+                    [
+                      105744,
+                      1
+                    ],
+                    [
+                      105775,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105767,
+                  "x": 0.216,
+                  "y": 0.449,
+                  "neighbours": [],
+                  "portalNeighbours": [
+                    908,
+                    928
+                  ]
+                },
+                {
+                  "id": 105768,
+                  "x": 0.263,
+                  "y": 0.495,
+                  "neighbours": [
+                    [
+                      105730,
+                      1
+                    ],
+                    [
+                      105773,
+                      1
+                    ],
+                    [
+                      105747,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105769,
+                  "x": 0.536,
+                  "y": 0.444,
+                  "neighbours": [
+                    [
+                      105758,
+                      1
+                    ],
+                    [
+                      105770,
+                      1
+                    ],
+                    [
+                      105771,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105770,
+                  "x": 0.704,
+                  "y": 0.446,
+                  "neighbours": [
+                    [
+                      105769,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    936
+                  ]
+                },
+                {
+                  "id": 105771,
+                  "x": 0.4,
+                  "y": 0.446,
+                  "neighbours": [
+                    [
+                      105769,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105772,
+                  "x": 0.577,
+                  "y": 0.495,
+                  "neighbours": [
+                    [
+                      105728,
+                      1
+                    ],
+                    [
+                      105724,
+                      1
+                    ],
+                    [
+                      105775,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105773,
+                  "x": 0.284,
+                  "y": 0.497,
+                  "neighbours": [
+                    [
+                      105768,
+                      1
+                    ],
+                    [
+                      105757,
+                      1
+                    ],
+                    [
+                      105753,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105774,
+                  "x": 0.75,
+                  "y": 0.54,
+                  "neighbours": [
+                    [
+                      105765,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": []
+                },
+                {
+                  "id": 105775,
+                  "x": 0.54,
+                  "y": 0.495,
+                  "neighbours": [
+                    [
+                      105766,
+                      1
+                    ],
+                    [
+                      105772,
+                      1
+                    ]
+                  ],
+                  "portalNeighbours": [
+                    930
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

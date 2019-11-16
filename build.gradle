@@ -1,0 +1,38 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.2'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "https://android.pointr.dev/artifactory/gradle-release-local"
+            credentials {
+                username 'aot'
+                password 'AKCp5dKsgQbSYhkkrZgAib4wJVRqAbGsjAsXpqkCxptE3K825mn3vzAncLbivq9NSqhfu1G6i'
+            }
+        }
+        maven { url 'https://jitpack.io' } //svga库
+        maven {  url 'https://sensetime.bintray.com/maven' }
+
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

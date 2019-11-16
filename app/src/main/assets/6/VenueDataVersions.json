@@ -1,0 +1,48 @@
+{
+  "status": {
+    "code": 200,
+    "errorMessage": ""
+  },
+  "body": {
+    "venueInternalIdentifier": 6,
+    "facilities": [
+      {
+        "facilityInternalIdentifier": 6,
+        "data": {
+          "mapVersion": [
+            {
+              "level": 0,
+              "version": 3,
+              "url": "https://pointrimages.blob.core.windows.net/aot/1560157759217636.jpg",
+              "lowResolutionUrl": "https://pointrimages.blob.core.windows.net/aot/low_1560157759217636.jpg",
+              "internalMapURL ": "",
+              "mapDetails": {
+                "url": "https://pointrimages.blob.core.windows.net/aot/1560157787193434.zip",
+                "width": 2267,
+                "height": 2267
+              },
+              "internalMapDetails": {}
+            },
+            {
+              "level": 1,
+              "version": 3,
+              "url": "https://pointrimages.blob.core.windows.net/aot/1560160319294425.jpg",
+              "lowResolutionUrl": "https://pointrimages.blob.core.windows.net/aot/low_1560160319294425.jpg",
+              "internalMapURL ": "",
+              "mapDetails": {
+                "url": "https://pointrimages.blob.core.windows.net/aot/1560160493388234.zip",
+                "width": 2267,
+                "height": 2267
+              },
+              "internalMapDetails": {}
+            }
+          ],
+          "poiVersion": 22,
+          "wallVersion": 14,
+          "graphVersion": 14,
+          "configurationVersion": 2
+        }
+      }
+    ]
+  }
+}

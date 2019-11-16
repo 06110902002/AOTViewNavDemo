@@ -1,0 +1,12 @@
+    <!--
+  ~ pointr_strings.xml
+  ~ Last modified on: 25/11/2015
+  ~
+  ~ Creatd by Pointr.
+  ~ Copyright (c) 2015 Pointr. All rights reserved.
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Pointr @AOT</string>
+    <string name="pointr_licence" tools:ignore="TypographyDashes">BE780EC2-60CC-4302-8D8E-636CADE22D94</string>
+</resources>
