@@ -78,6 +78,7 @@ import com.qozix.tileview.paths.BasicPathView;
 import com.sensetime.armap.activity.ARNavigationActivity;
 import com.sensetime.armap.activity.MainActivity;
 import com.sensetime.armap.dialog.LocationDialog;
+import com.sensetime.armap.utils.ARMapJumpUtil;
 import com.sensetime.armap.utils.ARPathUtils;
 import com.sensetime.armap.utils.ARUtils;
 import com.sensetime.armap.utils.AppConfig;
@@ -1703,10 +1704,8 @@ public class BaseContainerFragment extends Fragment implements MapControllerEven
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getActivity(),ARNavigationActivity.class);
                 String path = "your pointr path";
-                intent.setType(AppConfig.AR_TYPE.AR_NAVIGATION);
-                startActivity(intent);
+                ARMapJumpUtil.jumpARNavigationPage(getActivity(),path);
             }
         });
         arScanBtn.setText("AR Scan");
@@ -1720,10 +1719,7 @@ public class BaseContainerFragment extends Fragment implements MapControllerEven
         arNavBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),ARNavigationActivity.class);
-                intent.setType(AppConfig.AR_TYPE.AR_SCAN);
-                startActivity(intent);
-
+                ARMapJumpUtil.jumpARScanPage(getActivity());
             }
         });
         arNavBtn.setText("AR Nav");

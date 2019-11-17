@@ -1,1 +1,16 @@
-/build
+.idea/
+*.iml
+.settings/
+.vscode/
+.project
+.classpath
+*.apk
+.gradle/
+.externalNativeBuild/
+build/
+local.properties
+*.*/build/
+.idea/*/
+.idea/caches/
+.idea/caches/*.*
+*/.DS_Store
