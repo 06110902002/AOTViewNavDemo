@@ -1703,9 +1703,8 @@ public class BaseContainerFragment extends Fragment implements MapControllerEven
         arScanBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ARMapJumpUtil.jumpARScanPage(getActivity());
 
-                String path = "your pointr path";
-                ARMapJumpUtil.jumpARNavigationPage(getActivity(),path);
             }
         });
         arScanBtn.setText("AR Scan");
@@ -1719,7 +1718,15 @@ public class BaseContainerFragment extends Fragment implements MapControllerEven
         arNavBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ARMapJumpUtil.jumpARScanPage(getActivity());
+
+                String path = ARPathUtils.getInstance().getPathJSONString(getActivity(),null);
+                AppConfig.curLevel = 99;
+                AppConfig.facilityId = 11;
+                AppConfig.venueId = 11;
+                AppConfig.curLocationX = 0.0f;
+                AppConfig.curLocationY = 0.0f;
+                ARMapJumpUtil.jumpARNavigationPage(getActivity(),path);
+
             }
         });
         arNavBtn.setText("AR Nav");
