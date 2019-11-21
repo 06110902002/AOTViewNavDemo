@@ -49,6 +49,11 @@ import com.pointrlabs.core.pathfinding.directions.TurnByTurnDirectionManager;
 import com.pointrlabs.core.poi.models.PoiContainer;
 import com.pointrlabs.sample.R;
 import com.pointrlabs.sample.fragment.BaseContainerFragment;
+import com.sensetime.armap.activity.TestMapActivity;
+import com.sensetime.armap.entity.ARPathEntity;
+import com.sensetime.armap.utils.ARPathUtils;
+import com.sensetime.armap.utils.ARUtils;
+import com.sensetime.armap.utils.AppConfig;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -436,6 +441,7 @@ public class BasePointrMapActivity extends AppCompatActivity
                                 containerFragment.setUserVisibleHint(false);
                             });
                         }
+                        buildPathdata(calculatedPath);
 
                     }
                 });
@@ -521,6 +527,7 @@ public class BasePointrMapActivity extends AppCompatActivity
 
     private void replaceFragmentsWithMap() {
         containerFragment = getContainerFragment();
+        containerFragment.setArNavgationListener(new EnterARListener());
         containerFragment.setStateChangeListener(this);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -728,5 +735,47 @@ public class BasePointrMapActivity extends AppCompatActivity
             });
         }
         super.onBackPressed();
+    }
+
+    private  ARPathEntity arPathEntity;
+
+    /**
+     * build path first
+     * @param path
+     */
+    private void buildPathdata(Path path){
+        if(path == null) return;
+        AppConfig.mPath = path;
+        String pathString = ARPathUtils.getInstance().getPathJSONString(this,path);
+        int curLevel = getContainerFragment().getCurrentPosition().getLevel();
+        int venueId = getContainerFragment().getMap().getCurrentLocation().getVenueId();
+        int facilityId = getContainerFragment().getMap().getCurrentLocation().getFacilityId();;
+        float curLocationX = getContainerFragment().getCurrentPosition().getX();
+        AppConfig.curLocationX = curLocationX;
+        float curLocationY = getContainerFragment().getCurrentPosition().getY();
+        AppConfig.curLocationY = curLocationY;
+
+        arPathEntity = new ARPathEntity();
+        arPathEntity.setPathString(pathString);
+        arPathEntity.setCurLeve(curLevel);
+        arPathEntity.setVenueId(venueId);
+        arPathEntity.setFacilityId(facilityId);
+        arPathEntity.setCurLocationX(curLocationX);
+        arPathEntity.setCurLocationY(curLocationY);
+
+
+
+    }
+
+    private class EnterARListener implements BaseContainerFragment.ARNavgationListener{
+
+        @Override
+        public void onEnterARView() {
+//            if(arPathEntity == null){
+//                Toast.makeText(BasePointrMapActivity.this,"path object is null",Toast.LENGTH_LONG).show();
+//                return;
+//            }
+            ARUtils.switchPage2ARNavgation(BasePointrMapActivity.this,new ARPathEntity());
+        }
     }
 }

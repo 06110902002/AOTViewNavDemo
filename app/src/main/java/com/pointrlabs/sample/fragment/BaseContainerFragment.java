@@ -73,11 +73,12 @@ import com.pointrlabs.core.positioning.model.Location;
 import com.pointrlabs.core.positioning.model.Position;
 import com.pointrlabs.core.positioning.model.PositioningTypes;
 import com.pointrlabs.core.utils.PointrHelper;
+import com.pointrlabs.sample.activity.BasePointrMapActivity;
 import com.qozix.tileview.geom.CoordinateTranslater;
 import com.qozix.tileview.paths.BasicPathView;
 import com.sensetime.armap.activity.ARNavigationActivity;
 import com.sensetime.armap.activity.MainActivity;
-import com.sensetime.armap.dialog.LocationDialog;
+import com.sensetime.armap.entity.ARPathEntity;
 import com.sensetime.armap.utils.ARMapJumpUtil;
 import com.sensetime.armap.utils.ARPathUtils;
 import com.sensetime.armap.utils.ARUtils;
@@ -597,6 +598,7 @@ public class BaseContainerFragment extends Fragment implements MapControllerEven
         }
         if (poiManager != null) {
             poiManager.setSelectedPoi(poi);
+            AppConfig.selectPoi = poi;
             if (getNavigationFooter() != null) {
                 getNavigationFooter().setSelectedPoi(poi);
             }
@@ -1718,14 +1720,9 @@ public class BaseContainerFragment extends Fragment implements MapControllerEven
         arNavBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String path = ARPathUtils.getInstance().getPathJSONString(getActivity(),null);
-                AppConfig.curLevel = 99;
-                AppConfig.facilityId = 11;
-                AppConfig.venueId = 11;
-                AppConfig.curLocationX = 0.0f;
-                AppConfig.curLocationY = 0.0f;
-                ARMapJumpUtil.jumpARNavigationPage(getActivity(),path);
+                if(arNavgationListener != null){
+                    arNavgationListener.onEnterARView();
+                }
 
             }
         });
@@ -1735,6 +1732,16 @@ public class BaseContainerFragment extends Fragment implements MapControllerEven
         arNavBtn.setLayoutParams(params2);
         getSearchView().addView(arNavBtn);
 
+    }
+
+    private ARNavgationListener arNavgationListener;
+
+    public void setArNavgationListener(ARNavgationListener listener){
+        this.arNavgationListener = listener;
+    }
+
+    public interface ARNavgationListener{
+        void onEnterARView();
     }
 
 

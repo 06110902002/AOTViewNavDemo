@@ -9,7 +9,6 @@ import android.view.View;
 import com.pointrlabs.sample.R;
 import com.sensetime.armap.activity.ARNavigationActivity;
 import com.sensetime.armap.activity.TestMapActivity;
-import com.sensetime.armap.dialog.LocationDialog;
 import com.sensetime.armap.utils.ARUtils;
 import com.sensetime.armap.utils.MobileInfoUtils;
 
