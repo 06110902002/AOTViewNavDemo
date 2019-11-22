@@ -45,8 +45,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".activity.T2"></activity>
 
-        <activity android:name=".activity.DemoTestActivity"/>
-
         <activity
             android:name=".activity.PointrMapActivity"
             android:label="@string/app_name"

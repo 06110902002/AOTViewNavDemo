@@ -1,0 +1,1914 @@
+package com.pointrlabs.sample.activity.utils;
+
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.PathEffect;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.pointrlabs.core.configuration.CoreConfiguration;
+import com.pointrlabs.core.dataaccess.datamanager.models.Point;
+import com.pointrlabs.core.dataaccess.models.DataType;
+import com.pointrlabs.core.dataaccess.models.graph.NodeInterface;
+import com.pointrlabs.core.dataaccess.models.graph.PortalNode;
+import com.pointrlabs.core.dataaccess.models.poi.Poi;
+import com.pointrlabs.core.management.ConfigurationManager;
+import com.pointrlabs.core.management.GeofenceManager;
+import com.pointrlabs.core.management.MapManager;
+import com.pointrlabs.core.management.PathManager;
+import com.pointrlabs.core.management.PoiManager;
+import com.pointrlabs.core.management.Pointr;
+import com.pointrlabs.core.management.PointrBase;
+import com.pointrlabs.core.management.PositionManager;
+import com.pointrlabs.core.management.PositionManagerImpl;
+import com.pointrlabs.core.management.interfaces.DataManager;
+import com.pointrlabs.core.management.models.ErrorMessage;
+import com.pointrlabs.core.management.models.Facility;
+import com.pointrlabs.core.management.models.Venue;
+import com.pointrlabs.core.map.interfaces.Hideable;
+import com.pointrlabs.core.map.interfaces.MapControllerEvents;
+import com.pointrlabs.core.map.interfaces.MapView;
+import com.pointrlabs.core.map.interfaces.MapViewProvider;
+import com.pointrlabs.core.map.interfaces.OnFragmentDisplayStateChangedListener;
+import com.pointrlabs.core.map.model.ContainerFragmentState;
+import com.pointrlabs.core.map.model.MapMode;
+import com.pointrlabs.core.map.ui.BasePointrMapView;
+import com.pointrlabs.core.map.ui.DestinationMarkerView;
+import com.pointrlabs.core.map.ui.DrawablePointView;
+import com.pointrlabs.core.map.ui.LevelScrollView;
+import com.pointrlabs.core.map.ui.LocateMeButton;
+import com.pointrlabs.core.map.ui.MapDrawable;
+import com.pointrlabs.core.map.ui.MapModeChangerView;
+import com.pointrlabs.core.map.ui.NavigationFooterView;
+import com.pointrlabs.core.map.ui.POIView;
+import com.pointrlabs.core.map.ui.PinView;
+import com.pointrlabs.core.map.ui.PoiSearchView;
+import com.pointrlabs.core.map.ui.PointrProgressSpinner;
+import com.pointrlabs.core.map.ui.SimpleDrawable;
+import com.pointrlabs.core.map.ui.SimpleLineDrawable;
+import com.pointrlabs.core.map.ui.TurnByTurnHeaderView;
+import com.pointrlabs.core.nativecore.wrappers.Plog;
+import com.pointrlabs.core.pathfinding.Path;
+import com.pointrlabs.core.pathfinding.directions.PathDirection;
+import com.pointrlabs.core.pathfinding.models.PathManagementError;
+import com.pointrlabs.core.poi.models.PoiContainer;
+import com.pointrlabs.core.positioning.model.CalculatedLocation;
+import com.pointrlabs.core.positioning.model.GeoPosition;
+import com.pointrlabs.core.positioning.model.Location;
+import com.pointrlabs.core.positioning.model.Position;
+import com.pointrlabs.core.positioning.model.PositioningTypes;
+import com.pointrlabs.core.utils.PointrHelper;
+import com.qozix.tileview.geom.CoordinateTranslater;
+import com.qozix.tileview.paths.BasicPathView;
+import com.sensetime.armap.utils.AppConfig;
+
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import static com.pointrlabs.core.positioning.model.PositioningTypes.INVALID_FACILITY;
+
+/**
+ * Create By 刘铁柱
+ * Create Date 2019-10-21
+ * Sensetime@Copyright
+ * Des: minimap地图
+ */
+public class MiniMapFragment extends Fragment implements MapControllerEvents,
+        MapViewProvider,
+        DataManager.Listener,
+        PathManager.Listener,
+        PoiManager.Listener,
+        PositionManager.Listener,
+        ConfigurationManager.Listener,
+        MapManager.Listener,
+        MapView.Listener,
+        LocateMeButton.Listener,
+        MapModeChangerView.Listener,
+        LevelScrollView.Listener{
+
+    public static final String TAG = MiniMapFragment.class.getSimpleName();
+
+    public static final String poiDrawablesKey = "poiDrawablesKey";
+    public static final String destinationMarkerKey = "destinationMarkerKey";
+    public static final String directionDrawablesKey = "directionDrawablesKey";
+    public static final String pathDrawableKey = "pathDrawableKey";
+
+    protected int poiBackground;
+    protected ContainerFragmentState state = ContainerFragmentState.Search;
+    protected ContainerFragmentState previousState = ContainerFragmentState.Map;
+    protected OnFragmentDisplayStateChangedListener stateChangeListener;
+    private Pointr pointr;
+
+    private Integer pinViewIconSize;
+    private PinView userPinView;
+    private SimpleDrawable userPinDrawable;
+    protected AtomicBoolean isPinOnScreen = new AtomicBoolean(false);
+    private final Object pinViewCreationLock = new Object();
+
+    private Map<String, List<MapDrawable>> drawablesInLevel;
+    private Position currentPosition;
+    private Position positionInOtherFacility;
+    private AtomicBoolean isPositionCalculatedBefore = new AtomicBoolean(false);
+    private float lastMapOrientation;
+
+    private SimpleDrawable destinationMarkerDrawable;
+    private Path path;
+
+    MapManager mapManager;
+
+    private static final int REQUEST_ENABLE_BT = 420;
+    protected MapModeChangerView mapModeButton;
+    protected LevelScrollView levelPicker;
+    protected NavigationFooterView navigationFooter;
+    protected TurnByTurnHeaderView turnByTurnHeader;
+    protected PoiSearchView searchView;
+    protected BasePointrMapView map;
+    protected LocateMeButton locateMeButton;
+    protected PointrProgressSpinner progressView;
+    private DestinationMarkerView destinationMarkerView;
+    private AtomicBoolean isMapShownBefore = new AtomicBoolean(false);
+
+    private AtomicBoolean isPositionLost = new AtomicBoolean(false);
+    private BasicPathView.CustomDrawablePath lastCustomDrawablePath = null;
+    private CalculatedLocation lastCalculatedLocation = null;
+    private static MiniMapFragment instance;
+
+    public static MiniMapFragment newInstance() {
+        if (instance == null) {
+            instance = new MiniMapFragment();
+        }
+        return instance;
+    }
+    public MiniMapFragment() {
+    }
+
+    public int getLayoutId() {
+        return com.sensetime.armap.R.layout.layout_mini_map;
+    }
+
+    /**
+     * Level picker component for navigating through the available levels
+     *
+
+     * @return Level picker UI component
+     */
+    public LevelScrollView getLevelPicker() {
+        return levelPicker;
+    }
+
+    /**
+     * Map mode switcher for changing between modes such as Free, Tracking etc.
+     *
+     * @return Map mode switcher UI component
+     */
+    public MapModeChangerView getMapModeSwitcher() {
+        return mapModeButton;
+    }
+
+    public NavigationFooterView getNavigationFooter() {
+        return navigationFooter;
+    }
+
+    /**
+     * Area to be filled with navigation directions
+     *
+     * @return UI component for displaying directions
+     */
+    public TurnByTurnHeaderView getTurnByTurnHeader() {
+        return turnByTurnHeader;
+    }
+
+    /**
+     * A Search bar to filter and let user select the desired POI
+     *
+     * @return UI component for filtering and selecting POIs
+     */
+    public PoiSearchView getSearchView() {
+        return searchView;
+    }
+
+    public <T extends BasePointrMapView> T getMap() {
+        return (T)map;
+    }
+
+    public LocateMeButton getLocateMeButton() {
+        return locateMeButton;
+    }
+
+    public <T extends DrawablePointView> T getDestinationView() {
+        return (T)destinationMarkerView;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(getLayoutId(), container, false);
+
+        Pointr pointr = Pointr.getPointr();
+        if (pointr.getState() == null || pointr.getState() != PointrBase.State.RUNNING) {
+            Plog.e("Pointr SDK is not running yet, cannot initialize the map. Please start the Pointr SDK.");
+            return null;
+        }
+        map = (BasePointrMapView)view.findViewById(com.sensetime.armap.R.id.mini_view_map);
+//        progressView = (PointrProgressSpinner)view.findViewById(com.pointrlabs.core.R.id.progress_update);
+//        mapModeButton = (MapModeChangerView)view.findViewById(com.pointrlabs.core.R.id.fab_change_map_mode);
+//        levelPicker = (LevelScrollView)view.findViewById(com.pointrlabs.core.R.id.level_picker);
+//        navigationFooter = (NavigationFooterView)view.findViewById(com.pointrlabs.core.R.id.navigation_footer);
+//        turnByTurnHeader = (TurnByTurnHeaderView)view.findViewById(com.pointrlabs.core.R.id.turn_by_turn_header);
+//        searchView = (PoiSearchView)view.findViewById(com.pointrlabs.core.R.id.view_search);
+//        locateMeButton = (LocateMeButton)view.findViewById(com.pointrlabs.core.R.id.fab_locate_me);
+//
+        destinationMarkerView = new DestinationMarkerView(getContext());
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        pointr = Pointr.getPointr();
+
+        if (pointr.getState() == null || pointr.getState() != PointrBase.State.RUNNING) {
+            Plog.e("Pointr SDK is not running yet, cannot initialize the map. Please start the Pointr SDK.");
+            return;
+        }
+        poiBackground = getResources().getColor(com.pointrlabs.core.R.color.transparent_blue);
+
+        drawablesInLevel = new HashMap<>();
+
+        currentPosition = new Position();//test data
+        positionInOtherFacility = new Position();
+
+        mapManager = pointr.getMapManager();
+
+        map = getMap();
+
+        if (pinViewIconSize != null) {
+            setPinViewIconSize(pinViewIconSize);
+        }
+        map.setMapViewProvider(this);
+        map.addListener(this);
+        // convenient way for using scroll function on onCreate methods
+        map.post(() -> map.scrollToAndCenter(0.5, 0.5));
+
+        map.post(()->map.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                map.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                map.setScaleForFill();
+            }
+        }));
+//        if (getLevelPicker() != null) {
+//            LevelScrollView levelScrollView = getLevelPicker();
+//            levelScrollView.setController(this);
+//            levelScrollView.setCurrentLevel(getCurrentLevel(map));
+//        }
+//
+//        if (getMapModeSwitcher() != null) {
+//            MapModeChangerView mapModeChangerView = getMapModeSwitcher();
+//            mapModeChangerView.setMapModeChangerListener(this);
+//        }
+//
+//        if (getSearchView() != null) {
+//            getSearchView().setController(this);
+//        }
+//
+//        if (getLocateMeButton() != null) {
+//            getLocateMeButton().addListener(this);
+//        }
+
+        this.registerPointrListeners();
+        this.updatePoisInMap();
+    }
+
+    @Override
+    public ContainerFragmentState getState() {
+        return state;
+    }
+
+    public void onSingleTap(MotionEvent event) {
+        switch (state) {
+            case Map:
+                if (previousState == ContainerFragmentState.PoiSelected) {
+                    transitStateTo(ContainerFragmentState.PoiSelected);
+                } else if (previousState == ContainerFragmentState.Search) {
+                    transitStateTo(ContainerFragmentState.Search);
+                } else if (previousState == ContainerFragmentState.PathfindingHeaderAndFooter) {
+                    transitStateTo(ContainerFragmentState.PathfindingHeaderAndFooter);
+                }
+                break;
+            case Search:
+                hideKeyboard();
+                transitStateTo(ContainerFragmentState.Map);
+                break;
+            case PoiSelected:
+                transitStateTo(ContainerFragmentState.Map);
+                break;
+            case PathfindingHeader:
+                transitStateTo(ContainerFragmentState.PathfindingHeaderAndFooter);
+                break;
+            case PathfindingHeaderAndFooter:
+                // do nothing
+                break;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (pointr == null || pointr.getState() == null || pointr.getState() != PointrBase.State.RUNNING) {
+            Plog.e("Pointr SDK is not running yet, cannot initialize the map. Please start the Pointr SDK.");
+            return;
+        }
+
+        resumeMap();
+        pointr.resume();
+        this.registerPointrListeners();
+        this.updatePoisInMap();
+    }
+
+    private void resumeMap() {
+        map.resume();
+        if (isPinOnScreen.get()) {
+            isPinOnScreen.set(false);
+            onPinEnterOrExit(isPinOnScreen.get());
+        }
+        if (map.getCurrentLevel() != PositioningTypes.INVALID_LEVEL) {
+            map.updateMapForCurrentLevel();
+        } else {
+            List<Integer> levels = null;
+            if (mapManager != null) {
+                levels = mapManager.getLevelList();
+            }
+            if (levels != null && levels.size() > 0) {
+                map.setCurrentLevel(levels.get(0));
+            }
+        }
+    }
+
+    private void registerPointrListeners() {
+        DataManager dataManager = pointr.getDataManager();
+        if (dataManager != null) {
+            dataManager.addListener(this);
+        }
+
+        PoiManager poiManager = pointr.getPoiManager();
+        if (poiManager != null) {
+            poiManager.addListener(this);
+        }
+
+        ConfigurationManager configurationManager = pointr.getConfigurationManager();
+        if (configurationManager != null) {
+            configurationManager.addListener(this);
+        }
+
+        PathManager pathManager = pointr.getPathManager();
+        if (pathManager != null) {
+            pathManager.addListener(this);
+        }
+
+        PositionManager positionManager = pointr.getPositionManager();
+        if (positionManager != null) {
+            positionManager.addListener(this);
+        }
+
+        if (mapManager != null) {
+            mapManager.addListener(this);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (map != null) {
+            map.pause();
+        }
+        pointr.pause();
+        this.unregisterPointrListeners();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (map != null) {
+            map.setMapViewProvider(null);
+            map.removeListener(this);
+            map.destroy();
+        }
+        this.unregisterPointrListeners();
+        if(getLevelPicker() != null){
+            getLevelPicker().destroy();
+        }
+    }
+
+    private void unregisterPointrListeners() {
+        DataManager dataManager = pointr.getDataManager();
+        if (dataManager != null) {
+            dataManager.removeListener(this);
+        }
+
+        PoiManager poiManager = pointr.getPoiManager();
+        if (poiManager != null) {
+            poiManager.removeListener(this);
+        }
+
+        ConfigurationManager configurationManager = pointr.getConfigurationManager();
+        if (configurationManager != null) {
+            configurationManager.removeListener(this);
+        }
+
+        PathManager pathManager = pointr.getPathManager();
+        if (pathManager != null) {
+            pathManager.removeListener(this);
+        }
+
+        PositionManager positionManager = pointr.getPositionManager();
+        if (positionManager != null) {
+            positionManager.removeListener(this);
+        }
+
+        if (mapManager != null) {
+            mapManager.removeListener(this);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ENABLE_BT) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                Snackbar.make(mapModeButton, com.pointrlabs.core.R.string.positioning_disabled_snackbar, Snackbar.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void startPathfinding(PoiContainer poi) {
+        log("startPathfinding");
+        PoiManager poiManager = pointr.getPoiManager();
+        PathManager pathManager = pointr.getPathManager();
+        if (pathManager.isPathfindingStarted()) {
+            Plog.w("There is already an active pathfinding in progress. Abort before starting new one.");
+            return;
+        }
+        if (poiManager != null) {
+            poiManager.setSelectedPoi(poi);
+        }
+        if (pathManager != null) {
+            pathManager.startPathFinding();
+        }
+    }
+
+    @Override
+    public void abortPathfinding() {
+        log("abortPathfinding");
+        PathManager pathManager = Pointr.getPointr().getPathManager();
+        if (pathManager != null) {
+            pathManager.abortPathFinding();
+        }
+        PoiManager poiManager = Pointr.getPointr().getPoiManager();
+        if (poiManager != null) {
+            poiManager.resetSelectedPoi();
+        }
+        Plog.i("Path is aborted");
+        getActivity().runOnUiThread(()->changePathWithPath(null));
+    }
+
+    @Override
+    public void transitStateTo(ContainerFragmentState state) {
+        log("transitStateTo : " + state);
+        Plog.v("BASE transit state to - " + state);
+        if (stateChangeListener != null) {
+            stateChangeListener.onDisplayStateChanged(state);
+        }
+
+        previousState = this.state;
+        this.state = state;
+        switch (state) {
+            case Map:
+                if (getLocateMeButton() != null) {
+                    getLocateMeButton().detectPositionOnScreen(false);
+                }
+                if (getNavigationFooter() != null) {
+                    getNavigationFooter().setVisibility(View.INVISIBLE);
+                }
+                setComponentVisibility(false,
+                        getMapModeSwitcher(),
+                        getLevelPicker(),
+                        getTurnByTurnHeader(),
+                        getLocateMeButton(),
+                        getSearchView());
+                break;
+            case Search:
+                if (getLocateMeButton() != null) {
+                    getLocateMeButton().detectPositionOnScreen(true);
+                    getLocateMeButton().setVisibility(!isPinOnScreen.get());
+                }
+                if (getNavigationFooter() != null) {
+                    getNavigationFooter().setVisibility(View.INVISIBLE);
+                }
+                if (getLevelPicker() != null && getLevelPicker().getShouldBeVisible()) {
+                    getLevelPicker().setVisibility(View.VISIBLE);
+                }
+                setComponentVisibility(false, getTurnByTurnHeader());
+                setComponentVisibility(true, getSearchView(), getMapModeSwitcher());
+                break;
+            case PoiSelected:
+                if (getLocateMeButton() != null) {
+                    getLocateMeButton().detectPositionOnScreen(false);
+                }
+                if (getLevelPicker() != null && getLevelPicker().getShouldBeVisible()) {
+                    getLevelPicker().setVisibility(View.VISIBLE);
+                }
+                setComponentVisibility(
+                        false, getMapModeSwitcher(), getTurnByTurnHeader(), getLocateMeButton(), getSearchView());
+                setComponentVisibility(true, getNavigationFooter());
+                if (getNavigationFooter() != null) {
+                    NavigationFooterView navigationFooterView = getNavigationFooter();
+                    navigationFooterView.setPathfindingActive(true);
+                }
+                break;
+            case PathfindingHeader:
+                if (getLocateMeButton() != null) {
+                    getLocateMeButton().detectPositionOnScreen(true);
+                    getLocateMeButton().setVisibility(!isPinOnScreen.get());
+                }
+                if (getNavigationFooter() != null) {
+                    getNavigationFooter().setPathfindingActive(false);
+                    getNavigationFooter().setVisibility(View.INVISIBLE);
+                }
+                setComponentVisibility(false, getMapModeSwitcher(), getLocateMeButton(), getLevelPicker());
+                setComponentVisibility(true, getTurnByTurnHeader());
+
+                scaleToCurrentLocation(getPathFindingZoomValue());
+                break;
+            case PathfindingHeaderAndFooter:
+                if (getLocateMeButton() != null) {
+                    getLocateMeButton().detectPositionOnScreen(true);
+                    getLocateMeButton().setVisibility(!isPinOnScreen.get());
+                }
+                if (getNavigationFooter() != null) {
+                    getNavigationFooter().setPathfindingActive(false);
+                }
+                setComponentVisibility(false, getMapModeSwitcher(), getLocateMeButton(), getLevelPicker());
+                setComponentVisibility(true, getNavigationFooter(), getTurnByTurnHeader());
+
+                scaleToCurrentLocation(getPathFindingZoomValue());
+                break;
+        }
+    }
+
+    private void hideKeyboard() {
+        InputMethodManager keyboard = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        keyboard.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+    }
+
+    public void setStateChangeListener(OnFragmentDisplayStateChangedListener stateChangeListener) {
+        this.stateChangeListener = stateChangeListener;
+    }
+
+    protected void setComponentVisibility(boolean visible, Hideable... views) {
+        for (int i = 0, viewsLength = views.length; i < viewsLength; i++) {
+            Hideable hideable = views[i];
+            if (hideable != null) {
+                hideable.setVisibility(visible);
+            }
+        }
+    }
+
+    /**
+     * poi 点击事件
+     * @param poi
+     */
+    public void setSelectedPoi(PoiContainer poi) {
+        PoiManager poiManager = pointr.getPoiManager();
+        if(poi != null){
+            float x = poi.getPoiList().get(0).getLocation().getX();
+            float y = poi.getPoiList().get(0).getLocation().getY();
+            int levelId = poi.getPoiList().get(0).getLevel();
+            int venueId = poi.getPoiList().get(0).getVenueId();
+            int faId = poi.getPoiList().get(0).getFacilityId();
+            String id = poi.getPoiList().get(0).getId();
+            String type = poi.getPoiList().get(0).getType();
+            List<Point> region = poi.getPoiList().get(0).getRegion();
+            double lat = poi.getPoiList().get(0).getLatitude();
+            double lng = poi.getPoiList().get(0).getLongitude();
+
+            System.out.println("583---------x:"+x+" y:"+y + " levelId:"+levelId+" venueId:"+venueId+" fdId:"+faId
+                    +" id:"+id +" type:"+type +" region:"+region+" lat:"+lat+"  lng:"+lng);
+            TextView tmpView = new TextView(this.getActivity());
+            tmpView.setBackgroundColor(getActivity().getResources().getColor(com.pointrlabs.core.R.color.blue));
+            tmpView.setText("123");
+            map.addMarker(tmpView,x,y,-0.5f,-0.5f,false);
+
+//            Location start = new Location(0.49760412f,0.553588986f,0,1,1);
+//            Location end = new Location(0.497048795f,0.516542196f,0,1,1);
+//            PathManager pathManager = pointr.getPathManager();
+//            Path calculatedPath = pathManager.calculatePath(start,end);
+//            System.out.println("604---------:"+calculatedPath+":"+getCurrentPosition());
+        }
+        if (!poi.isContainerValid()) {
+            Plog.v("Poi selection is not valid. Will not set the selection.");
+            return;
+        }
+        if (poiManager != null) {
+            AppConfig.selectPoi = poi;
+            poiManager.setSelectedPoi(poi);
+            if (getNavigationFooter() != null) {
+                getNavigationFooter().setSelectedPoi(poi);
+            }
+
+            transitStateTo(ContainerFragmentState.PoiSelected);
+            map.getMapModeCoordinator().setMapMode(MapMode.Free);
+        } else {
+            Plog.w("Poi manager is null, path-finding won't work");
+        }
+    }
+
+    protected float getHalfZoomValue() {
+        return (map.getMaxZoomScale() + map.getMinZoomScale()) / 2;
+    }
+
+    protected float getQuarterZoomValue() {
+        return (map.getMaxZoomScale() + map.getMinZoomScale()) / 4;
+    }
+
+    protected float getPathFindingZoomValue() {
+        return (map.getMaxZoomScale() + map.getMinZoomScale()) / 8;
+    }
+
+    protected void scaleToCurrentLocation(float scale) {
+        Position pos = getCurrentPosition();
+        if (pos == null) {
+            map.smoothScaleFromCenter(scale);
+        } else {
+            map.slideToAndCenterWithScale(pos.getX(), pos.getY(), scale);
+        }
+    }
+
+    public int getPinViewIconSize() {
+        return pinViewIconSize;
+    }
+
+    public void setPinViewIconSize(Integer pinViewIconSize) {
+        this.pinViewIconSize = pinViewIconSize;
+        if (getPinView() != null) {
+            PinView pinView = getPinView();
+            pinView.setSize(pinViewIconSize);
+        }
+    }
+
+    // region PathManager.Listener methods
+    @Override
+    public void onDestinationReached(Poi destination) {
+        //TODO onDestinationReached
+        log("onDestinationReached : " + destination.getName());
+//        getActivity().runOnUiThread(() -> {
+//            map.getBasicPathView().clear();
+//            transitStateTo(ContainerFragmentState.Search);
+//            map.getMapModeCoordinator().setMapMode(MapMode.Tracking);
+//            map.slideToAndCenterWithScale(0.5, 0.5, map.getMinZoomScale());
+//            Snackbar.make(map,
+//                            String.format(getResources().getString(com.pointrlabs.core.R.string.map_reached), destination.getName()),
+//                            Snackbar.LENGTH_LONG)
+//                    .show();
+//            changePathWithPath(null);
+//        });
+    }
+    // region PathManager.Listener methods
+    @Override
+    public void onPathCalculated(Path calculatedPath) {
+        log("onPathCalculated");
+        getActivity().runOnUiThread(() -> {
+            if (state == ContainerFragmentState.PathfindingHeader ||
+                    state == ContainerFragmentState.PathfindingHeaderAndFooter) {
+                if (calculatedPath == null)
+                    return;
+                if (getTurnByTurnHeader() != null) {
+                    getTurnByTurnHeader().updateNextDirection(calculatedPath.getDirections());
+                }
+                changePathWithPath(calculatedPath);
+            }
+        });
+    }
+
+    public void changePathWithPath(Path newPath) {
+        if (!PointrHelper.isCalledOnUIThread()) {
+            Plog.v("changePathWithPath needs to be called on UI Thread, calling again on UI thread");
+            changePathWithPath(newPath);
+            return;
+        }
+        this.path = newPath;
+        // Add Destination Marker to path
+        if (newPath == null) {
+            if (destinationMarkerDrawable != null) {
+                map.removeDrawable(destinationMarkerDrawable);
+                destinationMarkerDrawable = null;
+            }
+        } else {
+            // TODO: all of these will be simplified with latest PathManager code
+            // check if end point of path changed
+            boolean isThePathDifferent =
+                    map.getCurrentPath() == null ||
+                            (map.getCurrentPath().getLastNode().getLocation().getX() !=
+                                    newPath.getLastNode().getLocation().getX()) ||
+                            (map.getCurrentPath().getLastNode().getLocation().getY() != newPath.getLastNode().getLocation().getY());
+            if (isThePathDifferent && destinationMarkerDrawable != null) {
+                // Path is changed or removed; remove destination drawable
+                map.removeDrawable(destinationMarkerDrawable);
+                destinationMarkerDrawable = null;
+            }
+
+            NodeInterface nodeDestination = newPath.getLastNode();
+            if (nodeDestination.getLocation().getLevel() == map.getCurrentLevel() &&
+                    !map.drawableExists(destinationMarkerDrawable)) {
+                destinationMarkerDrawable = new SimpleDrawable();
+                destinationMarkerDrawable.setX(nodeDestination.getLocation().getX());
+                destinationMarkerDrawable.setY(nodeDestination.getLocation().getY());
+                destinationMarkerDrawable.setIdentifier(destinationMarkerKey);
+                destinationMarkerDrawable.setRotatable(true);
+                map.addDrawable(destinationMarkerDrawable);//crashed 24 oct
+                map.realignDrawable(destinationMarkerDrawable);
+            }
+        }
+
+        // set path
+        if (newPath != null) {
+            newPath.setIdentifier(pathDrawableKey);
+            map.addDrawable(newPath);
+        } else {
+            map.removeDrawable(map.getCurrentPath());
+        }
+
+        map.setCurrentPath(newPath);
+    }
+    // region PathManager.Listener methods
+    @Override
+    public void onPathCalculationFailed(final PathManagementError error) {
+
+        //TODO onPathCalculationFailed
+        log("onPathCalculationFailed:" + error.getErrorMessage() + "  ， " + error.getErrorType());
+        isPositionLost.set(true);
+
+//        System.out.println("746-------------onPathCalculationFailed:");
+//
+//        getActivity().runOnUiThread(() -> {
+//            if (error.getErrorType() == PathManagementError.Type.PATH_UPDATE_FAILED) {
+//                // it will keep trying, will update the path when it is possible
+//                return;
+//            }
+//            map.getBasicPathView().clear();
+//            transitStateTo(ContainerFragmentState.Search);
+//            map.getMapModeCoordinator().setMapMode(MapMode.Tracking);
+//            Snackbar.make(map, com.pointrlabs.core.R.string.route_failed_path_calculation, Snackbar.LENGTH_SHORT).show();
+//            changePathWithPath(null);
+//        });
+    }
+    // region PathManager.Listener methods
+    @Override
+    public void onPathCalculationAborted() {
+        //TODO onPathCalculationAborted
+        log("onPathCalculationAborted");
+
+//        getActivity().runOnUiThread(() -> {
+//            map.getBasicPathView().clear();
+//            transitStateTo(ContainerFragmentState.Search);
+//            map.getMapModeCoordinator().setMapMode(MapMode.Tracking);
+//            changePathWithPath(null);
+//        });
+    }
+    // endregion
+
+    // region DataManager.Listener methods
+
+    @Override
+    public void onDataManagerStartDataManagementForVenue(Venue venue, Facility facility, boolean isOnlineData) {
+        log("onDataManagerStartDataManagementForVenue");
+    }
+
+    @Override
+    public void onDataManagerCompleteAllForVenue(Venue venue,
+                                                 Facility facility,
+                                                 boolean isSuccessful,
+                                                 boolean isOnlineData,
+                                                 List<ErrorMessage> errors) {
+        Plog.v("+ onCompleteAll for venue " + (venue == null ? "none" : venue.getVenueId()) + "- online " +
+                isOnlineData + " - successful " + isSuccessful);
+        if (!isSuccessful) {
+            getActivity().runOnUiThread(
+                    () -> Snackbar.make(map, com.pointrlabs.core.R.string.data_update_error_occurred, Snackbar.LENGTH_SHORT).show());
+        }
+        log("onDataManagerCompleteAllForVenue");
+    }
+
+    @Override
+    public void onDataManagerBeginProcessingDataForVenue(Venue venue,
+                                                         Facility facility,
+                                                         DataType dataType,
+                                                         boolean isOnlineData) {
+        log("onDataManagerBeginProcessingDataForVenue");
+    }
+
+    @Override
+    public void onDataManagerEndProcessingDataForVenue(Venue venue,
+                                                       Facility facility,
+                                                       DataType dataType,
+                                                       boolean isOnlineData,
+                                                       boolean isSuccessful,
+                                                       List<ErrorMessage> errors) {
+        log("onDataManagerEndProcessingDataForVenue");
+    }
+
+    @Override
+    public void onDataManagerBeginProcessingMapUpdateForVenue(Venue venue,
+                                                              Facility facility,
+                                                              int level,
+                                                              DataType type,
+                                                              boolean isOnlineData) {
+        log("onDataManagerBeginProcessingMapUpdateForVenue");
+    }
+
+    @Override
+    public void onDataManagerEndProcessingMapUpdateForVenue(Venue venue,
+                                                            Facility facility,
+                                                            int level,
+                                                            DataType type,
+                                                            boolean isOnlineData,
+                                                            boolean isSuccessful,
+                                                            List<ErrorMessage> errors) {
+        log("onDataManagerEndProcessingMapUpdateForVenue");
+    }
+
+    @Override
+    public void onVenueReady(Venue venue) {
+        log("onVenueReady");
+    }
+
+    @Override
+    public void onDataManagerBeginProcessingGlobalData(DataType type, boolean isOnlineData) {
+        log("onDataManagerBeginProcessingGlobalData");
+    }
+
+    @Override
+    public void onDataManagerEndProcessingGlobalData(DataType type, boolean isOnlineData, boolean isSuccessful) {
+        log("onDataManagerEndProcessingGlobalData");
+    }
+    // endregion
+
+    @Override
+    public void onConfigurationUpdate() {
+        log("onConfigurationUpdate");
+        List<Integer> levels = mapManager.getLevelList();
+        if (levels.isEmpty()) {
+            Plog.w("Levels are empty, map view cannot update maps");
+            return;
+        }
+        if (levels.contains(map.getCurrentLevel())) {
+            map.updateMapForCurrentLevel();
+        } else {
+            map.setCurrentLevel(levels.get(0));
+        }
+    }
+
+    @Override
+    public void onConfigurationUpdateFail() {
+        log("onConfigurationUpdateFail");
+    }
+    // region PositionManager.Listener methods
+    @Override
+    public void onLevelChanged(int level) {
+
+        log("onLevelChanged:"+level);
+
+        Plog.v("Level change detected -> " + level);
+        boolean isCorrectFacility = Pointr.getPointr().getConfigurationManager().isConfiguredToPhysicalFacility();
+        if (!isCorrectFacility) {
+            // Ignore data from another facility
+            Plog.i("Won't change level, user is viewing a different facility.");
+            return;
+        }
+
+        map.setCurrentLevel(level);
+        zoomToCurrentPosition();
+    }
+
+    private void zoomToCurrentPosition() {
+        PositionManager posManager = pointr.getPositionManager();
+        Position userPosition;
+        if (posManager != null) {
+            CalculatedLocation calculatedLocation = posManager.getLastCalculatedLocation();
+            userPosition = calculatedLocation.convertToPosition();
+            map.zoomToCurrentPosition(userPosition);
+        }
+    }
+
+    private boolean shouldShowPinHeading() {
+        ConfigurationManager configurationManager = pointr.getConfigurationManager();
+        if (configurationManager != null) {
+            CoreConfiguration configuration = configurationManager.getCurrentConfiguration();
+            if (configuration != null) {
+                return configuration.getUserInterfaceConfiguration().getShouldShowPinHeading();
+            }
+        }
+        return true;
+    }
+
+    private boolean shouldShowLevelInformation() {
+        ConfigurationManager configurationManager = Pointr.getPointr().getConfigurationManager();
+        if (configurationManager != null) {
+            CoreConfiguration coreConfiguration = configurationManager.getCurrentConfiguration();
+            if (coreConfiguration != null) {
+                return coreConfiguration.getUserInterfaceConfiguration().getShouldShowLevelInformationToast();
+            } else {
+                Plog.w("Configuration doesn't exist. Won't show level information!");
+            }
+        } else {
+            Plog.w("Configuration manager doesn't exist. Won't show level information!");
+        }
+        return false;
+    }
+
+    /**
+     * 总是在计算当前定位
+     * @param calculatedLocation
+     */
+    private void updateMapViewBasedOnCalculatedLocation(CalculatedLocation calculatedLocation) {
+        //System.out.println("942-------------updateMapViewBasedOnCalculatedLocation");
+        if (calculatedLocation == null) {
+            this.getActivity().runOnUiThread(() -> hideUserPin());
+            map.setCurrentLocation(null);
+            isPositionCalculatedBefore.set(false);
+            return;
+        }
+        Position userPosition = calculatedLocation.convertToPosition();
+        //TODO fuxy
+        if(null == userPosition && null != lastCalculatedLocation) {
+            userPosition = new Position(lastCalculatedLocation.getX(),lastCalculatedLocation.getY(),0,lastCalculatedLocation.getLevel());
+        }
+
+        currentPosition = userPosition;
+        map.setCurrentLocation(calculatedLocation);
+        if (userPosition == null) {
+            this.getActivity().runOnUiThread(() -> hideUserPin());
+            isPositionCalculatedBefore.set(false);
+            return;
+        }
+
+        //TODO fuxy
+        if (userPosition.isValidNormalisedPosition() &&
+                (!physicalAndMapViewFacilitiesAreSame() ||
+                        calculatedLocation.getState() == CalculatedLocation.LocationState.LOST)) {
+            // Hide position
+            positionInOtherFacility = userPosition;
+            currentPosition = null;
+            System.out.println("963-------------Position is from different facility or is lost - will hide position.");
+            if (map.getMapModeCoordinator().getMapMode() != MapMode.Free) {
+                map.getMapModeCoordinator().setMapMode(MapMode.Free);
+            }
+            this.getActivity().runOnUiThread(() -> hideUserPin());
+        } else  // look if this else causes anything.
+            if (userPosition.isValidNormalisedPosition()) {
+                // position is in physical facility
+                positionInOtherFacility = new Position();
+                updateUserPin(calculatedLocation);
+                map.showMapIfNotShownYet();
+            } else {
+                this.getActivity().runOnUiThread(() -> hideUserPin());
+            }
+
+//        if (userPosition.isValidNormalisedPosition()) {
+//            // position is in physical facility
+//            positionInOtherFacility = new Position();
+//        }
+//        updateUserPin(calculatedLocation);
+        //map.showMapIfNotShownYet();
+
+        showPositionOnTheMapIfFirstOne(currentPosition);
+    }
+
+    private void showPositionOnTheMapIfFirstOne(Position position) {
+        if (position != null && position.isValidNormalisedPosition()) {
+            if (isPositionCalculatedBefore.get()) {
+                return;
+            }
+            isPositionCalculatedBefore.set(true);
+            if (position.getLevel() != map.getCurrentLevel()) {
+                map.setCurrentLevel(position.getLevel());
+            }
+            map.zoomToCurrentPosition(position);
+        } else {
+            // invalid position from position manager
+            isPositionCalculatedBefore.set(false);
+            Plog.v("Invalid position to set.");
+        }
+    }
+
+    //PositionManager.Listener
+    @Override
+    public void onLocationCalculated(CalculatedLocation calculatedLocation) {
+        //TODO onLocationCalculated
+        mHander.removeMessages(UPDATE_USER_PIN_MSG);
+        isPositionLost.set(false);
+        if(calculatedLocation.getX() > 0 && calculatedLocation.getY() > 0) {
+            lastCalculatedLocation = calculatedLocation;
+            map.setCurrentLocation(lastCalculatedLocation);
+        }
+        log("onLocationCalculated");
+
+        updateMapViewBasedOnCalculatedLocation(calculatedLocation);
+        //System.out.println("934-------------onLocationCalculated");
+        if(AppConfig.mPath != null){
+            getMap().setCurrentPath(AppConfig.mPath);
+            getMap().addDrawable(AppConfig.mPath);
+        }
+    }
+
+    @Override
+    public BasicPathView.CustomDrawablePath lineViewForDrawable(MapDrawable drawable) {
+        //TODO onPositionIsFading
+        log("lineViewForDrawable");
+        if(isPositionLost.get()) {
+            return lastCustomDrawablePath;
+        }
+        // create drawable path here.
+        BasicPathView.CustomDrawablePath result = new BasicPathView.CustomDrawablePath();
+        // create paint object
+        Paint linePaint = new Paint();
+        int color = map.getContext().getResources().getColor(com.pointrlabs.core.R.color.dark_blue);
+        linePaint.setColor(color);
+        linePaint.setStrokeJoin(Paint.Join.ROUND);
+        linePaint.setStrokeWidth(10);
+        linePaint.setStyle(Paint.Style.STROKE);
+        PathEffect pathEffect = new PathEffect();  // new DashPathEffect(new float[]{2.0f, 2.0f}, 0); //Dashed Line.
+        linePaint.setPathEffect(pathEffect);
+        result.paint = linePaint;
+        // create Path
+        List<float[]> pathObject = null;
+        if (drawable instanceof Path) {
+            pathObject = calculatePathArrayForLevel(drawable, map.getCurrentLevel());
+
+        } else if (drawable instanceof SimpleLineDrawable) {
+            float[] pathArray = calculatePathArray(((SimpleLineDrawable)drawable).getPointsArray());
+            pathObject = new ArrayList<>();
+            pathObject.add(pathArray);
+        }
+
+        if (pathObject == null) {
+            Plog.v("Cannot create android Path object from the Path nodes. Cannot provide view.");
+            return null;
+        }
+
+        result.path = pathObject;
+
+        result.pathMode = BasicPathView.PathMode.Lined;  // or Dotted, Custom.
+
+        //TODO save last path
+        lastCustomDrawablePath = result;
+
+        return result;
+    }
+
+    //PositionManager.Listener
+    @Override
+    public void onPositionIsFading() {
+        //TODO onPositionIsFading
+        log("onPositionIsFading");
+    }
+
+    @Override
+    public void onPositionIsLost() {
+        //TODO onPositionIsLost
+        isPositionLost.set(true);
+        log("onPositionIsLost");
+
+        if(null != lastCalculatedLocation) {
+            System.out.println("1003--------------:onPositionIsLost");
+            //updateMapViewBasedOnCalculatedLocation(null);
+            PositionManagerImpl positionManager = (PositionManagerImpl) pointr.getPositionManager();
+            Position current = new Position(lastCalculatedLocation.getX(), lastCalculatedLocation.getY(), 0, lastCalculatedLocation.getLevel());
+            positionManager.onPositionCalculated(current);
+            mHander.removeMessages(UPDATE_USER_PIN_MSG);
+            mHander.sendEmptyMessage(UPDATE_USER_PIN_MSG);
+            map.setCurrentLocation(lastCalculatedLocation);
+            CalculatedLocation temp = positionManager.getLastCalculatedLocation();
+            log("onPositionIsLost " + temp.getX() + ";" + temp.getY());
+        }
+    }
+
+    private void hideUserPin() {
+        if (userPinView != null) {
+            userPinView.disappearFromView();
+        }
+
+        map.removeDrawable(userPinDrawable);
+
+        userPinDrawable = null;
+        userPinView = null;
+    }
+
+    private void updateUserPin(CalculatedLocation calculatedLocation) {
+        log("updateUserPin");
+        if(calculatedLocation.getX() < 0 && calculatedLocation.getY() < 0 && null != lastCalculatedLocation) {
+            calculatedLocation = lastCalculatedLocation;
+        }
+        // if the level is correct show drawable
+        // else hide it
+        //System.out.println("1021------------------:updateUserPin");
+        Position userPosition = calculatedLocation.convertToPosition();
+        boolean isPositionLevelSameWithMapLevel = map.getCurrentLevel() == currentPosition.getLevel();
+        boolean isPositionInsideTheScreenBoundary = map.isPointVisibleInMap(userPosition);
+        if (isPositionInsideTheScreenBoundary != isPinOnScreen.get() ||
+                (!isPinOnScreen.get() && !isPositionCalculatedBefore.get())) {
+            onPinEnterOrExit(isPositionInsideTheScreenBoundary);
+            isPinOnScreen.set(isPositionInsideTheScreenBoundary);
+            log("updateUserPin 1");
+        }
+
+        if (userPinDrawable != null) {
+            userPinDrawable.setX(userPosition.getX());
+            userPinDrawable.setY(userPosition.getY());
+        }
+
+        log("updateUserPin x " + userPosition.getX() + "  Y " + userPosition.getY());
+        if (isPositionLevelSameWithMapLevel && isPositionInsideTheScreenBoundary) {
+            if (!map.drawableExists(userPinDrawable)) {
+                createUserPinDrawable();
+            }
+            log("updateUserPin 2");
+            final CalculatedLocation finalCalculatedLocation = calculatedLocation;
+            map.getActivity().runOnUiThread(() -> {
+                map.rotateCanvasWithUserPinView(userPosition);
+                adjustUserPinView(finalCalculatedLocation);
+            });
+
+        } else {  // if(!isPositionLevelSameWithMapLevel){
+            //TODO fuxy
+            this.getActivity().runOnUiThread(() -> hideUserPin());
+            log("updateUserPin 3");
+        }
+        map.refreshDrawable(userPinDrawable);
+    }
+
+    private void adjustUserPinView(CalculatedLocation calculatedLocation) {
+        Position userPosition = calculatedLocation.convertToPosition();
+
+        if (userPinDrawable == null) {
+            Plog.v("user pin drawable is null");
+            return;
+        }
+
+        if (userPinView == null) {
+            Plog.v("user pin view is null but drawable is not, refresh views");
+            map.refreshDrawable(userPinDrawable);
+            return;
+        }
+        // if there is pin rotate it
+        userPinView.setOrientationAccuracy(userPosition.getOrientationAccuracy());
+        rotatePinWithRotation(userPosition);
+
+        if (calculatedLocation.getState() == CalculatedLocation.LocationState.ACTIVE) {
+            userPinView.updatePinViewWithAccuracy(userPosition);
+        } else if (calculatedLocation.getState() == CalculatedLocation.LocationState.FADED && userPinView.isActive()) {
+            userPinView.fadeTo(0.5F);
+        }
+    }
+
+    private void rotatePinWithRotation(Position position) {
+        if (position.getOrientation() == PositioningTypes.INVALID_ORIENTATION || userPinDrawable == null) {
+            return;
+        }
+        // if user pin drawable exist and has a valid rotation rotate and refresh
+        userPinView.rotate(position);
+    }
+
+    private void createUserPinDrawable() {
+        boolean isValidPosition = currentPosition.isValidNormalisedPosition();
+        boolean isCurrentLevel = map.getCurrentLevel() == currentPosition.getLevel();
+        synchronized (pinViewCreationLock) {
+            if (isValidPosition && isCurrentLevel) {
+                Plog.v("create user pin");
+                userPinDrawable = new SimpleDrawable();
+                // use given identifier in mapView for userpin, else some error can occur when rotating
+                userPinDrawable.setIdentifier(MapView.userPinDrawableKey);
+                userPinDrawable.setInteractive(false);
+                map.addDrawable(userPinDrawable);
+            }
+        }
+    }
+
+    private boolean physicalAndMapViewFacilitiesAreSame() {
+        GeofenceManager geofenceManager = pointr.getGeofenceManager();
+        if (geofenceManager != null && geofenceManager.getCurrentFacility() != null) {
+            return geofenceManager.getCurrentFacility().equals(map.getCurrentFacility());
+        }
+        return false;
+    }
+
+    @Override
+    public void onGeolocationCalculated(GeoPosition location) {
+        log("onGeolocationCalculated");
+    }
+
+    @Override
+    public void onStateChanged(EnumSet<PositionManager.State> set) {
+        log("onStateChanged");
+        if (set.contains(PositionManager.State.BluetoothOff)) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+    }
+    // endregion
+
+    @Override
+    public void onTriggerPoiEntered(Poi poi) {
+        log("onTriggerPoiEntered");
+    }
+
+    @Override
+    public void onTriggerPoiExited(Poi poi) {
+        log("poi");
+    }
+
+    @Override
+    public void onPoiUpdated() {
+        log("onPoiUpdated");
+        updatePoisInMap();
+    }
+
+    private void updatePoisInMap() {
+        if (drawablesInLevel.containsKey(poiDrawablesKey)) {
+            map.removeDrawables(drawablesInLevel.get(poiDrawablesKey));
+        }
+
+        int level = map.getCurrentLevel();
+        PoiManager poiManager = Pointr.getPointr().getPoiManager();
+        if (poiManager == null) {
+            Plog.w("Cannot get pois for level. Poi Manager is null");
+            return;
+        }
+
+        if (map.getCurrentFacility() == null || map.getCurrentFacility().getFacilityId() == INVALID_FACILITY) {
+            Plog.v("No facility to get poi's for.");
+            return;
+        }
+
+        PoiContainer poiContainer = poiManager.getAllPoi(level, null, map.getCurrentFacility().getFacilityId());
+        if (poiContainer == null || !poiContainer.isContainerValid()) {
+            Plog.w("No Poi to draw yet");
+            return;
+        }
+        List<Poi> poisOnLevel = poiContainer.getPoiList();
+
+        List<MapDrawable> poiDrawables = new ArrayList<>();
+
+        for (Poi poi : poisOnLevel) {
+            poi.setIsRotatable(true);
+            poi.setIsInteractive(true);
+
+            poiDrawables.add(poi);
+            map.addDrawable(poi);
+        }
+
+        drawablesInLevel.put(poiDrawablesKey, poiDrawables);
+        map.realignDrawables();
+        map.refreshView();
+    }
+
+    public PinView createNewPinView() {
+        PinView pinView = new PinView(getActivity());
+        pinView.setMap(getMap());
+        if (pinViewIconSize != null) {
+            pinView.setSize(pinViewIconSize);
+        }
+        return pinView;
+    }
+    public PinView getPinView() {
+        return userPinView;
+    }
+
+    @Override
+    public View viewForDrawable(MapDrawable drawable) {
+
+        if(drawable == null) return null;
+
+        if (drawable.getIdentifier() != null && drawable.getIdentifier().equalsIgnoreCase(MapView.userPinDrawableKey)) {
+            // drawable is userPin create a user pinview
+            userPinView = createNewPinView();
+            userPinView.resetVariables();
+            userPinView.setDrawable(drawable);
+            userPinView.setShouldShowPinHeading(shouldShowPinHeading());
+            return userPinView;
+
+        } else if (drawable.getIdentifier() != null && drawable.getIdentifier().contains(destinationMarkerKey)) {
+            DestinationMarkerView destinationMarker = getDestinationView();
+            destinationMarker.setDrawable(drawable);
+            destinationMarker.setAnchorPoints(-0.5f, -1f);
+            //            destinationMarkerDrawable.setSize(100);  size can be changed here.
+            return destinationMarker;
+
+        } else if ((drawable instanceof SimpleDrawable) && drawable.getIdentifier() != null &&
+                drawable.getIdentifier().contains(directionDrawablesKey)) {
+            // do nothing for now
+        } else if (drawable instanceof Poi) {
+            Poi poi = (Poi)drawable;
+            POIView poiView = new POIView(getActivity());
+            poiView.setLabelText(poi.getName());
+            poiView.setDrawable(poi);
+            int poiIconId = getImageResourceIdForPoi(poi);
+            if (poiIconId == 0) {
+                poiIconId = poi.getDefaultPoiImage();
+                if (poiIconId == poi.getGenericIconId()) {
+                    // Means there is no default icon for this poi, and the generic icon will be used
+                }
+            }
+            poiView.setIconViewImage(poiIconId);
+            poiView.setIconDimensions(80, 80);  // icon size can be altered here
+            poiView.setAnchorPoints(-0.5f, -0.5f);
+            return poiView;
+        }
+        return null;
+    }
+
+    /**
+     * With this method the image icon of poi can be overriden depending on its name/type as preference
+     * It should return the resource id of the drawable that is preferred
+     *
+     * @param poi
+     * @return
+     */
+    private int getImageResourceIdForPoi(Poi poi) {
+        // A default return value can be set, to use the pointr default image icons in wanted cases
+        // Wanted cases can be overriden like this, if the case is not overriden, it will return 0 and pointr
+        // default icon will be used
+        if (poi.getName().contains("toilets")) {
+            return com.pointrlabs.core.R.drawable.toilets;
+        }
+        return 0;
+    }
+
+    private List<float[]> calculatePathArrayForLevel(MapDrawable drawable, int currentLevel) {
+        if (drawable == null || !(drawable instanceof Path)) {
+            Plog.v("MapDrawable is null or not an instance of path");
+            return null;
+        }
+
+        List<float[]> pathsToDrawResult = new ArrayList<>();
+
+        Path path = (Path)drawable;
+
+        // if we are going to take the facility of the current configuration
+        final Facility visibleFacility = map.getCurrentFacility();
+
+        final List<NodeInterface> nodes = path.getNodes();
+
+        boolean isNearPortal = false;
+        if (path.getDirections().size() > 0) {
+            PathDirection firstDirection = path.getDirections().get(0);
+            if (firstDirection.getType() == PathDirection.PathDirectionType.CHANGE_FACILITY ||
+                    firstDirection.getType() == PathDirection.PathDirectionType.CHANGE_LEVEL) {
+                isNearPortal = true;
+            }
+        }
+
+        List<NodeInterface> nodesOnCurrentLevel = new ArrayList<>();
+
+        List<List<NodeInterface>> pathsToDraw = new ArrayList<>();
+        NodeInterface previousNode = nodes.get(0);
+
+        Plog.v("Will draw " + nodes.size() + " nodes");
+
+        for (int i = 0; i < nodes.size(); i++) {
+            NodeInterface node = nodes.get(i);
+
+            Integer nodeLevel = node.getLocation().getLevel();
+
+            boolean beforeChangingFacility =
+                    previousNode.getLocation().getFacilityId() == visibleFacility.getFacilityId() &&
+                            node.getLocation().getFacilityId() != visibleFacility.getFacilityId();
+            boolean afterChangingFacility =
+                    previousNode.getLocation().getFacilityId() != visibleFacility.getFacilityId() &&
+                            node.getLocation().getFacilityId() == visibleFacility.getFacilityId();
+            boolean beforeChangingLevel =
+                    previousNode.getLocation().getLevel() == currentLevel && nodeLevel != currentLevel;
+            boolean afterChangingLevel =
+                    previousNode.getLocation().getLevel() != currentLevel && nodeLevel == currentLevel;
+
+            if (afterChangingFacility || afterChangingLevel) {
+                // Current node is after the portal, no need to remove the remaining path from screen.
+                isNearPortal = false;
+            }
+            if (isNearPortal) {
+                continue;
+            }
+            if ((previousNode instanceof PortalNode) && (node instanceof PortalNode) &&
+                    (previousNode.getLocation().getLevel() == nodeLevel)) {
+                pathsToDraw.add(nodesOnCurrentLevel);
+                nodesOnCurrentLevel = new ArrayList<>();
+                nodesOnCurrentLevel.add(node);
+                previousNode = node;
+                continue;
+            }
+
+            previousNode = node;
+
+            if (node.getLocation().getFacilityId() == visibleFacility.getFacilityId() &&
+                    nodeLevel.equals(currentLevel)) {
+                nodesOnCurrentLevel.add(node);
+            }
+
+            if (beforeChangingFacility) {
+                pathsToDraw.add(nodesOnCurrentLevel);
+                nodesOnCurrentLevel = new ArrayList<>();
+            } else if (afterChangingFacility) {
+                nodesOnCurrentLevel = new ArrayList<>();
+                nodesOnCurrentLevel.add(node);
+            }
+            if (!beforeChangingFacility && beforeChangingLevel) {
+                pathsToDraw.add(nodesOnCurrentLevel);
+                nodesOnCurrentLevel = new ArrayList<>();
+            } else if (!afterChangingFacility && afterChangingLevel) {
+                nodesOnCurrentLevel = new ArrayList<>();
+                nodesOnCurrentLevel.add(node);
+            }
+        }
+
+        if (!pathsToDraw.contains(nodesOnCurrentLevel) && nodesOnCurrentLevel.size() != 0) {
+            pathsToDraw.add(nodesOnCurrentLevel);
+        }
+
+        for (List<NodeInterface> nodesToDraw : pathsToDraw) {  // Because some levels have non-continuous paths.
+            List<Location> locationArray = getLocationArrayFromNodes(nodesToDraw);
+            float[] pathArray = calculatePathArray(locationArray);
+            pathsToDrawResult.add(pathArray);
+        }
+
+        return pathsToDrawResult;
+    }
+
+    private List<Location> getLocationArrayFromNodes(List<NodeInterface> nodesList) {
+        List<Location> locations = new ArrayList<>();
+        for (NodeInterface node : nodesList) {
+            locations.add(node.getLocation());
+        }
+        return locations;
+    }
+
+    private float[] calculatePathArray(List<Location> pointsArray) {
+        if (pointsArray == null || pointsArray.isEmpty()) {
+            Plog.v("No nodes to draw.");
+            return null;
+        }
+        float[] pathArray = new float[(pointsArray.size() - 1) * 4];
+        CoordinateTranslater ctr = map.getCoordinateTranslater();
+        for (int i = 0; i < pointsArray.size() - 1; i++) {
+            int index = i * 4;
+            Location from = pointsArray.get(i);
+            pathArray[index] = ctr.translateX(from.getX());
+            pathArray[index + 1] = ctr.translateY(from.getY());
+
+            Location to = pointsArray.get(i + 1);
+            pathArray[index + 2] = ctr.translateX(to.getX());
+            pathArray[index + 3] = ctr.translateY(to.getY());
+        }
+
+        return pathArray;
+    }
+
+    // endregion
+
+    /**
+     * MapView  点击事件，此处可用来处理poi的点击事件
+     * @param mapView
+     * @param drawablePointView
+     */
+    @Override
+    public void onDrawablePointViewTouched(BasePointrMapView mapView, DrawablePointView drawablePointView) {
+        log("onDrawablePointViewTouched");
+        mapView.moveToMarker(drawablePointView, true);
+        if (drawablePointView instanceof POIView) {
+            POIView poiView = (POIView)drawablePointView;
+            Poi poi = (Poi)poiView.getDrawable();
+            if (!map.hasPath()) {
+                setSelectedPoi(new PoiContainer(poi));
+            }
+        }
+    }
+
+    @Override
+    public void onMapLevelChangedTo(BasePointrMapView mapView, int level) {
+        log("onMapLevelChangedTo " + level);
+
+        if (shouldShowLevelInformation()) {
+            String message = String.format(getString(com.pointrlabs.core.R.string.display_level_text), String.valueOf(level));
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        }
+
+        if (level != mapView.getCurrentLevel()) {
+            mapView.getMapModeCoordinator().setMapMode(MapMode.Free);
+        }
+
+        // This is for optimizing the map download. We prioritize the level user is viewing while downloading maps.
+        notifyDataManagerOfLevelChange(level);
+        if(getLevelPicker() != null){
+            getLevelPicker().setCurrentLevel(level);
+        }
+        updatePoisInMap();
+        adjustLevelForStoreLayout(mapView, level, mapView.getMapModeCoordinator().getMapMode());
+        if (isMapShownBefore.compareAndSet(false, true)) {
+            map.setScaleForFill();
+        }
+
+        Plog.v("Map level changed to " + level);
+    }
+
+    private void notifyDataManagerOfLevelChange(int level) {
+        DataManager dataManager = Pointr.getPointr().getDataManager();
+        if (dataManager != null) {
+            dataManager.handleMapViewLevelChange(level);
+        }
+    }
+
+    private void adjustLevelForStoreLayout(BasePointrMapView mapView, int level) {
+        PoiManager poiManager = pointr.getPoiManager();
+        Poi layoutPoi = poiManager == null ? null : poiManager.getStoreLayoutPoi(level);
+        if (layoutPoi != null) {
+            Map<String, Float> constraints = storeLayoutConstraintsFromRegionArray(layoutPoi.getRegion());
+            mapView.setConstraintSize(constraints.get("minWidth"),
+                    constraints.get("maxWidth"),
+                    constraints.get("minHeight"),
+                    constraints.get("maxHeight"));
+            mapView.setCenterX(constraints.get("minWidth") +
+                    (constraints.get("maxWidth") - constraints.get("minWidth")) / 2);
+            mapView.setCenterY(constraints.get("minHeight") +
+                    (constraints.get("maxHeight") - constraints.get("minHeight")) / 2);
+            mapView.scrollToAndCenter(mapView.getCenterX(), mapView.getCenterY());
+        } else {
+            mapView.unsetConstraintSize();
+            mapView.setCenterX(0.5F);
+            mapView.setCenterY(0.5F);
+        }
+    }
+
+    private void adjustLevelForStoreLayout(BasePointrMapView mapView, int level, MapMode mapMode) {
+        if (mapMode == MapMode.PathTracking || mapMode == MapMode.RotationalTracking) {
+            mapView.unsetConstraintSize();
+            mapView.setCenterX(0.5F);
+            mapView.setCenterY(0.5F);
+            return;
+        }
+        PoiManager poiManager = pointr.getPoiManager();
+        Poi layoutPoi = poiManager == null ? null : poiManager.getStoreLayoutPoi(level);
+        if (layoutPoi != null) {
+            Map<String, Float> constraints = storeLayoutConstraintsFromRegionArray(layoutPoi.getRegion());
+            mapView.setConstraintSize(constraints.get("minWidth"),
+                    constraints.get("maxWidth"),
+                    constraints.get("minHeight"),
+                    constraints.get("maxHeight"));
+            mapView.setCenterX(constraints.get("minWidth") +
+                    (constraints.get("maxWidth") - constraints.get("minWidth")) / 2);
+            mapView.setCenterY(constraints.get("minHeight") +
+                    (constraints.get("maxHeight") - constraints.get("minHeight")) / 2);
+        }
+    }
+
+    private Map<String, Float> storeLayoutConstraintsFromRegionArray(List<Point> region) {
+        float minWidth = 1.0F;
+        float minHeight = 1.0F;
+        float maxWidth = 0.0F;
+        float maxHeight = 0.0F;
+
+        for (Point point : region) {
+            minWidth = (float)Math.min(minWidth, point.getX());
+            minHeight = (float)Math.min(minHeight, point.getY());
+            maxWidth = (float)Math.max(maxWidth, point.getX());
+            maxHeight = (float)Math.max(maxHeight, point.getY());
+        }
+
+        Map<String, Float> layoutMap = new HashMap<>();
+        layoutMap.put("minWidth", minWidth);
+        layoutMap.put("minHeight", minHeight);
+        layoutMap.put("maxWidth", maxWidth);
+        layoutMap.put("maxHeight", maxHeight);
+
+        return layoutMap;
+    }
+
+    /**
+     * 地图模型点击事件监听器
+     * @param mapView
+     * @param mapMode
+     */
+    @Override
+    public void onMapModeChangedTo(BasePointrMapView mapView, MapMode mapMode) {
+        String message = "";
+        switch (mapMode) {
+            case Tracking:
+                message = "Auto tracking mode activated";
+                break;
+            case RotationalTracking:
+                message = "Auto tracking with rotation mode activated";
+                break;
+            case Free:
+                message = "Free mode activated";
+                break;
+            case PathTracking:
+                message = "Path tracking mode activated";
+                break;
+            default:
+                break;
+        }
+
+        Plog.v("Mode changed : " + message);
+        log("onMapModeChangedTo " + message);
+        doModeChangeEventsWithMapMode(mapMode);
+    }
+
+    @Override
+    public void didReceiveSingleFingerTap(BasePointrMapView mapView, MotionEvent event) {
+        log("didReceiveSingleFingerTap");
+        onSingleTap(event);
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            getActivity().sendBroadcast(new Intent(AppConfig.SCALE_MAP));
+        }
+    }
+
+    /**
+     * 地图双击事件
+     * @param mapView
+     * @param event
+     */
+    @Override
+    public void didReceiveDoubleFingerTap(BasePointrMapView mapView, MotionEvent event) {
+        log("didReceiveDoubleFingerTap");
+        mapView.doubleTapZoom(event);
+    }
+
+    /**
+     * 定位点击监听器
+     */
+    public void onLocatorClicked() {
+        Position pos = getCurrentPosition();
+        System.out.println("1511-----------获取当前位置:"+pos);
+        if (pos == null || !pos.isValidNormalisedPosition()) {
+            // Cannot be located since there is no location
+            return;
+        }
+
+        map.previewLevel(pos.getLevel());
+        map.slideToAndCenterWithScale(pos.getX(), pos.getY(), getQuarterZoomValue());
+        PathManager pathManager = pointr.getPathManager();
+        if (pathManager == null || !pathManager.isPathfindingStarted()) {
+            // There is no active path, and user wants to locate its position
+            map.getMapModeCoordinator().setMapMode(MapMode.Tracking);
+        } else {
+            // There is an active path, so continue with the mode that was user prior to user pin moving out of screen
+            map.getMapModeCoordinator().setMapMode(
+                    MapMode.PathTracking);  // Any preferred map mode for --pathfinding-- can be picked from here
+        }
+        createUserPinDrawable();
+    }
+
+    /**
+     * 获取当前位置
+     * @return
+     */
+    public Position getCurrentPosition() {
+        if (currentPosition != null && currentPosition.isValidNormalisedPosition()) {
+            return currentPosition;
+        }
+
+        if(null != lastCalculatedLocation) {
+            Position lastPosition = new Position(lastCalculatedLocation.getX(),lastCalculatedLocation.getY(),0,lastCalculatedLocation.getLevel());
+            if (lastPosition != null && lastPosition.isValidNormalisedPosition()) {
+                return lastPosition;
+            }
+        }
+        return null;
+    }
+
+    public void onPinEnterOrExit(boolean isInScreen) {
+//        if (getLocateMeButton().isDetectable()) {
+//            this.getActivity().runOnUiThread(() -> getLocateMeButton().setVisibility(!isInScreen));
+//        }
+        if (!isInScreen) {
+            map.getMapModeCoordinator().setMapMode(MapMode.Free);
+        } else {
+            PathManager pathManager = pointr.getPathManager();
+            if (pathManager == null || !pathManager.isPathfindingStarted()) {
+                // There is no active path, and pin is on screen so switch to tracking
+                map.getMapModeCoordinator().setMapMode(MapMode.Tracking);
+            } else {
+                map.getMapModeCoordinator().setMapMode(
+                        MapMode.PathTracking);  // Any preferred map mode for --pathfinding-- can be picked from here
+            }
+        }
+    }
+
+    private void doModeChangeEventsWithMapMode(MapMode mapMode) {
+        if (mapMode != MapMode.Free) {
+            if (currentPosition == null) {
+                Plog.w("Position is null no chance to put map mode to another mode than free");
+                map.getMapModeCoordinator().setMapMode(MapMode.Free);
+                return;
+            }
+            // Reset zoom and content offset when switching to static mode
+            if (currentPosition.getLevel() != PositioningTypes.INVALID_LEVEL) {
+                // We have level and position and not in free mode
+                // so set the center and level for position
+                map.scrollToAndCenter(currentPosition.getX(), currentPosition.getY());
+            } else if (positionInOtherFacility.getLevel() != PositioningTypes.INVALID_LEVEL) {
+                // We have valid position in another facility
+                // position is not in free mode
+                if (switchFacilityAutomaticallyIfAvailable()) {
+                    currentPosition = positionInOtherFacility;
+                    positionInOtherFacility = new Position();
+                    map.scrollToAndCenter(currentPosition.getX(), currentPosition.getY());
+                }
+            }
+
+            if (currentPosition.getLevel() == PositioningTypes.INVALID_LEVEL) {
+                Plog.w("Position is invalid no chance to put map mode to another mode than free");
+                map.getMapModeCoordinator().setMapMode(MapMode.Free);
+            }
+        }
+
+        adjustLevelForStoreLayout(map, map.getCurrentLevel(), mapMode);
+    }
+
+    private boolean switchFacilityAutomaticallyIfAvailable() {
+        ConfigurationManager configurationManager = pointr.getConfigurationManager();
+        if (configurationManager != null) {
+            CoreConfiguration configuration = configurationManager.getCurrentConfiguration();
+            if (configuration != null &&
+                    !configuration.getGeofenceManagerConfig().getIsAutomaticFacilitySwitchEnabled()) {
+                return false;
+            }
+        }
+        // auto facility change enabled so set the facility and the center and level for position
+        if (!physicalAndMapViewFacilitiesAreSame()) {
+            // position is in different facility than seen and we want to change forcedFacility to physical just let
+            // forced facility to invalid and when callback on config manager updated came facility will be changed
+            // automatically
+            map.setForcedFacility(null);
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * 右下角底部按钮点击事件
+     * @param mapModeChangerView
+     */
+    @Override
+    public void userDidTapOnMapModeView(MapModeChangerView mapModeChangerView) {
+        MapMode newMode = MapMode.Free;                   // You can change here.
+        map.getMapModeCoordinator().setMapMode(newMode);  // Can select which map to update.
+        String message = String.format(getString(com.pointrlabs.core.R.string.map_mode_switched),
+                getResources().getString(newMode.getVisibleNameResourceId()));
+        this.getActivity().runOnUiThread(() -> Snackbar.make(map, message, Snackbar.LENGTH_SHORT).show());
+    }
+
+    /**
+     * 获取当前地图总计有多少楼层
+     * @return
+     */
+    public List<Integer> getLevelList() {
+        MapManager mapManager = Pointr.getPointr().getMapManager();
+        if (mapManager != null) {
+            return mapManager.getLevelList();
+        }
+        return new ArrayList<>(0);
+    }
+
+    /**
+     * 获取当前楼层
+     * @param map
+     * @return
+     */
+    public int getCurrentLevel(BasePointrMapView map) {
+        return map.getCurrentLevel();
+    }
+
+    /**
+     * 切换楼层
+     * @param view
+     * @param level
+     */
+    @Override
+    public void onUserPickedLevel(LevelScrollView view, int level) {
+        map.setCurrentLevel(level);
+        log("onUserPickedLevel");
+    }
+
+    @Override
+    public void onMapsUpdated() {
+        log("onMapsUpdated");
+        Plog.v("+ onMapsUpdated");
+        if (map.getCurrentLevel() == PositioningTypes.INVALID_LEVEL) {
+            if (mapManager == null) {
+                Plog.w("Map manager is null, map view cannot update maps");
+                return;
+            }
+
+            // We cannot show anything if there is no level before and after the update
+            List<Integer> levels = mapManager.getLevelList();
+            if (levels.isEmpty()) {
+                Plog.w("Levels are empty, map view cannot update maps");
+                return;
+            }
+            CalculatedLocation currentLoc = map.getCurrentLocation();  // Position that you want to show on map
+            Facility currentMapFacility = map.getCurrentFacility();    // Current facility of map
+            if (currentLoc != null && currentMapFacility != null &&
+                    currentLoc.getFacilityId() == currentMapFacility.getFacilityId()) {
+                int userPositionLevel = currentLoc.getLevel();
+                if (levels.contains(userPositionLevel)) {
+                    map.setCurrentLevel(userPositionLevel);
+                } else {
+                    map.setCurrentLevel(levels.get(0));
+                }
+            } else {
+                map.setCurrentLevel(levels.get(0));
+            }
+        } else {
+            map.updateMapForCurrentLevel();
+        }
+    }
+
+    @Override
+    public void onMapsUpdated(Venue venue, Facility facility, int level, DataType type) {
+        log("+ onMapsUpdated for facility " + facility + " level " + level + " type " + type);
+        Plog.v("+ onMapsUpdated for facility " + facility + " level " + level + " type " + type);
+        if (mapManager == null) {
+            Plog.w("Map manager is null, map view cannot update maps");
+            return;
+        }
+
+        if (map.getCurrentFacility() == null) {
+            Plog.i("There is no facility set yet.");
+            return;
+        }
+        if (map.getCurrentFacility().getFacilityId() != facility.getFacilityId()) {
+            Plog.w("Will ignore map manager update - current facility id is " +
+                    map.getCurrentFacility().getFacilityId() + " and the updated facility id is " +
+                    facility.getFacilityId());
+            return;
+        }
+
+        List<Integer> levels = mapManager.getLevelList();
+        if (!map.getIsFirstMapShown()) {
+            Plog.v("No maps shown yet - show first map");
+            Plog.v("Set current level to " + level);
+            // We cannot show anything if there is no level before and after the update
+
+            if (levels.isEmpty()) {
+                Plog.w("Levels are empty, map view cannot update maps");
+                return;
+            }
+            map.setCurrentLevel(level);
+        } else if (map.getCurrentLevel() == level) {
+            map.updateMapForCurrentLevel();
+        }
+    }
+
+    //updateUserPin
+    private static final int UPDATE_USER_PIN_MSG = 1100;
+    private final Handler mHander = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == UPDATE_USER_PIN_MSG) {
+                if(null != lastCalculatedLocation && isPositionLost.get()) {
+                    updateUserPin(lastCalculatedLocation);
+                    mHander.removeMessages(UPDATE_USER_PIN_MSG);
+                    mHander.sendEmptyMessageDelayed(UPDATE_USER_PIN_MSG,200);
+                }
+            }
+        }
+    };
+    private void log(String msg) {
+        Log.d("test",msg);
+    }
+}
