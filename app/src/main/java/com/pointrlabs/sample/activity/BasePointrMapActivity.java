@@ -771,11 +771,11 @@ public class BasePointrMapActivity extends AppCompatActivity
 
         @Override
         public void onEnterARView() {
-//            if(arPathEntity == null){
-//                Toast.makeText(BasePointrMapActivity.this,"path object is null",Toast.LENGTH_LONG).show();
-//                return;
-//            }
-            ARUtils.switchPage2ARNavgation(BasePointrMapActivity.this,new ARPathEntity());
+            if(arPathEntity == null){
+                Toast.makeText(BasePointrMapActivity.this,"path object is null",Toast.LENGTH_LONG).show();
+                return;
+            }
+            ARUtils.switchPage2ARNavgation(BasePointrMapActivity.this,arPathEntity);
         }
     }
 }
