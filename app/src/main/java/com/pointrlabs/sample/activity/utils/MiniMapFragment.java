@@ -604,31 +604,6 @@ public class MiniMapFragment extends Fragment implements MapControllerEvents,
      */
     public void setSelectedPoi(PoiContainer poi) {
         PoiManager poiManager = pointr.getPoiManager();
-        if(poi != null){
-            float x = poi.getPoiList().get(0).getLocation().getX();
-            float y = poi.getPoiList().get(0).getLocation().getY();
-            int levelId = poi.getPoiList().get(0).getLevel();
-            int venueId = poi.getPoiList().get(0).getVenueId();
-            int faId = poi.getPoiList().get(0).getFacilityId();
-            String id = poi.getPoiList().get(0).getId();
-            String type = poi.getPoiList().get(0).getType();
-            List<Point> region = poi.getPoiList().get(0).getRegion();
-            double lat = poi.getPoiList().get(0).getLatitude();
-            double lng = poi.getPoiList().get(0).getLongitude();
-
-            System.out.println("583---------x:"+x+" y:"+y + " levelId:"+levelId+" venueId:"+venueId+" fdId:"+faId
-                    +" id:"+id +" type:"+type +" region:"+region+" lat:"+lat+"  lng:"+lng);
-            TextView tmpView = new TextView(this.getActivity());
-            tmpView.setBackgroundColor(getActivity().getResources().getColor(com.pointrlabs.core.R.color.blue));
-            tmpView.setText("123");
-            map.addMarker(tmpView,x,y,-0.5f,-0.5f,false);
-
-//            Location start = new Location(0.49760412f,0.553588986f,0,1,1);
-//            Location end = new Location(0.497048795f,0.516542196f,0,1,1);
-//            PathManager pathManager = pointr.getPathManager();
-//            Path calculatedPath = pathManager.calculatePath(start,end);
-//            System.out.println("604---------:"+calculatedPath+":"+getCurrentPosition());
-        }
         if (!poi.isContainerValid()) {
             Plog.v("Poi selection is not valid. Will not set the selection.");
             return;

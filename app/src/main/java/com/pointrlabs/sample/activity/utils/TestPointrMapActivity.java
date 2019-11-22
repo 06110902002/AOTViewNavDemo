@@ -41,7 +41,7 @@ public class TestPointrMapActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_ASK_LOCATION_PERMISSION = 1;
     private static final int REQUEST_ENABLE_BT = 2;
     private static final int REQUEST_CODE_ASK_WHITELISTING_PERMISSION = 3;
-    private MiniMapFragment containerFragment;
+    private BaseContainerFragment containerFragment;
 
 
     @Override
@@ -117,7 +117,7 @@ public class TestPointrMapActivity extends AppCompatActivity {
                 .commitAllowingStateLoss();
     }
 
-    protected MiniMapFragment getContainerFragment() {
-        return MiniMapFragment.newInstance();
+    protected BaseContainerFragment getContainerFragment() {
+        return BaseContainerFragment.newInstance();
     }
 }
