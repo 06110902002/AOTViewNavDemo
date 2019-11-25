@@ -49,11 +49,10 @@ import com.pointrlabs.core.pathfinding.directions.TurnByTurnDirectionManager;
 import com.pointrlabs.core.poi.models.PoiContainer;
 import com.pointrlabs.sample.R;
 import com.pointrlabs.sample.fragment.BaseContainerFragment;
-import com.sensetime.armap.activity.TestMapActivity;
+import com.sensetime.armap.constant.PointrConfig;
 import com.sensetime.armap.entity.ARPathEntity;
 import com.sensetime.armap.utils.ARPathUtils;
 import com.sensetime.armap.utils.ARUtils;
-import com.sensetime.armap.utils.AppConfig;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -745,15 +744,15 @@ public class BasePointrMapActivity extends AppCompatActivity
      */
     private void buildPathdata(Path path){
         if(path == null) return;
-        AppConfig.mPath = path;
+        PointrConfig.mPath = path;
         String pathString = ARPathUtils.getInstance().getPathJSONString(this,path);
         int curLevel = getContainerFragment().getCurrentPosition().getLevel();
         int venueId = getContainerFragment().getMap().getCurrentLocation().getVenueId();
         int facilityId = getContainerFragment().getMap().getCurrentLocation().getFacilityId();;
         float curLocationX = getContainerFragment().getCurrentPosition().getX();
-        AppConfig.curLocationX = curLocationX;
+        PointrConfig.curLocationX = curLocationX;
         float curLocationY = getContainerFragment().getCurrentPosition().getY();
-        AppConfig.curLocationY = curLocationY;
+        PointrConfig.curLocationY = curLocationY;
 
         arPathEntity = new ARPathEntity();
         arPathEntity.setPathString(pathString);

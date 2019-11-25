@@ -76,13 +76,11 @@ import com.pointrlabs.core.utils.PointrHelper;
 import com.pointrlabs.sample.activity.BasePointrMapActivity;
 import com.qozix.tileview.geom.CoordinateTranslater;
 import com.qozix.tileview.paths.BasicPathView;
-import com.sensetime.armap.activity.ARNavigationActivity;
-import com.sensetime.armap.activity.MainActivity;
+import com.sensetime.armap.constant.PointrConfig;
 import com.sensetime.armap.entity.ARPathEntity;
 import com.sensetime.armap.utils.ARMapJumpUtil;
 import com.sensetime.armap.utils.ARPathUtils;
 import com.sensetime.armap.utils.ARUtils;
-import com.sensetime.armap.utils.AppConfig;
 import com.sensetime.armap.utils.MobileInfoUtils;
 
 import java.util.ArrayList;
@@ -598,7 +596,7 @@ public class BaseContainerFragment extends Fragment implements MapControllerEven
         }
         if (poiManager != null) {
             poiManager.setSelectedPoi(poi);
-            AppConfig.selectPoi = poi;
+            PointrConfig.selectPoi = poi;
             if (getNavigationFooter() != null) {
                 getNavigationFooter().setSelectedPoi(poi);
             }

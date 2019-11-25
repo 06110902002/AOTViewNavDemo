@@ -102,8 +102,8 @@
     "pathWidth": 3.5,
     "shouldCheckAnnotationClash": true,
     "mapRotationLimitAngleInDegrees": 6.0,
-    "isAugmentedRealityEnabled": false,
-    "shouldShowSimulationJoystick": true
+    "isAugmentedRealityEnabled": false
+
   },
   "carparkConfiguration": {
     "isEnabled": false
