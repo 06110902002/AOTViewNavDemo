@@ -76,7 +76,7 @@ public class PointRMgr {
             }
             pointr.start();
             if(initPointRListener != null){
-                initPointRListener.onAfter();
+                initPointRListener.onComplete();
             }
         } else {
             Plog.v("Pointr is already ON, show map");
@@ -159,7 +159,6 @@ public class PointRMgr {
     public interface InitPointRListener{
 
         void onBefore();
-        void onAfter();
         void onComplete();
         void onStartFailure(List<ErrorMessage> list);
         void onPointrStateUpdate(PointrBase.State state, List<WarningMessage> list);

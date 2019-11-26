@@ -7,21 +7,14 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pointrlabs.core.configuration.CoreConfiguration;
@@ -38,12 +31,9 @@ import com.pointrlabs.core.management.PoiManager;
 import com.pointrlabs.core.management.Pointr;
 import com.pointrlabs.core.management.PointrBase;
 import com.pointrlabs.core.management.PositionManager;
-import com.pointrlabs.core.management.PositionManagerImpl;
 import com.pointrlabs.core.management.interfaces.DataManager;
-import com.pointrlabs.core.management.models.ErrorMessage;
 import com.pointrlabs.core.management.models.Facility;
 import com.pointrlabs.core.management.models.Venue;
-import com.pointrlabs.core.map.interfaces.Hideable;
 import com.pointrlabs.core.map.interfaces.MapControllerEvents;
 import com.pointrlabs.core.map.interfaces.MapView;
 import com.pointrlabs.core.map.interfaces.MapViewProvider;
@@ -53,18 +43,13 @@ import com.pointrlabs.core.map.model.MapMode;
 import com.pointrlabs.core.map.ui.BasePointrMapView;
 import com.pointrlabs.core.map.ui.DestinationMarkerView;
 import com.pointrlabs.core.map.ui.DrawablePointView;
-import com.pointrlabs.core.map.ui.LevelScrollView;
-import com.pointrlabs.core.map.ui.LocateMeButton;
 import com.pointrlabs.core.map.ui.MapDrawable;
 import com.pointrlabs.core.map.ui.MapModeChangerView;
-import com.pointrlabs.core.map.ui.NavigationFooterView;
 import com.pointrlabs.core.map.ui.POIView;
 import com.pointrlabs.core.map.ui.PinView;
-import com.pointrlabs.core.map.ui.PoiSearchView;
-import com.pointrlabs.core.map.ui.PointrProgressSpinner;
+import com.pointrlabs.core.map.ui.PointrMapView;
 import com.pointrlabs.core.map.ui.SimpleDrawable;
 import com.pointrlabs.core.map.ui.SimpleLineDrawable;
-import com.pointrlabs.core.map.ui.TurnByTurnHeaderView;
 import com.pointrlabs.core.nativecore.wrappers.Plog;
 import com.pointrlabs.core.pathfinding.Path;
 import com.pointrlabs.core.pathfinding.directions.PathDirection;
@@ -99,16 +84,13 @@ import static com.pointrlabs.core.positioning.model.PositioningTypes.INVALID_FAC
  */
 public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         MapViewProvider,
-        DataManager.Listener,
         PathManager.Listener,
         PoiManager.Listener,
         PositionManager.Listener,
         ConfigurationManager.Listener,
         MapManager.Listener,
         MapView.Listener,
-        LocateMeButton.Listener,
-        MapModeChangerView.Listener,
-        LevelScrollView.Listener {
+        MapModeChangerView.Listener{
     public static final String TAG = BaseContainerFragment.class.getSimpleName();
 
     public static final String poiDrawablesKey = "poiDrawablesKey";
@@ -132,8 +114,6 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
     private Position currentPosition;
     private Position positionInOtherFacility;
     private AtomicBoolean isPositionCalculatedBefore = new AtomicBoolean(false);
-    private float lastMapOrientation;
-
     private SimpleDrawable destinationMarkerDrawable;
     private Path path;
 
@@ -141,19 +121,13 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
 
     private static final int REQUEST_ENABLE_BT = 420;
     protected MapModeChangerView mapModeButton;
-    protected LevelScrollView levelPicker;
-    protected NavigationFooterView navigationFooter;
-    protected TurnByTurnHeaderView turnByTurnHeader;
-    protected PoiSearchView searchView;
-    protected BasePointrMapView map;
-    protected LocateMeButton locateMeButton;
-    protected PointrProgressSpinner progressView;
+    protected PointrMapView map;
     private DestinationMarkerView destinationMarkerView;
     private AtomicBoolean isMapShownBefore = new AtomicBoolean(false);
 
     private static MiniMapFragment instance;
 
-    public static MiniMapFragment newInstance() {
+    public static MiniMapFragment getInstance() {
         if (instance == null) {
             instance = new MiniMapFragment();
         }
@@ -163,60 +137,32 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
     }
 
     public int getLayoutId() {
-        return R.layout.fragment_pointr_map;
+        return R.layout.layout_mini_map;
     }
 
-    /**
-     * Level picker component for navigating through the available levels
-     *
 
-     * @return Level picker UI component
-     */
-    public LevelScrollView getLevelPicker() {
-        return levelPicker;
+    public PointrMapView getMap() {
+        return map;
     }
 
-    /**
-     * Map mode switcher for changing between modes such as Free, Tracking etc.
-     *
-     * @return Map mode switcher UI component
-     */
-    public MapModeChangerView getMapModeSwitcher() {
-        return mapModeButton;
-    }
-
-    public NavigationFooterView getNavigationFooter() {
-        return navigationFooter;
-    }
-
-    /**
-     * Area to be filled with navigation directions
-     *
-     * @return UI component for displaying directions
-     */
-    public TurnByTurnHeaderView getTurnByTurnHeader() {
-        return turnByTurnHeader;
-    }
-
-    /**
-     * A Search bar to filter and let user select the desired POI
-     *
-     * @return UI component for filtering and selecting POIs
-     */
-    public PoiSearchView getSearchView() {
-        return searchView;
-    }
-
-    public <T extends BasePointrMapView> T getMap() {
-        return (T)map;
-    }
-
-    public LocateMeButton getLocateMeButton() {
-        return locateMeButton;
-    }
 
     public <T extends DrawablePointView> T getDestinationView() {
         return (T)destinationMarkerView;
+    }
+
+    /**
+     * 当pointr 启动失败时再次启动pointr
+     * @param context
+     */
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Pointr pointr = Pointr.getPointr();
+        if(pointr == null){
+            Toast.makeText(getActivity(),"Pointr Execption",Toast.LENGTH_SHORT).show();
+        } else if (pointr.getState() != PointrBase.State.RUNNING) {
+            pointr.start();
+        }
     }
 
     @Override
@@ -228,17 +174,10 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         Pointr pointr = Pointr.getPointr();
         if (pointr.getState() == null || pointr.getState() != PointrBase.State.RUNNING) {
             Plog.e("Pointr SDK is not running yet, cannot initialize the map. Please start the Pointr SDK.");
+            Toast.makeText(getActivity(),"Pointr Execption map do not show",Toast.LENGTH_SHORT).show();
             return null;
         }
-        map = (BasePointrMapView)view.findViewById(com.pointrlabs.core.R.id.view_map);
-        progressView = (PointrProgressSpinner)view.findViewById(com.pointrlabs.core.R.id.progress_update);
-        mapModeButton = (MapModeChangerView)view.findViewById(com.pointrlabs.core.R.id.fab_change_map_mode);
-        levelPicker = (LevelScrollView)view.findViewById(com.pointrlabs.core.R.id.level_picker);
-        navigationFooter = (NavigationFooterView)view.findViewById(com.pointrlabs.core.R.id.navigation_footer);
-        turnByTurnHeader = (TurnByTurnHeaderView)view.findViewById(com.pointrlabs.core.R.id.turn_by_turn_header);
-        searchView = (PoiSearchView)view.findViewById(com.pointrlabs.core.R.id.view_search);
-        locateMeButton = (LocateMeButton)view.findViewById(com.pointrlabs.core.R.id.fab_locate_me);
-
+        map = view.findViewById(R.id.mini_map);
         destinationMarkerView = new DestinationMarkerView(getContext());
         return view;
     }
@@ -248,22 +187,16 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         super.onViewCreated(view, savedInstanceState);
 
         pointr = Pointr.getPointr();
-
         if (pointr.getState() == null || pointr.getState() != PointrBase.State.RUNNING) {
             Plog.e("Pointr SDK is not running yet, cannot initialize the map. Please start the Pointr SDK.");
             return;
         }
         poiBackground = getResources().getColor(com.pointrlabs.core.R.color.transparent_blue);
-
         drawablesInLevel = new HashMap<>();
-
         currentPosition = new Position();
         positionInOtherFacility = new Position();
-
         mapManager = pointr.getMapManager();
-
         map = getMap();
-
         if (pinViewIconSize != null) {
             setPinViewIconSize(pinViewIconSize);
         }
@@ -279,25 +212,6 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
                 map.setScaleForFill();
             }
         }));
-        if (getLevelPicker() != null) {
-            LevelScrollView levelScrollView = getLevelPicker();
-            levelScrollView.setController(this);
-            levelScrollView.setCurrentLevel(getCurrentLevel(map));
-        }
-
-//        if (getMapModeSwitcher() != null) {
-//            MapModeChangerView mapModeChangerView = getMapModeSwitcher();
-//            mapModeChangerView.setMapModeChangerListener(this);
-//        }
-//
-//        if (getSearchView() != null) {
-//            getSearchView().setController(this);
-//        }
-//
-//        if (getLocateMeButton() != null) {
-//            getLocateMeButton().addListener(this);
-//        }
-
         this.registerPointrListeners();
         this.updatePoisInMap();
     }
@@ -305,33 +219,6 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
     @Override
     public ContainerFragmentState getState() {
         return state;
-    }
-
-    public void onSingleTap(MotionEvent event) {
-        switch (state) {
-            case Map:
-                if (previousState == ContainerFragmentState.PoiSelected) {
-                    transitStateTo(ContainerFragmentState.PoiSelected);
-                } else if (previousState == ContainerFragmentState.Search) {
-                    transitStateTo(ContainerFragmentState.Search);
-                } else if (previousState == ContainerFragmentState.PathfindingHeaderAndFooter) {
-                    transitStateTo(ContainerFragmentState.PathfindingHeaderAndFooter);
-                }
-                break;
-            case Search:
-                hideKeyboard();
-                transitStateTo(ContainerFragmentState.Map);
-                break;
-            case PoiSelected:
-                transitStateTo(ContainerFragmentState.Map);
-                break;
-            case PathfindingHeader:
-                transitStateTo(ContainerFragmentState.PathfindingHeaderAndFooter);
-                break;
-            case PathfindingHeaderAndFooter:
-                // do nothing
-                break;
-        }
     }
 
     @Override
@@ -368,10 +255,6 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
     }
 
     private void registerPointrListeners() {
-        DataManager dataManager = pointr.getDataManager();
-        if (dataManager != null) {
-            dataManager.addListener(this);
-        }
 
         PoiManager poiManager = pointr.getPoiManager();
         if (poiManager != null) {
@@ -417,14 +300,9 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
             map.destroy();
         }
         this.unregisterPointrListeners();
-        getLevelPicker().destroy();
     }
 
     private void unregisterPointrListeners() {
-        DataManager dataManager = pointr.getDataManager();
-        if (dataManager != null) {
-            dataManager.removeListener(this);
-        }
 
         PoiManager poiManager = pointr.getPoiManager();
         if (poiManager != null) {
@@ -501,96 +379,18 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         previousState = this.state;
         this.state = state;
         switch (state) {
-            case Map:
-                if (getLocateMeButton() != null) {
-                    getLocateMeButton().detectPositionOnScreen(false);
-                }
-                if (getNavigationFooter() != null) {
-                    getNavigationFooter().setVisibility(View.INVISIBLE);
-                }
-                setComponentVisibility(false,
-                        getMapModeSwitcher(),
-                        getLevelPicker(),
-                        getTurnByTurnHeader(),
-                        getLocateMeButton(),
-                        getSearchView());
-                break;
-            case Search:
-                if (getLocateMeButton() != null) {
-                    getLocateMeButton().detectPositionOnScreen(true);
-                    getLocateMeButton().setVisibility(!isPinOnScreen.get());
-                }
-                if (getNavigationFooter() != null) {
-                    getNavigationFooter().setVisibility(View.INVISIBLE);
-                }
-                if (getLevelPicker() != null && getLevelPicker().getShouldBeVisible()) {
-                    getLevelPicker().setVisibility(View.VISIBLE);
-                }
-                setComponentVisibility(false, getTurnByTurnHeader());
-                setComponentVisibility(true, getSearchView(), getMapModeSwitcher());
-                break;
-            case PoiSelected:
-                if (getLocateMeButton() != null) {
-                    getLocateMeButton().detectPositionOnScreen(false);
-                }
-                if (getLevelPicker() != null && getLevelPicker().getShouldBeVisible()) {
-                    getLevelPicker().setVisibility(View.VISIBLE);
-                }
-                setComponentVisibility(
-                        false, getMapModeSwitcher(), getTurnByTurnHeader(), getLocateMeButton(), getSearchView());
-                setComponentVisibility(true, getNavigationFooter());
-                if (getNavigationFooter() != null) {
-                    NavigationFooterView navigationFooterView = getNavigationFooter();
-                    navigationFooterView.setPathfindingActive(true);
-                }
-                break;
             case PathfindingHeader:
-                if (getLocateMeButton() != null) {
-                    getLocateMeButton().detectPositionOnScreen(true);
-                    getLocateMeButton().setVisibility(!isPinOnScreen.get());
-                }
-                if (getNavigationFooter() != null) {
-                    getNavigationFooter().setPathfindingActive(false);
-                    getNavigationFooter().setVisibility(View.INVISIBLE);
-                }
-                setComponentVisibility(false, getMapModeSwitcher(), getLocateMeButton(), getLevelPicker());
-                setComponentVisibility(true, getTurnByTurnHeader());
-
-                scaleToCurrentLocation(getPathFindingZoomValue());
-                break;
             case PathfindingHeaderAndFooter:
-                if (getLocateMeButton() != null) {
-                    getLocateMeButton().detectPositionOnScreen(true);
-                    getLocateMeButton().setVisibility(!isPinOnScreen.get());
-                }
-                if (getNavigationFooter() != null) {
-                    getNavigationFooter().setPathfindingActive(false);
-                }
-                setComponentVisibility(false, getMapModeSwitcher(), getLocateMeButton(), getLevelPicker());
-                setComponentVisibility(true, getNavigationFooter(), getTurnByTurnHeader());
-
                 scaleToCurrentLocation(getPathFindingZoomValue());
                 break;
         }
     }
 
-    private void hideKeyboard() {
-        InputMethodManager keyboard = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        keyboard.hideSoftInputFromWindow(getView().getWindowToken(), 0);
-    }
 
     public void setStateChangeListener(OnFragmentDisplayStateChangedListener stateChangeListener) {
         this.stateChangeListener = stateChangeListener;
     }
 
-    protected void setComponentVisibility(boolean visible, Hideable... views) {
-        for (int i = 0, viewsLength = views.length; i < viewsLength; i++) {
-            Hideable hideable = views[i];
-            if (hideable != null) {
-                hideable.setVisibility(visible);
-            }
-        }
-    }
 
     public void setSelectedPoi(PoiContainer poi) {
         PoiManager poiManager = pointr.getPoiManager();
@@ -601,23 +401,12 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         if (poiManager != null) {
             poiManager.setSelectedPoi(poi);
             PointrConfig.selectPoi = poi;
-            if (getNavigationFooter() != null) {
-                getNavigationFooter().setSelectedPoi(poi);
-            }
 
             transitStateTo(ContainerFragmentState.PoiSelected);
             map.getMapModeCoordinator().setMapMode(MapMode.Free);
         } else {
             Plog.w("Poi manager is null, path-finding won't work");
         }
-    }
-
-    protected float getHalfZoomValue() {
-        return (map.getMaxZoomScale() + map.getMinZoomScale()) / 2;
-    }
-
-    protected float getQuarterZoomValue() {
-        return (map.getMaxZoomScale() + map.getMinZoomScale()) / 4;
     }
 
     protected float getPathFindingZoomValue() {
@@ -631,10 +420,6 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         } else {
             map.slideToAndCenterWithScale(pos.getX(), pos.getY(), scale);
         }
-    }
-
-    public int getPinViewIconSize() {
-        return pinViewIconSize;
     }
 
     public void setPinViewIconSize(Integer pinViewIconSize) {
@@ -671,9 +456,6 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
                     state == ContainerFragmentState.PathfindingHeaderAndFooter) {
                 if (calculatedPath == null)
                     return;
-                if (getTurnByTurnHeader() != null) {
-                    getTurnByTurnHeader().updateNextDirection(calculatedPath.getDirections());
-                }
                 changePathWithPath(calculatedPath);
             }
         });
@@ -756,78 +538,7 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
     }
     // endregion
 
-    // region DataManager.Listener methods
 
-    @Override
-    public void onDataManagerStartDataManagementForVenue(Venue venue, Facility facility, boolean isOnlineData) {
-        // Do nothing
-    }
-
-    @Override
-    public void onDataManagerCompleteAllForVenue(Venue venue,
-                                                 Facility facility,
-                                                 boolean isSuccessful,
-                                                 boolean isOnlineData,
-                                                 List<ErrorMessage> errors) {
-        Plog.v("+ onCompleteAll for venue " + (venue == null ? "none" : venue.getVenueId()) + "- online " +
-                isOnlineData + " - successful " + isSuccessful);
-        if (!isSuccessful) {
-            getActivity().runOnUiThread(
-                    () -> Snackbar.make(map, com.pointrlabs.core.R.string.data_update_error_occurred, Snackbar.LENGTH_SHORT).show());
-        }
-    }
-
-    @Override
-    public void onDataManagerBeginProcessingDataForVenue(Venue venue,
-                                                         Facility facility,
-                                                         DataType dataType,
-                                                         boolean isOnlineData) {
-        // Do nothing
-    }
-
-    @Override
-    public void onDataManagerEndProcessingDataForVenue(Venue venue,
-                                                       Facility facility,
-                                                       DataType dataType,
-                                                       boolean isOnlineData,
-                                                       boolean isSuccessful,
-                                                       List<ErrorMessage> errors) {
-        // Do nothing
-    }
-
-    @Override
-    public void onDataManagerBeginProcessingMapUpdateForVenue(Venue venue,
-                                                              Facility facility,
-                                                              int level,
-                                                              DataType type,
-                                                              boolean isOnlineData) {
-        // Do nothing
-    }
-
-    @Override
-    public void onDataManagerEndProcessingMapUpdateForVenue(Venue venue,
-                                                            Facility facility,
-                                                            int level,
-                                                            DataType type,
-                                                            boolean isOnlineData,
-                                                            boolean isSuccessful,
-                                                            List<ErrorMessage> errors) {
-        // Do nothing
-    }
-
-    @Override
-    public void onVenueReady(Venue venue) {
-        // Do nothing
-    }
-
-    @Override
-    public void onDataManagerBeginProcessingGlobalData(DataType type, boolean isOnlineData) {
-    }
-
-    @Override
-    public void onDataManagerEndProcessingGlobalData(DataType type, boolean isOnlineData, boolean isSuccessful) {
-    }
-    // endregion
 
     @Override
     public void onConfigurationUpdate() {
@@ -1144,6 +855,11 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         return userPinView;
     }
 
+    /**
+     * 地图绘制poi 图标的回调
+     * @param drawable
+     * @return
+     */
     @Override
     public View viewForDrawable(MapDrawable drawable) {
         if (drawable.getIdentifier() != null && drawable.getIdentifier().equalsIgnoreCase(MapView.userPinDrawableKey)) {
@@ -1238,6 +954,12 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         return result;
     }
 
+    /**
+     * 根据楼层信息计算路径结点信息
+     * @param drawable
+     * @param currentLevel
+     * @return
+     */
     private List<float[]> calculatePathArrayForLevel(MapDrawable drawable, int currentLevel) {
         if (drawable == null || !(drawable instanceof Path)) {
             Plog.v("MapDrawable is null or not an instance of path");
@@ -1337,6 +1059,11 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         return pathsToDrawResult;
     }
 
+    /**
+     * 从结点列表中获取坐标
+     * @param nodesList
+     * @return
+     */
     private List<Location> getLocationArrayFromNodes(List<NodeInterface> nodesList) {
         List<Location> locations = new ArrayList<>();
         for (NodeInterface node : nodesList) {
@@ -1345,6 +1072,11 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         return locations;
     }
 
+    /**
+     * 根据列表中的坐标计算路径，链表形式
+     * @param pointsArray
+     * @return
+     */
     private float[] calculatePathArray(List<Location> pointsArray) {
         if (pointsArray == null || pointsArray.isEmpty()) {
             Plog.v("No nodes to draw.");
@@ -1368,6 +1100,11 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
 
     // endregion
 
+    /**
+     * 地图选中poi事件
+     * @param mapView
+     * @param drawablePointView
+     */
     @Override
     public void onDrawablePointViewTouched(BasePointrMapView mapView, DrawablePointView drawablePointView) {
         mapView.moveToMarker(drawablePointView, true);
@@ -1393,8 +1130,6 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
 
         // This is for optimizing the map download. We prioritize the level user is viewing while downloading maps.
         notifyDataManagerOfLevelChange(level);
-
-        getLevelPicker().setCurrentLevel(level);
         updatePoisInMap();
         adjustLevelForStoreLayout(mapView, level, mapView.getMapModeCoordinator().getMapMode());
         if (isMapShownBefore.compareAndSet(false, true)) {
@@ -1411,27 +1146,12 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         }
     }
 
-    private void adjustLevelForStoreLayout(BasePointrMapView mapView, int level) {
-        PoiManager poiManager = pointr.getPoiManager();
-        Poi layoutPoi = poiManager == null ? null : poiManager.getStoreLayoutPoi(level);
-        if (layoutPoi != null) {
-            Map<String, Float> constraints = storeLayoutConstraintsFromRegionArray(layoutPoi.getRegion());
-            mapView.setConstraintSize(constraints.get("minWidth"),
-                    constraints.get("maxWidth"),
-                    constraints.get("minHeight"),
-                    constraints.get("maxHeight"));
-            mapView.setCenterX(constraints.get("minWidth") +
-                    (constraints.get("maxWidth") - constraints.get("minWidth")) / 2);
-            mapView.setCenterY(constraints.get("minHeight") +
-                    (constraints.get("maxHeight") - constraints.get("minHeight")) / 2);
-            mapView.scrollToAndCenter(mapView.getCenterX(), mapView.getCenterY());
-        } else {
-            mapView.unsetConstraintSize();
-            mapView.setCenterX(0.5F);
-            mapView.setCenterY(0.5F);
-        }
-    }
-
+    /**
+     * 根据楼层调整地图
+     * @param mapView
+     * @param level
+     * @param mapMode
+     */
     private void adjustLevelForStoreLayout(BasePointrMapView mapView, int level, MapMode mapMode) {
         if (mapMode == MapMode.PathTracking || mapMode == MapMode.RotationalTracking) {
             mapView.unsetConstraintSize();
@@ -1503,32 +1223,11 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
 
     @Override
     public void didReceiveSingleFingerTap(BasePointrMapView mapView, MotionEvent event) {
-        onSingleTap(event);
     }
 
     @Override
     public void didReceiveDoubleFingerTap(BasePointrMapView mapView, MotionEvent event) {
         mapView.doubleTapZoom(event);
-    }
-
-    public void onLocatorClicked() {
-        Position pos = getCurrentPosition();
-        if (pos == null || !pos.isValidNormalisedPosition()) {
-            // Cannot be located since there is no location
-            return;
-        }
-
-        map.previewLevel(pos.getLevel());
-        map.slideToAndCenterWithScale(pos.getX(), pos.getY(), getQuarterZoomValue());
-        PathManager pathManager = pointr.getPathManager();
-        if (pathManager == null || !pathManager.isPathfindingStarted()) {
-            // There is no active path, and user wants to locate its position
-            map.getMapModeCoordinator().setMapMode(MapMode.Tracking);
-        } else {
-            // There is an active path, so continue with the mode that was user prior to user pin moving out of screen
-            map.getMapModeCoordinator().setMapMode(
-                    MapMode.PathTracking);  // Any preferred map mode for --pathfinding-- can be picked from here
-        }
     }
 
     public Position getCurrentPosition() {
@@ -1539,9 +1238,7 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
     }
 
     public void onPinEnterOrExit(boolean isInScreen) {
-        if (getLocateMeButton().isDetectable()) {
-            this.getActivity().runOnUiThread(() -> getLocateMeButton().setVisibility(!isInScreen));
-        }
+
         if (!isInScreen) {
             map.getMapModeCoordinator().setMapMode(MapMode.Free);
         } else {
@@ -1626,11 +1323,6 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
 
     public int getCurrentLevel(BasePointrMapView map) {
         return map.getCurrentLevel();
-    }
-
-    @Override
-    public void onUserPickedLevel(LevelScrollView view, int level) {
-        map.setCurrentLevel(level);
     }
 
     @Override

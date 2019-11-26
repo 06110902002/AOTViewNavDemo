@@ -1,19 +1,25 @@
 package com.pointrlabs.sample.activity.utils;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.pointrlabs.core.configuration.CoreConfiguration;
 import com.pointrlabs.core.dataaccess.models.graph.NodeInterface;
 import com.pointrlabs.core.dataaccess.models.graph.PortalNode;
 import com.pointrlabs.core.dataaccess.models.poi.Poi;
+import com.pointrlabs.core.dependencyinjection.Injector;
 import com.pointrlabs.core.management.ConfigurationManager;
 import com.pointrlabs.core.management.GeofenceManager;
 import com.pointrlabs.core.management.PathManager;
@@ -21,6 +27,7 @@ import com.pointrlabs.core.management.PoiManager;
 import com.pointrlabs.core.management.Pointr;
 import com.pointrlabs.core.management.PointrBase;
 import com.pointrlabs.core.management.PositionManager;
+import com.pointrlabs.core.management.Storage;
 import com.pointrlabs.core.management.models.ErrorMessage;
 import com.pointrlabs.core.management.models.Facility;
 import com.pointrlabs.core.management.models.WarningMessage;
@@ -55,11 +62,16 @@ import com.pointrlabs.sample.activity.utils.PointRMgr;
 import com.pointrlabs.sample.fragment.BaseContainerFragment;
 import com.qozix.tileview.geom.CoordinateTranslater;
 import com.qozix.tileview.paths.BasicPathView;
+import com.sensetime.armap.utils.MobileInfoUtils;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import static com.pointrlabs.core.positioning.model.PositioningTypes.INVALID_FACILITY;
 
 /**
  * Create By 刘铁柱
@@ -69,6 +81,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class TestPointrMapActivity extends AppCompatActivity {
 
+    private String[] permissions = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.BLUETOOTH_ADMIN,
+            Manifest.permission.BLUETOOTH,
+    };
+    private LinearLayout rootLayout;
     private ARController arController;
     private ARFragment arFragment;
     private boolean isContainerFragmentStateAvailableForAR = false;
@@ -93,8 +113,9 @@ public class TestPointrMapActivity extends AppCompatActivity {
     private Position positionInOtherFacility;
     protected AtomicBoolean isPinOnScreen = new AtomicBoolean(false);
     private final Object pinViewCreationLock = new Object();
-
-
+    private Map<String, List<MapDrawable>> drawablesInLevel;
+    private final int REQUEST_PERMISSION_CODE = 0x0021;
+    private PointRInitListener pointRInitListener;
 
 
 
@@ -102,36 +123,127 @@ public class TestPointrMapActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(hasPermission(permissions)){
+            setContentView(R.layout.layout_test_map);
+            initView();
+        }else{
+            requestPermission(permissions);
+        }
+        pointRInitListener = new PointRInitListener();
+        PointRMgr.getInstance().initPointR(pointRInitListener);
+//        findViewById(R.id.btn_test_nav).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                PointRMgr.getInstance().getPathAndDrawNavLineOnMap(TestPointrMapActivity.this, new PointRMgr.PathCalculateListener() {
+//                    @Override
+//                    public void onSuccess(Path path) {
+//
+////                        PoiManager poiManager = PointRMgr.getInstance().getPointr().getPoiManager();
+////
+////                        runOnUiThread(() -> {
+////                            containerFragment = getContainerFragment();
+////                            PoiContainer selectedPoi = poiManager.getSelectedPoi();
+////                            if (selectedPoi != null) {
+////                                containerFragment.startPathfinding(selectedPoi);
+////                                containerFragment.transitStateTo(ContainerFragmentState.PathfindingHeaderAndFooter);
+////                                containerFragment.getMap().getMapModeCoordinator().setMapMode(MapMode.PathTracking);
+////                            }
+////                        });
+//                    }
+//
+//                    @Override
+//                    public void onFail(String msg) {
+//                        Toast.makeText(TestPointrMapActivity.this,msg,Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//            }
+//        });
+    }
+
+    /**
+     * 检查蓝牙状态，首选检查设备是否支持蓝牙，如果不支持程序中断
+     * 如果支持蓝牙再检查 蓝牙状态，如果蓝牙未打开请求打开
+     * 当蓝牙打开时，启动权限申请，所有权限开启成功之后进行pointr初始化工作
+     */
+    public void chkBlueToothStatus(){
+        BluetoothAdapter blueadapter=BluetoothAdapter.getDefaultAdapter();
+       if(blueadapter == null) {
+           Toast.makeText(this,"设备不支持蓝牙",Toast.LENGTH_LONG).show();
+           return;
+       }
+       if(!blueadapter.enable()){
+           Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+           startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+       }else{
+           if(hasPermission(permissions)){
+           }else{
+               requestPermission(permissions);
+           }
+       }
+    }
+
+    public boolean hasPermission(String... permissions) {
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected void requestPermission(String... permissions) {
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSION_CODE);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if(requestCode == REQUEST_PERMISSION_CODE){
+            for (int i = 0; i < grantResults.length; i++){
+                // 权限申请被拒绝
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED){
+                    //权限拒绝
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[i])) {
+                        // 用户直接拒绝了（勾选不再显示）
+                    } else {
+                        // 用户此次选择了禁止权限
+                    }
+                    Toast.makeText(this,"请打开读写权限",Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+            //所有权限都被允许
+            onHoldPermissions();
+        }else if(requestCode == REQUEST_CODE_ASK_LOCATION_PERMISSION){
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted
+                // Try again
+                PointRMgr.getInstance().initPointR(pointRInitListener);
+            }
+        }
+    }
+
+    private void onHoldPermissions(){
         setContentView(R.layout.layout_test_map);
         initView();
-        PointRMgr.getInstance().initPointR(new PointRInitListener());
-        findViewById(R.id.btn_test_nav).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PointRMgr.getInstance().getPathAndDrawNavLineOnMap(TestPointrMapActivity.this, new PointRMgr.PathCalculateListener() {
-                    @Override
-                    public void onSuccess(Path path) {
+        chkBlueToothStatus();
+    }
 
-//                        PoiManager poiManager = PointRMgr.getInstance().getPointr().getPoiManager();
-//
-//                        runOnUiThread(() -> {
-//                            containerFragment = getContainerFragment();
-//                            PoiContainer selectedPoi = poiManager.getSelectedPoi();
-//                            if (selectedPoi != null) {
-//                                containerFragment.startPathfinding(selectedPoi);
-//                                containerFragment.transitStateTo(ContainerFragmentState.PathfindingHeaderAndFooter);
-//                                containerFragment.getMap().getMapModeCoordinator().setMapMode(MapMode.PathTracking);
-//                            }
-//                        });
-                    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ENABLE_BT) {
+            isBleRequestSentBefore.set(true);
+            if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(TestPointrMapActivity.this,"Bluetooth is disabled, positioning will not work",
+                        Toast.LENGTH_SHORT).show();
+            }else{
 
-                    @Override
-                    public void onFail(String msg) {
-                        Toast.makeText(TestPointrMapActivity.this,msg,Toast.LENGTH_LONG).show();
-                    }
-                });
+                if(hasPermission(permissions)){
+                    PointRMgr.getInstance().initPointR(new PointRInitListener());
+                }else{
+                    requestPermission(permissions);
+                }
             }
-        });
+        }
     }
 
     /**
@@ -141,12 +253,7 @@ public class TestPointrMapActivity extends AppCompatActivity {
 
         @Override
         public void onBefore() {
-
-        }
-
-        @Override
-        public void onAfter() {
-            initPointrObj();
+            //requestPermission(permissions);
         }
 
         @Override
@@ -161,12 +268,15 @@ public class TestPointrMapActivity extends AppCompatActivity {
 
         @Override
         public void onPointrStateUpdate(PointrBase.State state, List<WarningMessage> list) {
-
+            if (state.equals(PointrBase.State.RUNNING)) {
+                initPointrObj();
+            }
         }
     }
 
     private void initView(){
         mapView = findViewById(R.id.view_map);
+        drawablesInLevel = new HashMap<>();
         currentPosition = new Position();
         positionInOtherFacility = new Position();
 
@@ -178,6 +288,8 @@ public class TestPointrMapActivity extends AppCompatActivity {
      *      pointr 初次启动那么应该在它启动完成之后进行 PositionManager 的监听绑定
      * 情况二：
      *      pointr 本身已经启动，那么就在它启动完成之后的回调进行监听器的绑定
+     *
+     * 注意：需要等pointr完全启动之后再渲染地图
      */
     private void initPointrObj(){
         pointrMapViewProviderListener = new PointrMapViewProviderListener();
@@ -187,6 +299,7 @@ public class TestPointrMapActivity extends AppCompatActivity {
         if (positionManager != null) {
             positionManager.addListener(pointrLocationListener);
         }
+        updatePoisInMap();
     }
 
     /**
@@ -713,6 +826,48 @@ public class TestPointrMapActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    /**
+     * 更新地图poi数据
+     */
+    private void updatePoisInMap() {
+        if (drawablesInLevel.containsKey(poiDrawablesKey)) {
+            mapView.removeDrawables(drawablesInLevel.get(poiDrawablesKey));
+        }
+
+        int level = mapView.getCurrentLevel();
+        PoiManager poiManager = Pointr.getPointr().getPoiManager();
+        if (poiManager == null) {
+            Plog.w("Cannot get pois for level. Poi Manager is null");
+            return;
+        }
+
+        if (mapView.getCurrentFacility() == null || mapView.getCurrentFacility().getFacilityId() == INVALID_FACILITY) {
+            Plog.v("No facility to get poi's for.");
+            return;
+        }
+
+        PoiContainer poiContainer = poiManager.getAllPoi(level, null, mapView.getCurrentFacility().getFacilityId());
+        if (poiContainer == null || !poiContainer.isContainerValid()) {
+            Plog.w("No Poi to draw yet");
+            return;
+        }
+        List<Poi> poisOnLevel = poiContainer.getPoiList();
+
+        List<MapDrawable> poiDrawables = new ArrayList<>();
+
+        for (Poi poi : poisOnLevel) {
+            poi.setIsRotatable(true);
+            poi.setIsInteractive(true);
+
+            poiDrawables.add(poi);
+            mapView.addDrawable(poi);
+        }
+
+        drawablesInLevel.put(poiDrawablesKey, poiDrawables);
+        mapView.realignDrawables();
+        mapView.refreshView();
     }
 
     @Override
