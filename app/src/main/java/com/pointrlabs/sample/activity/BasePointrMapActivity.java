@@ -3,14 +3,16 @@ package com.pointrlabs.sample.activity;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -18,11 +20,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.pointrlabs.core.configuration.CoreConfiguration;
 import com.pointrlabs.core.configuration.GeofenceManagerConfiguration;
 import com.pointrlabs.core.configuration.UserInterfaceConfiguration;
+import com.pointrlabs.core.dataaccess.models.poi.Poi;
 import com.pointrlabs.core.dependencyinjection.Injector;
 import com.pointrlabs.core.management.ConfigurationManager;
 import com.pointrlabs.core.management.PathManager;
@@ -30,6 +40,7 @@ import com.pointrlabs.core.management.PoiManager;
 import com.pointrlabs.core.management.Pointr;
 import com.pointrlabs.core.management.PointrBase;
 import com.pointrlabs.core.management.PositionManager;
+import com.pointrlabs.core.management.PositionManagerImpl;
 import com.pointrlabs.core.management.Storage;
 import com.pointrlabs.core.management.interfaces.PointrListener;
 import com.pointrlabs.core.management.models.ErrorMessage;
@@ -43,17 +54,26 @@ import com.pointrlabs.core.map.fragment.RouteScreenFragment;
 import com.pointrlabs.core.map.interfaces.OnFragmentDisplayStateChangedListener;
 import com.pointrlabs.core.map.model.ContainerFragmentState;
 import com.pointrlabs.core.map.model.MapMode;
-import com.pointrlabs.core.nativecore.wrappers.Plog;
 import com.pointrlabs.core.pathfinding.Path;
 import com.pointrlabs.core.pathfinding.directions.TurnByTurnDirectionManager;
 import com.pointrlabs.core.poi.models.PoiContainer;
+import com.pointrlabs.core.positioning.model.Location;
+import com.pointrlabs.core.positioning.model.Position;
 import com.pointrlabs.sample.R;
-import com.pointrlabs.sample.TestAddMapActivity;
 import com.pointrlabs.sample.fragment.BaseContainerFragment;
+import com.sensetime.armap.activity.ArMapNavigationActivity;
+import com.sensetime.armap.activity.HTMLActivity;
+import com.sensetime.armap.activity.WebViewActivity;
+import com.sensetime.armap.constant.ApiConfig;
 import com.sensetime.armap.constant.PointrConfig;
+import com.sensetime.armap.dialog.UserGuideDialog;
 import com.sensetime.armap.entity.ARPathEntity;
+import com.sensetime.armap.listeners.FastClickListener;
 import com.sensetime.armap.utils.ARPathUtils;
 import com.sensetime.armap.utils.ARUtils;
+import com.sensetime.armap.utils.STLog;
+import com.sensetime.armap.utils.Utils;
+import com.sensetime.armap.widget.HMMapView;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -89,7 +109,7 @@ public class BasePointrMapActivity extends AppCompatActivity
     // region PointrListener
     @Override
     public void onStateUpdated(Pointr.State state, List<WarningMessage> warningMessages) {
-        Plog.i("Pointr state updated to " + state.toString());
+        STLog.i("","Pointr state updated to " + state.toString());
         runOnUiThread(() -> {
             showToastMessage(state.toString());
         });
@@ -102,11 +122,11 @@ public class BasePointrMapActivity extends AppCompatActivity
 
     @Override
     public void onFailure(List<ErrorMessage> errorMessages) {
-        Plog.e("Failed to start Pointr");
+        STLog.e("TAG","Failed to start Pointr");
         String strMsg = "";
         if (errorMessages != null) {
             for (ErrorMessage errMsg : errorMessages) {
-                Plog.e(errMsg.getMessage());
+                STLog.e(TAG,errMsg.getMessage());
                 strMsg += errMsg.getMessage() + "\n";
             }
         }
@@ -120,7 +140,7 @@ public class BasePointrMapActivity extends AppCompatActivity
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (grantResults.length == 0) {
-            Plog.w("Android has returned empty results");
+            STLog.e(TAG,"Android has returned empty results");
             return;
         }
         switch (requestCode) {
@@ -145,7 +165,7 @@ public class BasePointrMapActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
+        initView();
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
             // Don't initialise map if device version is lower than supported
             showUnsupportedVersionMessage();
@@ -160,12 +180,29 @@ public class BasePointrMapActivity extends AppCompatActivity
         pointr.addListener(this);
 
         if (pointr.getState() == null || pointr.getState() == PointrBase.State.OFF) {
-            Plog.v("Pointr is OFF, let's start it");
+            STLog.e(TAG,"Pointr is OFF, let's start it");
             tryStartEngine();
         } else {
-            Plog.v("Pointr is already ON, show map");
+            STLog.e(TAG,"Pointr is already ON, show map");
             setUpRouteScreen();
             proceedToMap(true);
+        }
+        registerBroadcast();
+    }
+
+    @Override
+    protected void onRestart() {//todo 2019/12/12
+        super.onRestart();
+        if(pointr != null && pointr.getState() != PointrBase.State.RUNNING){
+            Pointr.getPointr().start();
+        }
+    }
+
+    @Override
+    protected void onStart() {//todo 2019/12/12
+        super.onStart();
+        if(pointr != null && pointr.getState() != PointrBase.State.RUNNING){
+            Pointr.getPointr().start();
         }
     }
 
@@ -185,6 +222,10 @@ public class BasePointrMapActivity extends AppCompatActivity
 
         if (arController != null) {
             arController.removeARStateListener(this);
+        }
+        if (mainRec != null) {
+            unregisterReceiver(mainRec);
+            mainRec = null;
         }
     }
 
@@ -239,7 +280,7 @@ public class BasePointrMapActivity extends AppCompatActivity
             return;  // We cant continue without location permission, we will wait for it
         }
 
-        Plog.i("+ startPointrEngine");
+        STLog.d("TAG","+ startPointrEngine");
         // Start pointr engine with the given licence key
         configurePointr();
         pointr.start();
@@ -253,23 +294,23 @@ public class BasePointrMapActivity extends AppCompatActivity
 
     // region Popup messages
     private void showToastMessage(String msg) {
-        assert Looper.getMainLooper() == Looper.myLooper();
-
-        Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
-        toast.show();
+//        assert Looper.getMainLooper() == Looper.myLooper();
+//
+//        Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
+//        toast.show();
     }
 
     private void showLocationPermissionMessage() {
-        DialogInterface.OnClickListener listener = (dialog, which)
-                -> ActivityCompat.requestPermissions(
-                this,
-                new String[] {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
-                REQUEST_CODE_ASK_LOCATION_PERMISSION);
-        new AlertDialog.Builder(this)
-                .setMessage(R.string.location_permission_rationale)
-                .setPositiveButton(android.R.string.ok, listener)
-                .create()
-                .show();
+//        DialogInterface.OnClickListener listener = (dialog, which)
+//                -> ActivityCompat.requestPermissions(
+//                this,
+//                new String[] {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
+//                REQUEST_CODE_ASK_LOCATION_PERMISSION);
+//        new AlertDialog.Builder(this)
+//                .setMessage(R.string.location_permission_rationale)
+//                .setPositiveButton(android.R.string.ok, listener)
+//                .create()
+//                .show();
     }
 
     private void showUnsupportedVersionMessage() {
@@ -350,7 +391,7 @@ public class BasePointrMapActivity extends AppCompatActivity
         if (askForPermission) {
             showWhiteListingPermissionMessage();
         } else {
-            Plog.v("Ignoring battery optimizations is not enabled.");
+            STLog.v(TAG,"Ignoring battery optimizations is not enabled.");
         }
     }
 
@@ -412,7 +453,7 @@ public class BasePointrMapActivity extends AppCompatActivity
                             setUpRouteScreen();
                         }
                         if (!routeScreenFragment.isAdded()) {
-                            Plog.v("Route screen was not added, adding....");
+                            STLog.v(TAG,"Route screen was not added, adding....");
                             runOnUiThread(() -> {
                                 pathManager.abortPathFinding();
                                 getSupportFragmentManager()
@@ -441,7 +482,6 @@ public class BasePointrMapActivity extends AppCompatActivity
                                 containerFragment.setUserVisibleHint(false);
                             });
                         }
-                        buildPathdata(calculatedPath);
 
                     }
                 });
@@ -497,7 +537,7 @@ public class BasePointrMapActivity extends AppCompatActivity
         // Initialise AR if AugmentedRealityEnabled in user configuration
         Pointr pointr = Pointr.getPointr();
         if (pointr == null) {
-            Plog.e("Pointr is null, cannot initialise AR");
+            STLog.e(TAG,"Pointr is null, cannot initialise AR");
             return;
         }
         ConfigurationManager manager = pointr.getConfigurationManager();
@@ -510,24 +550,23 @@ public class BasePointrMapActivity extends AppCompatActivity
                     if (isAREnabled) {
                         arController = new ARController(this);
                         arController.addARStateListener(this);
-                        Plog.v("AR is enabled");
+                        STLog.v(TAG,"AR is enabled");
                     } else {
-                        Plog.v("isAugmentedRealityEnabled is false - AR is disabled");
+                        STLog.v(TAG,"isAugmentedRealityEnabled is false - AR is disabled");
                     }
                 } else {
-                    Plog.v("UserInterfaceConfiguration is null - AR is disabled");
+                    STLog.v(TAG,"UserInterfaceConfiguration is null - AR is disabled");
                 }
             } else {
-                Plog.v("CurrentConfiguration is null - AR is disabled");
+                STLog.v(TAG,"CurrentConfiguration is null - AR is disabled");
             }
         } else {
-            Plog.v("ConfigurationManager is null - AR is disabled");
+            STLog.v(TAG,"ConfigurationManager is null - AR is disabled");
         }
     }
 
     private void replaceFragmentsWithMap() {
         containerFragment = getContainerFragment();
-        containerFragment.setArNavgationListener(new EnterARListener());
         containerFragment.setStateChangeListener(this);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -557,7 +596,7 @@ public class BasePointrMapActivity extends AppCompatActivity
 
     @Override
     public void onARStateChanged(ARController.ARState state) {
-        Plog.v("onStateChanged: " + state.toString());
+        STLog.v(TAG,"onStateChanged: " + state.toString());
         // Change from map to AR
         if (state == ARController.ARState.READY && containerFragment != null &&
                 containerFragment.getUserVisibleHint() && isContainerFragmentStateAvailableForAR) {
@@ -632,7 +671,7 @@ public class BasePointrMapActivity extends AppCompatActivity
     public void onButtonClickedForRouteAction(RouteScreenFragment.RouteScreenAction action) {
         PoiManager poiManager = pointr.getPoiManager();
         if (poiManager == null) {
-            Plog.e("could not get Poi Manager, cannot perform routing");
+            STLog.e(TAG,"could not get Poi Manager, cannot perform routing");
             return;
         }
         if (routeScreenFragment != null) {
@@ -642,7 +681,7 @@ public class BasePointrMapActivity extends AppCompatActivity
         }
         if (action == RouteScreenFragment.RouteScreenAction.startPathfinding) {
             if (containerFragment == null) {
-                Plog.v("map fragment is null, adding reference");
+                STLog.v(TAG,"map fragment is null, adding reference");
                 runOnUiThread(() -> {
                     containerFragment = getContainerFragment();
                     containerFragment.setStateChangeListener(this);
@@ -658,11 +697,11 @@ public class BasePointrMapActivity extends AppCompatActivity
                         containerFragment.getMap().getMapModeCoordinator().setMapMode(
                                 MapMode.PathTracking);  // Any preferred map mode for --pathfinding-- can be set from here
                     } else {
-                        Plog.e("Cannot start pathfinding - selected Poi is null");
+                        STLog.e(TAG,"Cannot start pathfinding - selected Poi is null");
                     }
                 });
             } else {
-                Plog.v("map fragment is not null");
+                STLog.v(TAG,"map fragment is not null");
                 runOnUiThread(() -> {
                     containerFragment = getContainerFragment();
                     getSupportFragmentManager()
@@ -677,7 +716,7 @@ public class BasePointrMapActivity extends AppCompatActivity
                         containerFragment.getMap().getMapModeCoordinator().setMapMode(
                                 MapMode.PathTracking);  // Any preferred map mode for --pathfinding-- can be set from here
                     } else {
-                        Plog.e("Cannot start pathfinding - selected Poi is null");
+                        STLog.e(TAG,"Cannot start pathfinding - selected Poi is null");
                     }
                 });
             }
@@ -737,45 +776,463 @@ public class BasePointrMapActivity extends AppCompatActivity
         super.onBackPressed();
     }
 
-    private  ARPathEntity arPathEntity;
 
-    /**
-     * build path first
-     * @param path
-     */
-    private void buildPathdata(Path path){
-        if(path == null) return;
-        PointrConfig.mPath = path;
-        String pathString = ARPathUtils.getInstance().getPathJSONString(this,path);
-        int curLevel = getContainerFragment().getCurrentPosition().getLevel();
-        int venueId = getContainerFragment().getMap().getCurrentLocation().getVenueId();
-        int facilityId = getContainerFragment().getMap().getCurrentLocation().getFacilityId();;
-        float curLocationX = getContainerFragment().getCurrentPosition().getX();
-        float curLocationY = getContainerFragment().getCurrentPosition().getY();
+    //测试例子
+    private LinearLayout mARLocationLayout;
+    private LinearLayout mARScanLayout;
+    private LinearLayout mARNavLayout;
+    private RadioButton[] mRadioButtons;
+    private void initView(){
+        Utils.init(getApplication());
+        findViewById(R.id.btn_go_navgation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPointrPath();
 
-        arPathEntity = new ARPathEntity();
-        arPathEntity.setPathString(pathString);
-        arPathEntity.setCurLeve(curLevel);
-        arPathEntity.setVenueId(venueId);
-        arPathEntity.setFacilityId(facilityId);
-        arPathEntity.setCurLocationX(curLocationX);
-        arPathEntity.setCurLocationY(curLocationY);
+            }
+        });
 
+        RadioGroup radioGroup = findViewById(R.id.rg_groups);
+        int count = 5 ;
+        mRadioButtons = new RadioButton[count];
+        RadioChangeListener radioChangeListener = new RadioChangeListener();
+        for (int i = 0; i < count; i++) {
+            int position = radioGroup.getChildCount() - i - 1;
+            mRadioButtons[i] = (RadioButton) radioGroup.getChildAt(position);
+            mRadioButtons[i].setTag(i);
+            //mRadioButtons[i].setText(groupInfo.getGroupName().toUpperCase());
+            mRadioButtons[i].setOnCheckedChangeListener(radioChangeListener);
+        }
+        mRadioButtons[count - 1].setChecked(true);
 
+        findViewById(R.id.btn_go_scane).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                if(getContainerFragment().getMap().getCurrentLocation() == null ||
+                        getContainerFragment().getCurrentPosition() == null){
+                    Toast.makeText(BasePointrMapActivity.this,"当前蓝牙定位失败",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                float curLocationX = getContainerFragment().getCurrentPosition().getX();
+                float curLocationY = getContainerFragment().getCurrentPosition().getY();
+                int curLevel = getContainerFragment().getCurrentPosition().getLevel();
+                int venueId = getContainerFragment().getMap().getCurrentLocation().getVenueId();
+                int facilityId = getContainerFragment().getMap().getCurrentLocation().getFacilityId();
+                ARPathEntity arPathEntity = new ARPathEntity();
+                arPathEntity.setCurLeve(curLevel);
+                arPathEntity.setVenueId(venueId);
+                arPathEntity.setFacilityId(facilityId);
+                arPathEntity.setCurLocationX(curLocationX);
+                arPathEntity.setCurLocationY(curLocationY);
+                ARUtils.switchPage2ARScan(BasePointrMapActivity.this,arPathEntity);
+            }
+        });
+
+        findViewById(R.id.btn_buile_path).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ARPathEntity arPathEntity = new ARPathEntity();
+                arPathEntity.setPathString(getJSONStr());
+                arPathEntity.setVenueId(1);
+                arPathEntity.setFacilityId(1);
+                arPathEntity.setCurLeve(4);
+                //PointrConfig.curLocationX = 0.314418f;
+                //PointrConfig.curLocationY = 0.364939f;
+                arPathEntity.setCurLocationX(0.314418f);
+                arPathEntity.setCurLocationY(0.364939f);
+                Poi poi = new Poi("327",0.546074f,0.561281f,-999.0,-999.0,1,1,1,"Lift","Lift",
+                        null,null, null,null,"Lift",null,true,null,null,null,null,null);
+                //PointrConfig.selectPoi = new PoiContainer(poi);
+                ARUtils.switchPage2ARNavgation(BasePointrMapActivity.this,arPathEntity);
+            }
+        });
+        findViewById(R.id.btn_abort_path).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                endNavgation();
+            }
+        });
+
+        findViewById(R.id.btn_webview).setOnClickListener(new FastClickListener() {
+            @Override
+            public void onSigleClick(View v) {
+                //startActivity(new Intent(BasePointrMapActivity.this,HTMLActivity.class));
+                testDialog();
+
+            }
+        });
     }
+    ARPathEntity arPathEntity = null;
+    private void getPointrPath(){
+        if(arPathEntity != null){
+            goARPage(arPathEntity);
+            return;
+        }
+        if(getContainerFragment().getMap().getCurrentLocation() == null ||
+                getContainerFragment().getCurrentPosition() == null){
+            Toast.makeText(this,"当前蓝牙定位失败",Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(pointr == null) return;
+        if(containerFragment.getSelectPoi() == null){
+            Toast.makeText(this,"请选择终点",Toast.LENGTH_LONG).show();
+            return;
+        }
+        PositionManagerImpl positionManager = (PositionManagerImpl) pointr.getPositionManager();
+        final Position position = getContainerFragment().getCurrentPosition();
+        // Poi poi = PointrConfig.selectPoi.getPoiList().get(0);
+        // Location location = new Location(position.getX(),position.getY(),position.getLevel(),0,0);
+        //Location endLocation = poi.getLocation();
+        PathManager pathManager = pointr.getPathManager();
 
-    private class EnterARListener implements BaseContainerFragment.ARNavgationListener{
-
-        @Override
-        public void onEnterARView() {
-            if(arPathEntity == null){
-                TestAddMapActivity.mapView = getContainerFragment().getMap();
-                startActivity(new Intent(BasePointrMapActivity.this, TestAddMapActivity.class));
-                Toast.makeText(BasePointrMapActivity.this,"path object is null",Toast.LENGTH_LONG).show();
+        AsyncTask.execute(() -> {
+            pointr.getPoiManager().setSelectedPoi(containerFragment.getSelectPoi());
+            Path calculatedPath = pathManager.calculatePath();
+            if(calculatedPath == null){
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(BasePointrMapActivity.this,"路径计算失败",Toast.LENGTH_LONG).show();
+                    }
+                });
                 return;
             }
-            ARUtils.switchPage2ARNavgation(BasePointrMapActivity.this,arPathEntity);
+            PointrConfig.mPath = calculatedPath;
+
+            //String pathString = ARPathUtils.getInstance().getPathJSONString(BasePointrMapActivity.this,calculatedPath);
+            //AppConfig.testPathJSONString = pathString;
+            int curLevel = getContainerFragment().getCurrentPosition().getLevel();
+            STLog.d("Level","转换前level:"+curLevel+" 转换后楼层:"+ARPathUtils.filterLevelInfo(curLevel));
+
+            // AppConfig.curLevel = curLevel;
+
+            int venueId = getContainerFragment().getMap().getCurrentLocation().getVenueId();
+            //AppConfig.venueId = venueId;
+
+            int facilityId = getContainerFragment().getMap().getCurrentLocation().getFacilityId();;
+            //AppConfig.facilityId = facilityId;
+
+            float curLocationX = getContainerFragment().getCurrentPosition().getX();
+            //PointrConfig.curLocationX = curLocationX;
+
+            float curLocationY = getContainerFragment().getCurrentPosition().getY();
+            //PointrConfig.curLocationY = curLocationY;
+            if(arPathEntity == null){
+                arPathEntity = new ARPathEntity();
+            }
+            //arPathEntity.setPathString(pathString);
+            // arPathEntity.setPath(calculatedPath);
+            arPathEntity.setCurLeve(curLevel);
+            arPathEntity.setVenueId(venueId);
+            arPathEntity.setFacilityId(facilityId);
+            arPathEntity.setCurLocationX(curLocationX);
+            arPathEntity.setCurLocationY(curLocationY);
+            arPathEntity.setDestinationX(containerFragment.getSelectPoi().getPoiList().get(0).getX());
+            arPathEntity.setDestinationY(containerFragment.getSelectPoi().getPoiList().get(0).getY());
+            STLog.d("pointr","\n pointr 起始点x:"+containerFragment.getSelectPoi().getPoiList().get(0).getX()
+                    +"\n pointr 起始点y:"+containerFragment.getSelectPoi().getPoiList().get(0).getY());
+            arPathEntity.setDestnination(containerFragment.getSelectPoi().getPoiList().get(0).getName());
+            System.out.println("950----------:"+containerFragment.getSelectPoi().getPoiList().get(0).getName());
+
+
+            if(calculatedPath == null){
+                containerFragment.abortPathfinding();
+                System.out.println("379---------:calculatedPath == null so return");
+                return;
+            }
+
+            pathManager.abortPathFinding();
+
+
+            PoiManager poiManager = pointr.getPoiManager();
+            if (poiManager == null) {
+                STLog.e(TAG,"could not get Poi Manager, cannot perform routing");
+                return;
+            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    PoiContainer selectedPoi = poiManager.getSelectedPoi();
+                    if (selectedPoi != null) {
+                        containerFragment.startPathfinding(selectedPoi);
+                        containerFragment.transitStateTo(ContainerFragmentState.PathfindingHeaderAndFooter);
+                        containerFragment.getMap().getMapModeCoordinator().setMapMode(
+                                MapMode.PathTracking);  // Any preferred map mode for --pathfinding-- can be set from here
+                        goARPage(arPathEntity);
+                    } else {
+                        System.out.println("379---------:selected Poi is null");
+                    }
+
+                }
+            });
+
+        });
+
+    }
+    private void goARPage(ARPathEntity arPathEntity){
+        ARUtils.switchPage2ARNavgation(this,arPathEntity);
+    }
+
+    private MainRec mainRec;
+    public void registerBroadcast() {
+        if (mainRec == null) {
+            mainRec = new MainRec();
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(PointrConfig.END_NAVGATION);
+            registerReceiver(mainRec, filter);
         }
+    }
+    private class MainRec extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (TextUtils.equals(intent.getAction(), PointrConfig.END_NAVGATION)) {
+                endNavgation();
+            }
+        }
+    }
+
+    private void endNavgation(){
+        runOnUiThread(() -> {
+            containerFragment.getMap().getMapModeCoordinator().setMapMode(MapMode.Tracking);
+            containerFragment.abortPathfinding();
+        });
+
+        if(arPathEntity != null){
+            arPathEntity = null;
+        }
+
+        if(PointrConfig.mPath != null){
+            PointrConfig.mPath = null;
+        }
+    }
+
+
+    private class RadioChangeListener implements CompoundButton.OnCheckedChangeListener{
+
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                int tag = (int) buttonView.getTag();
+
+                switch (tag){
+                    case 0:
+
+                        ApiConfig.setLocationHostAddress("b1");
+                        break;
+                    case 1:
+
+                        ApiConfig.setLocationHostAddress("f1");
+
+                        break;
+                    case 2:
+
+                        ApiConfig.setLocationHostAddress("f2");
+
+                        break;
+                    case 3:
+
+                        ApiConfig.setLocationHostAddress("f3");
+
+                        break;
+                    case 4:
+                        ApiConfig.setLocationHostAddress("f4");
+
+                        break;
+                }
+
+
+            }
+        }
+    }
+
+    private String getJSONStr() {
+
+        String test = "{\n" +
+                "    \"nodelist\":[\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":584.7125118196639,\n" +
+                "            \"_z\":421.9173916375117,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":583.2117425830113,\n" +
+                "            \"_z\":422.1504710011894,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":581.7109733463589,\n" +
+                "            \"_z\":422.3835503648671,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":580.2102041097064,\n" +
+                "            \"_z\":422.6166297285448,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":578.709434873054,\n" +
+                "            \"_z\":422.8497090922225,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":577.2086656364014,\n" +
+                "            \"_z\":423.08278845590024,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":575.707896399749,\n" +
+                "            \"_z\":423.31586781957793,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":574.2071271630965,\n" +
+                "            \"_z\":423.5489471832557,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":572.7063579264441,\n" +
+                "            \"_z\":423.78202654693337,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":571.2055886897915,\n" +
+                "            \"_z\":424.01510591061106,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":569.7048194531391,\n" +
+                "            \"_z\":424.2481852742888,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":568.2040502164866,\n" +
+                "            \"_z\":424.4812646379665,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":566.7032809798342,\n" +
+                "            \"_z\":424.71434400164424,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":565.2025117431816,\n" +
+                "            \"_z\":424.9474233653219,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":563.7017425065292,\n" +
+                "            \"_z\":425.1805027289996,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":562.2009732698767,\n" +
+                "            \"_z\":425.41358209267736,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":560.7002040332243,\n" +
+                "            \"_z\":425.64666145635505,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":559.1994347965717,\n" +
+                "            \"_z\":425.8797408200328,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":557.6986655599193,\n" +
+                "            \"_z\":426.1128201837105,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":556.1978963232668,\n" +
+                "            \"_z\":426.34589954738817,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":554.6971270866144,\n" +
+                "            \"_z\":426.5789789110659,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":553.1963578499619,\n" +
+                "            \"_z\":426.8120582747436,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"Please follow the line\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":551.6955886133094,\n" +
+                "            \"_z\":427.04513763842135,\n" +
+                "            \"_y\":0\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"_des\":\"The End\",\n" +
+                "            \"_directionString\":\"forward\",\n" +
+                "            \"_x\":550.1948193766569,\n" +
+                "            \"_z\":427.27821700209904,\n" +
+                "            \"_y\":0\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}\n" +
+                "\n";
+
+        return test;
+    }
+
+    UserGuideDialog userGuideDialog;
+    private void testDialog(){
+        if(userGuideDialog == null){
+            userGuideDialog = new UserGuideDialog(BasePointrMapActivity.this);
+        }
+        userGuideDialog.setType(UserGuideDialog.UserGuideType.AREA_UNAVAILABLE_TIPS);
+        userGuideDialog.show();
     }
 }

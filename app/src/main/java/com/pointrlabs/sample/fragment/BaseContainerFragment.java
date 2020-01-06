@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.PathEffect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,8 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.pointrlabs.core.R;
@@ -73,15 +70,9 @@ import com.pointrlabs.core.positioning.model.Location;
 import com.pointrlabs.core.positioning.model.Position;
 import com.pointrlabs.core.positioning.model.PositioningTypes;
 import com.pointrlabs.core.utils.PointrHelper;
-import com.pointrlabs.sample.activity.BasePointrMapActivity;
 import com.qozix.tileview.geom.CoordinateTranslater;
 import com.qozix.tileview.paths.BasicPathView;
 import com.sensetime.armap.constant.PointrConfig;
-import com.sensetime.armap.entity.ARPathEntity;
-import com.sensetime.armap.utils.ARMapJumpUtil;
-import com.sensetime.armap.utils.ARPathUtils;
-import com.sensetime.armap.utils.ARUtils;
-import com.sensetime.armap.utils.MobileInfoUtils;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -235,7 +226,6 @@ public class BaseContainerFragment extends Fragment implements MapControllerEven
         locateMeButton = (LocateMeButton)view.findViewById(R.id.fab_locate_me);
 
         destinationMarkerView = new DestinationMarkerView(getContext());
-        testARSDk(view);
         return view;
     }
 
@@ -596,7 +586,6 @@ public class BaseContainerFragment extends Fragment implements MapControllerEven
         }
         if (poiManager != null) {
             poiManager.setSelectedPoi(poi);
-            PointrConfig.selectPoi = poi;
             if (getNavigationFooter() != null) {
                 getNavigationFooter().setSelectedPoi(poi);
             }
@@ -1698,50 +1687,11 @@ public class BaseContainerFragment extends Fragment implements MapControllerEven
     }
 
 
-    private void testARSDk(View rootView){
-        Button arScanBtn = new Button(this.getActivity());
-        arScanBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ARMapJumpUtil.jumpARScanPage(getActivity());
-
-            }
-        });
-        arScanBtn.setText("AR Scan");
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(300,200);
-        params.setMargins(20,200,0,0);
-        arScanBtn.setLayoutParams(params);
-        getSearchView().addView(arScanBtn);
-
-
-        Button arNavBtn = new Button(this.getActivity());
-        arNavBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(arNavgationListener != null){
-                    arNavgationListener.onEnterARView();
-                }
-
-            }
-        });
-        arNavBtn.setText("AR Nav");
-        FrameLayout.LayoutParams params2 = new FrameLayout.LayoutParams(300,200);
-        params2.setMargins(300,200,0,0);
-        arNavBtn.setLayoutParams(params2);
-        getSearchView().addView(arNavBtn);
-
+    public PoiContainer getSelectPoi(){
+        if(pointr != null){
+            return pointr.getPoiManager().getSelectedPoi();
+        }
+        return null;
     }
-
-    private ARNavgationListener arNavgationListener;
-
-    public void setArNavgationListener(ARNavgationListener listener){
-        this.arNavgationListener = listener;
-    }
-
-    public interface ARNavgationListener{
-        void onEnterARView();
-    }
-
-
 
 }
