@@ -400,7 +400,6 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
         }
         if (poiManager != null) {
             poiManager.setSelectedPoi(poi);
-            PointrConfig.selectPoi = poi;
 
             transitStateTo(ContainerFragmentState.PoiSelected);
             map.getMapModeCoordinator().setMapMode(MapMode.Free);
