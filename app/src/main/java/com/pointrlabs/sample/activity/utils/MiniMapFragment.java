@@ -449,8 +449,8 @@ public class MiniMapFragment  extends Fragment implements MapControllerEvents,
 
     @Override
     public void onPathCalculated(Path calculatedPath) {
-        System.out.println("678-------------:onPathCalculated:dis"+calculatedPath.getWalkingDistance()+
-                "wailtiem:"+calculatedPath.getTravelTime() + "cost:"+calculatedPath.getTravelCost());
+//        System.out.println("678-------------:onPathCalculated:dis"+calculatedPath.getWalkingDistance()+
+//                "wailtiem:"+calculatedPath.getTravelTime() + "cost:"+calculatedPath.getTravelCost());
         getActivity().runOnUiThread(() -> {
             if (state == ContainerFragmentState.PathfindingHeader ||
                     state == ContainerFragmentState.PathfindingHeaderAndFooter) {

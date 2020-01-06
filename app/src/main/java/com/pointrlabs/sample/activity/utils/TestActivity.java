@@ -11,6 +11,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.pointrlabs.core.management.PathManager;
@@ -29,6 +32,7 @@ import com.pointrlabs.sample.R;
 import com.pointrlabs.sample.fragment.BaseContainerFragment;
 import com.sensetime.armap.constant.PointrConfig;
 import com.sensetime.armap.utils.ARPathUtils;
+import com.sensetime.armap.utils.MobileInfoUtils;
 
 import java.util.List;
 
@@ -207,7 +211,7 @@ public class TestActivity extends AppCompatActivity {
         AsyncTask.execute(() -> {
             Pointr.getPointr().getPoiManager().setSelectedPoi(PointrConfig.selectPoi);
             Path calculatedPath = pathManager.calculatePath();
-            ARPathUtils.getInstance().getPathJSONString(TestActivity.this, calculatedPath);
+            ARPathUtils2.getInstance().buildPathJSONString(TestActivity.this, calculatedPath);
             if (calculatedPath == null) {
                 containerFragment.abortPathfinding();
                 return;
@@ -235,7 +239,28 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void switchLevel(int level){
-        getContainerFragment().getMap().setCurrentLevel(level);
+        //getContainerFragment().getMap().setCurrentLevel(level);
+        FrameLayout miniMapLayout = findViewById(R.id.fragment_container);
+        ViewGroup.LayoutParams layoutParams = miniMapLayout.getLayoutParams();
+        layoutParams.height = MobileInfoUtils.dp2px(this, 200);
+        layoutParams.width = MobileInfoUtils.dp2px(this, 200);
+        miniMapLayout.setLayoutParams(layoutParams);
+        getContainerFragment().getMap().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getContainerFragment().getMap().scrollToAndCenter(0.5,0.5);
+            }
+        },500);
+//        getContainerFragment().getMap().post(()->getContainerFragment().getMap().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                getContainerFragment().getMap().getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//                getContainerFragment().getMap().setScaleForFill();
+//            }
+//        }));
+
+        //getContainerFragment().getMap().setScale(0.0f);
+
     }
 
 }

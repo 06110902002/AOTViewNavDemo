@@ -25,7 +25,7 @@ allprojects {
             }
         }
         maven { url 'https://jitpack.io' } //svga库
-        maven {  url 'https://sensetime.bintray.com/maven' }
+        maven {   url 'https://dl.bintray.com/sensetime1/maven'  }
 
         flatDir {
             dirs 'libs'

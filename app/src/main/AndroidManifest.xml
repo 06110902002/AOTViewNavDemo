@@ -48,10 +48,10 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.PointrMapActivity"></activity>
+        <activity android:name=".activity.utils.TestActivity"></activity>
 
         <activity
-            android:name=".activity.utils.TestActivity"
+            android:name=".activity.PointrMapActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
@@ -90,6 +90,9 @@
         <service
             android:name="com.pointrlabs.core.push.RegistrationIntentService"
             android:exported="false" />
+
+        <activity android:name=".TestAddMapActivity" />
+
     </application>
 
 </manifest>

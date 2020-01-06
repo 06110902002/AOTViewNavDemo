@@ -48,6 +48,7 @@ import com.pointrlabs.core.pathfinding.Path;
 import com.pointrlabs.core.pathfinding.directions.TurnByTurnDirectionManager;
 import com.pointrlabs.core.poi.models.PoiContainer;
 import com.pointrlabs.sample.R;
+import com.pointrlabs.sample.TestAddMapActivity;
 import com.pointrlabs.sample.fragment.BaseContainerFragment;
 import com.sensetime.armap.constant.PointrConfig;
 import com.sensetime.armap.entity.ARPathEntity;
@@ -750,9 +751,7 @@ public class BasePointrMapActivity extends AppCompatActivity
         int venueId = getContainerFragment().getMap().getCurrentLocation().getVenueId();
         int facilityId = getContainerFragment().getMap().getCurrentLocation().getFacilityId();;
         float curLocationX = getContainerFragment().getCurrentPosition().getX();
-        PointrConfig.curLocationX = curLocationX;
         float curLocationY = getContainerFragment().getCurrentPosition().getY();
-        PointrConfig.curLocationY = curLocationY;
 
         arPathEntity = new ARPathEntity();
         arPathEntity.setPathString(pathString);
@@ -771,6 +770,8 @@ public class BasePointrMapActivity extends AppCompatActivity
         @Override
         public void onEnterARView() {
             if(arPathEntity == null){
+                TestAddMapActivity.mapView = getContainerFragment().getMap();
+                startActivity(new Intent(BasePointrMapActivity.this, TestAddMapActivity.class));
                 Toast.makeText(BasePointrMapActivity.this,"path object is null",Toast.LENGTH_LONG).show();
                 return;
             }
