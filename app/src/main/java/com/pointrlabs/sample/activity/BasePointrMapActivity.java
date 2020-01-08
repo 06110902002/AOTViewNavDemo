@@ -777,11 +777,6 @@ public class BasePointrMapActivity extends AppCompatActivity
     }
 
 
-    //测试例子
-    private LinearLayout mARLocationLayout;
-    private LinearLayout mARScanLayout;
-    private LinearLayout mARNavLayout;
-    private RadioButton[] mRadioButtons;
     private void initView(){
         Utils.init(getApplication());
         findViewById(R.id.btn_go_navgation).setOnClickListener(new View.OnClickListener() {
@@ -792,26 +787,13 @@ public class BasePointrMapActivity extends AppCompatActivity
             }
         });
 
-        RadioGroup radioGroup = findViewById(R.id.rg_groups);
-        int count = 5 ;
-        mRadioButtons = new RadioButton[count];
-        RadioChangeListener radioChangeListener = new RadioChangeListener();
-        for (int i = 0; i < count; i++) {
-            int position = radioGroup.getChildCount() - i - 1;
-            mRadioButtons[i] = (RadioButton) radioGroup.getChildAt(position);
-            mRadioButtons[i].setTag(i);
-            //mRadioButtons[i].setText(groupInfo.getGroupName().toUpperCase());
-            mRadioButtons[i].setOnCheckedChangeListener(radioChangeListener);
-        }
-        mRadioButtons[count - 1].setChecked(true);
-
         findViewById(R.id.btn_go_scane).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(getContainerFragment().getMap().getCurrentLocation() == null ||
                         getContainerFragment().getCurrentPosition() == null){
-                    Toast.makeText(BasePointrMapActivity.this,"当前蓝牙定位失败",Toast.LENGTH_LONG).show();
+                    Toast.makeText(BasePointrMapActivity.this,"bluetooth location is failed",Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -855,29 +837,21 @@ public class BasePointrMapActivity extends AppCompatActivity
             }
         });
 
-        findViewById(R.id.btn_webview).setOnClickListener(new FastClickListener() {
-            @Override
-            public void onSigleClick(View v) {
-                //startActivity(new Intent(BasePointrMapActivity.this,HTMLActivity.class));
-                testDialog();
-
-            }
-        });
     }
     ARPathEntity arPathEntity = null;
     private void getPointrPath(){
-        if(arPathEntity != null){
+        if(arPathEntity != null && PointrConfig.mPath != null){
             goARPage(arPathEntity);
             return;
         }
         if(getContainerFragment().getMap().getCurrentLocation() == null ||
                 getContainerFragment().getCurrentPosition() == null){
-            Toast.makeText(this,"当前蓝牙定位失败",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"bluetooth location is failed",Toast.LENGTH_LONG).show();
             return;
         }
         if(pointr == null) return;
         if(containerFragment.getSelectPoi() == null){
-            Toast.makeText(this,"请选择终点",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"pick destination poi first",Toast.LENGTH_LONG).show();
             return;
         }
         PositionManagerImpl positionManager = (PositionManagerImpl) pointr.getPositionManager();
@@ -894,36 +868,20 @@ public class BasePointrMapActivity extends AppCompatActivity
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(BasePointrMapActivity.this,"路径计算失败",Toast.LENGTH_LONG).show();
+                        Toast.makeText(BasePointrMapActivity.this,"calculate Path failed",Toast.LENGTH_LONG).show();
                     }
                 });
                 return;
             }
             PointrConfig.mPath = calculatedPath;
-
-            //String pathString = ARPathUtils.getInstance().getPathJSONString(BasePointrMapActivity.this,calculatedPath);
-            //AppConfig.testPathJSONString = pathString;
             int curLevel = getContainerFragment().getCurrentPosition().getLevel();
-            STLog.d("Level","转换前level:"+curLevel+" 转换后楼层:"+ARPathUtils.filterLevelInfo(curLevel));
-
-            // AppConfig.curLevel = curLevel;
-
             int venueId = getContainerFragment().getMap().getCurrentLocation().getVenueId();
-            //AppConfig.venueId = venueId;
-
             int facilityId = getContainerFragment().getMap().getCurrentLocation().getFacilityId();;
-            //AppConfig.facilityId = facilityId;
-
             float curLocationX = getContainerFragment().getCurrentPosition().getX();
-            //PointrConfig.curLocationX = curLocationX;
-
             float curLocationY = getContainerFragment().getCurrentPosition().getY();
-            //PointrConfig.curLocationY = curLocationY;
             if(arPathEntity == null){
                 arPathEntity = new ARPathEntity();
             }
-            //arPathEntity.setPathString(pathString);
-            // arPathEntity.setPath(calculatedPath);
             arPathEntity.setCurLeve(curLevel);
             arPathEntity.setVenueId(venueId);
             arPathEntity.setFacilityId(facilityId);
@@ -931,15 +889,9 @@ public class BasePointrMapActivity extends AppCompatActivity
             arPathEntity.setCurLocationY(curLocationY);
             arPathEntity.setDestinationX(containerFragment.getSelectPoi().getPoiList().get(0).getX());
             arPathEntity.setDestinationY(containerFragment.getSelectPoi().getPoiList().get(0).getY());
-            STLog.d("pointr","\n pointr 起始点x:"+containerFragment.getSelectPoi().getPoiList().get(0).getX()
-                    +"\n pointr 起始点y:"+containerFragment.getSelectPoi().getPoiList().get(0).getY());
             arPathEntity.setDestnination(containerFragment.getSelectPoi().getPoiList().get(0).getName());
-            System.out.println("950----------:"+containerFragment.getSelectPoi().getPoiList().get(0).getName());
-
-
             if(calculatedPath == null){
                 containerFragment.abortPathfinding();
-                System.out.println("379---------:calculatedPath == null so return");
                 return;
             }
 
@@ -1009,43 +961,11 @@ public class BasePointrMapActivity extends AppCompatActivity
         }
     }
 
-
-    private class RadioChangeListener implements CompoundButton.OnCheckedChangeListener{
-
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-                int tag = (int) buttonView.getTag();
-
-                switch (tag){
-                    case 0:
-
-                        ApiConfig.setLocationHostAddress("b1");
-                        break;
-                    case 1:
-
-                        ApiConfig.setLocationHostAddress("f1");
-
-                        break;
-                    case 2:
-
-                        ApiConfig.setLocationHostAddress("f2");
-
-                        break;
-                    case 3:
-
-                        ApiConfig.setLocationHostAddress("f3");
-
-                        break;
-                    case 4:
-                        ApiConfig.setLocationHostAddress("f4");
-
-                        break;
-                }
-
-
-            }
-        }
+    /**
+     * abort path find and destory res
+     */
+    private void cancelNavgation(){
+        endNavgation();
     }
 
     private String getJSONStr() {
@@ -1225,14 +1145,5 @@ public class BasePointrMapActivity extends AppCompatActivity
                 "\n";
 
         return test;
-    }
-
-    UserGuideDialog userGuideDialog;
-    private void testDialog(){
-        if(userGuideDialog == null){
-            userGuideDialog = new UserGuideDialog(BasePointrMapActivity.this);
-        }
-        userGuideDialog.setType(UserGuideDialog.UserGuideType.AREA_UNAVAILABLE_TIPS);
-        userGuideDialog.show();
     }
 }

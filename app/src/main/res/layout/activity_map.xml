@@ -15,15 +15,6 @@
         android:layout_height="500dp"
         android:background="@color/theme_primary" />
 
-    <include
-        layout="@layout/floor_change_layout"
-        android:layout_width="40dp"
-        android:layout_height="200dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="12dp"
-        android:visibility="gone"
-        />
-
     <LinearLayout
         android:layout_below="@+id/fragment_container"
         android:orientation="horizontal"
@@ -43,18 +34,14 @@
             android:id="@+id/btn_buile_path"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="build path thest"/>
+            android:text="build path test"/>
         <Button
             android:id="@+id/btn_abort_path"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="abort"/>
     </LinearLayout>
-    <Button
-        android:id="@+id/btn_webview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="webview"/>
+
 
 
 </RelativeLayout>
